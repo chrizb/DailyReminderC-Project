@@ -1,0 +1,84 @@
+﻿<Window x:Class="dailyreminder.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid Visibility="Visible" Name="reminderside">
+            <Canvas>
+                <Button  Background="CadetBlue" Canvas.Top="20" Canvas.Left="30" Content="Ny Påminelse" Name="reminder" Click="reminder_Click"></Button>
+                <Button  Background="CadetBlue" Canvas.Top="20" Canvas.Right="30" Content="Översikt" Name="oversikt" Click="oversikt_Click"></Button>
+            </Canvas>
+            <Label Grid.Row="2" Content="Inga Påminelser" Height="30" Width="100"></Label>
+        </Grid>
+        <Grid Visibility="Hidden" Name="oversiktside">
+            <Canvas>
+                <Button  Background="CadetBlue" Canvas.Top="20" Canvas.Left="30" Content="Back" Name="back" Click="back_Click"></Button>
+            </Canvas>
+            <WrapPanel Width="210" Height="30" Margin="0 -250 0 0">
+                <Label Content="Översikt" Margin="70 0 0 0" Width="60"></Label>
+
+            </WrapPanel>
+            <Label Grid.Row="2" Content="Inga Påminelser" Height="30" Width="100"></Label>
+        </Grid>
+        <Grid Visibility="Hidden" Name="bookingsite">
+            <Canvas>
+                <Button  Background="CadetBlue" Canvas.Top="20" Canvas.Left="30" Content="Back" Name="backrem" Click="back_Click"></Button>
+            </Canvas>
+            <WrapPanel Width="210" Height="30" Margin="0 -250 0 0">
+                <Label Content="Påminelse" Margin="70 0 0 0" Width="80"></Label>
+
+            </WrapPanel>
+            <WrapPanel Width="210" Height="30" Margin="0 -200 0 0">
+                <Label Content="Titel:" Margin="0 0 0 0" Width="45"></Label>
+                <TextBox Margin="0 4 0 0" Width="140" Height="22"></TextBox>
+            </WrapPanel>
+            <WrapPanel Width="210" Height="30" Margin="0 -120 0 0">
+                <Label Content="Start:" Margin="0 0 0 0" Width="45"></Label>
+                <TextBox Margin="0 4 0 0" Width="45" Height="22"></TextBox>
+                <Label Content="Alarm:" Margin="0 0 0 0" Width="45"></Label>
+                <TextBox Margin="5 4 0 0" Width="45" Height="22"></TextBox>
+            </WrapPanel>
+            <WrapPanel Width="210" Height="60" Margin="0 0 0 0">
+                <Label Content="Dagar:" Margin="0 0 0 0" Width="45"></Label>
+                <Button Margin="0 4 0 0" Width="30" Height="20" Content="Mån" Background="Red" Click="Colorchange_OnClick" Name="m"></Button>
+                <Button Margin="5 4 0 0" Width="30" Height="20" Content="Tis" Background="Red" Click="Colorchange_OnClick" Name="ti"></Button>
+                <Button Margin="5 4 0 0" Width="30" Height="20" Content="Ons" Background="Red" Click="Colorchange_OnClick" Name="o"></Button>
+                <Button Margin="5 4 0 0" Width="30" Height="20" Content="Tors" Background="Red" Click="Colorchange_OnClick" Name="t"></Button>
+                <Button Margin="45 4 0 0" Width="30" Height="20" Content="Fre" Background="Red" Click="Colorchange_OnClick" Name="f"></Button>
+                <Button Margin="5 4 0 0" Width="30" Height="20" Content="Lör" Background="Red" Click="Colorchange_OnClick" Name="l"></Button>
+                <Button Margin="5 4 0 0" Width="30" Height="20" Content="Sön" Background="Red" Click="Colorchange_OnClick" Name="s"></Button>
+            </WrapPanel>
+            <WrapPanel Width="210" Height="60" Margin="0 100 0 0">
+                <Label Content="Beskrivning:" Margin="0 0 0 0" Width="75"></Label>
+                <TextBox Margin="0 2 0 0" Width="110" Height="42"></TextBox>
+            </WrapPanel>
+            <WrapPanel Width="210" Height="20" Margin="0 190 0 0">
+                <Button Width="190" Height="20" Background="GreenYellow" Content="Skapa"></Button>
+            </WrapPanel>
+            <!--<Label Width="50" Height="20" Background="Blue" Margin="154,59,313,240"></Label>
+            <TextBox Height="20" Margin="255,59,123,240"/>
+            <Label Width="50" Height="20" Background="Orange" Margin="154,156,313,143"></Label>
+            <Button Width="30" Height="15" Margin="216,156,271,148"></Button>
+            <Label Width="50" Height="20" Background="Black" Margin="280,104,187,195"></Label>
+            <Label Width="50" Height="20" Background="yellow" Margin="154,104,313,195"></Label>
+            <Label Width="50" Height="20" Background="Orange" Margin="154,204,313,95"/>
+            <TextBox Height="20" Margin="216,104,253,195"/>
+            <TextBox Height="20" Margin="346,104,123,195" RenderTransformOrigin="0.562,0.45"/>
+            <Button Width="30" Height="15" Margin="216,156,271,148"/>
+            <Button Width="30" Height="15" Margin="255,176,232,128"/>
+            <Button Width="30" Height="15" Margin="216,176,271,128"/>
+            <Button Width="30" Height="15" Margin="364,156,123,148"/>
+            <Button Width="30" Height="15" Margin="325,156,162,148"/>
+            <Button Width="30" Height="15" Margin="290,156,197,148"/>
+            <Button Width="30" Height="15" Margin="255,156,232,148"/>
+            <TextBox Margin="255,204,123,23"/>-->
+
+
+
+
+
+
+
+        </Grid>
+    </Grid>
+</Window>
