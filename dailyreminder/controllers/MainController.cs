@@ -14,7 +14,7 @@ namespace dailyreminder.controllers {
 
 
         public MainController() {
-            if(loggedIn){
+            if(loggedIn){ // This is important, both is used the same way but works different
                 rdc = new OfflineController();
             }
             else {
