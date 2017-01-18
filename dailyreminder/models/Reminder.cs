@@ -11,6 +11,10 @@ namespace dailyreminder.models {
         int startTime; // Time is measured in minutes from 00:00
         int endTime;
         String days;
+        public String Days {
+            get { return days; }
+            set { this.days = value; }
+        }
         String title;
         public String Title {
             get { return title; }

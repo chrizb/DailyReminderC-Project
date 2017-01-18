@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace dailyreminder.controllers {
-    class HeadController {
+    class LoggedInController : ReminderDataController{
     }
 }
