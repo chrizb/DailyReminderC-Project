@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace dailyreminder.models {
+    class Reminder {
+
+        long id;
+        int startTime; // Time is measured in minutes from 00:00
+        int endTime;
+        String days;
+        String title;
+        public String Title {
+            get { return title; }
+            set { this.title = value; }
+        }
+        String description;
+        public String Description {
+            get { return description; }
+            set { this.description = value; }
+        }
+        bool done;
+        public bool Done {
+            get { return done; }
+        }
+
+        public void setToDone() {
+            done = true;
+        }
+        public String getStartTimeString() {
+            return (startTime/60) + " " + (startTime % 60);
+        }
+        public String getEndTimeString() {
+            return (endTime / 60) + " " + (endTime % 60);
+        }
+
+
+    }
+}
