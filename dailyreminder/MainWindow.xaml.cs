@@ -12,14 +12,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using dailyreminder.models;
+using dailyreminder.controllers;
 
 namespace dailyreminder {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
+
+        // Controllers to be used:
+
+        MainController mainController;
+
         public MainWindow() {
             InitializeComponent();
+            // Show login-popup
+            mainController = new MainController(false);
+            mainController.initializeDataAndLogin();
         }
 
         BitmapImage blueButt = new BitmapImage(new Uri("Images/Buttons/blueButt.png", UriKind.Relative));
@@ -35,6 +45,8 @@ namespace dailyreminder {
         BitmapImage createreminderClickedButt = new BitmapImage(new Uri("Images/Buttons/createreminderClickedButt.png", UriKind.Relative));
 
         #region Mouseevents for Menu Buttons
+
+        
 
         //---------------------------------------------------------------------------------------------------
         //----- Bookingsite
@@ -96,11 +108,13 @@ namespace dailyreminder {
             overviewButt.Source = blueClickedButt;
         }
 
+
+
         #endregion
 
         private void createButt_MouseDown(object sender, MouseButtonEventArgs e) {
             createButt.Source = createreminderClickedButt;
-            //Save reminder to database!!
+            string myTitle = title.Text;
         }
 
         private void createButt_MouseEnter(object sender, MouseEventArgs e) {

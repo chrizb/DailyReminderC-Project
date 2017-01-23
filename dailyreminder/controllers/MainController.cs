@@ -8,21 +8,20 @@ using dailyreminder.models;
 namespace dailyreminder.controllers {
     class MainController {
 
-        List<Reminder> reminderList;
-        bool loggedIn = false;
+        public List<Reminder> ReminderList { get; set; }
+        public bool loggedIn{ get; set; }
         ReminderDataController rdc;
 
 
-        public MainController() {
+        public MainController(bool loggedIn) {
+            this.loggedIn = loggedIn;
             if(loggedIn){ // This is important, both is used the same way but works different
-                rdc = new OfflineController();
-            }
-            else {
                 rdc = new LoggedInController();
             }
+            else {
+                rdc = new OfflineController();
+            }
             
-               
-
         }
 
         public void initializeDataAndLogin() {

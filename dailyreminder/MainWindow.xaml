@@ -36,7 +36,7 @@
                 <Label Grid.Row="2" FontSize="15" Content="You have no reminders" Height="100" Width="164"></Label>
             </Grid>
             <!--.....................grid for booking site....................-->
-            <Grid Name="bookingSite" Visibility="Hidden" Margin="0,59,0,0">
+            <Grid Name="bookingSite" Visibility="Visible" Margin="0,59,0,0">
 
                 <Label Content="   Reminder" Grid.Row="1" Width="80"></Label>
 
