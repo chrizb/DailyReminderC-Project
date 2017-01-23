@@ -21,7 +21,7 @@ namespace dailyreminder.controllers {
                 rdc = new LoggedInController();
             }
             
-                
+               
 
         }
 
