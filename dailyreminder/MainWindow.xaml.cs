@@ -18,9 +18,21 @@ namespace dailyreminder {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
+        System.Windows.Forms.NotifyIcon icon = new System.Windows.Forms.NotifyIcon();
         public MainWindow() {
+
             InitializeComponent();
+            this.Closed += new EventHandler(MainWindow_Closed);
+            this.Deactivated += new EventHandler(MainWindow_Deactivated);
+            this.icon.Visible = true;
+            this.icon.Icon = dailyreminder.Resources.Resource1.DailyReminderIcon;
+            this.icon.ContextMenu = new System.Windows.Forms.ContextMenu();
+            this.icon.ContextMenu.MenuItems.Add("dailyreminder app");
+            this.icon.ContextMenu.MenuItems[0].Click += new EventHandler(icon_DoubleClick);
+            this.icon.DoubleClick += new EventHandler(icon_DoubleClick);
         }
+
+        
 
         BitmapImage blueButt = new BitmapImage(new Uri("Images/Buttons/blueButt.png", UriKind.Relative));
         BitmapImage blueHoverButt = new BitmapImage(new Uri("Images/Buttons/blueHoverButt.png", UriKind.Relative));
@@ -100,6 +112,7 @@ namespace dailyreminder {
 
         private void createButt_MouseDown(object sender, MouseButtonEventArgs e) {
             createButt.Source = createreminderClickedButt;
+            this.icon.ShowBalloonTip(10000, "Added Reminder", "AlarmTime", System.Windows.Forms.ToolTipIcon.Info);
             //Save reminder to database!!
         }
 
@@ -110,5 +123,27 @@ namespace dailyreminder {
         private void createButt_MouseLeave(object sender, MouseEventArgs e) {
             createButt.Source = createreminderButt;
         }
+
+        void MainWindow_Closed(object sender, EventArgs e)
+        {
+            icon.Dispose();
+            
+        }
+
+        void MainWindow_Deactivated(object sender, EventArgs e)
+        {
+            if (this.WindowState == WindowState.Minimized)
+            {
+                this.Hide();
+            }
+        }
+
+        void icon_DoubleClick(object sender, EventArgs e)
+        {
+              this.Show();
+              this.WindowState = WindowState.Normal;
+
+        }
+
     }
 }
