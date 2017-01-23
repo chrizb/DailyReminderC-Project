@@ -9,12 +9,12 @@ using System.Web.Script.Serialization;
 
 namespace dailyreminder.controllers {
     abstract class ReminderDataController {
-        public void saveAll(List<Reminder> reminderList, string token);
-        public List<Reminder> loadAll(string filepath);
-        public void saveReminder(Reminder reminder);
-        public bool login(string email, string token);
-        public void addNewReminder(Reminder reminder);
-        public void deleteReminder(int reminderId);
-        public void updateReminder(Reminder reminder);
+        abstract public void saveAll(List<Reminder> reminderList, string token);
+        abstract public List<Reminder> loadAll(string filepath);
+        abstract public void saveReminder(Reminder reminder);
+        abstract public bool login(string email, string token);
+        abstract public void addNewReminder(Reminder reminder);
+        abstract public void deleteReminder(int reminderId);
+        abstract public void updateReminder(Reminder reminder);
     }
 }
