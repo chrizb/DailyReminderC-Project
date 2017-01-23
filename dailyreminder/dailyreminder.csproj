@@ -54,6 +54,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="DayImages.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -66,6 +70,7 @@
     <Compile Include="controllers\MainController.cs" />
     <Compile Include="controllers\OfflineController.cs" />
     <Compile Include="controllers\ReminderDataController.cs" />
+    <Compile Include="DayImages.xaml.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -99,7 +104,17 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Buttons\addnewButt.png" />
+    <Resource Include="Images\Buttons\addnewClickedButt.png" />
+    <Resource Include="Images\Buttons\addnewHoverButt.png" />
+    <Resource Include="Images\Buttons\blueButt.png" />
+    <Resource Include="Images\Buttons\blueClickedButt.png" />
+    <Resource Include="Images\Buttons\blueHoverButt.png" />
+    <Resource Include="Images\Buttons\createreminderButt.png" />
+    <Resource Include="Images\Buttons\createreminderClickedButt.png" />
+    <Resource Include="Images\Buttons\createreminderHoverButt.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
