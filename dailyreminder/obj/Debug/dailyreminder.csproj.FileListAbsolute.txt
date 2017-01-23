@@ -11,3 +11,6 @@ c:\users\christofer\desktop\dailyreminder\dailyreminder\obj\Debug\dailyreminder.
 c:\users\christofer\desktop\dailyreminder\dailyreminder\obj\Debug\dailyreminder.csproj.GenerateResource.Cache
 c:\users\christofer\desktop\dailyreminder\dailyreminder\obj\Debug\dailyreminder.exe
 c:\users\christofer\desktop\dailyreminder\dailyreminder\obj\Debug\dailyreminder.pdb
+C:\Users\Hampus\Documents\GitHub\DailyReminderC-Project-master\dailyreminder\bin\Debug\dailyreminder.exe.config
+C:\Users\Hampus\Documents\GitHub\DailyReminderC-Project-master\dailyreminder\obj\Debug\dailyreminder.exe
+C:\Users\Hampus\Documents\GitHub\DailyReminderC-Project-master\dailyreminder\obj\Debug\dailyreminder.pdb
