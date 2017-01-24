@@ -8,7 +8,7 @@ using dailyreminder.models;
 namespace dailyreminder.controllers {
     class MainController {
 
-        public List<Reminder> reminderList { get; set; }
+        public List<Reminder> reminderList;
         public bool loggedIn{ get; set; }
         ReminderDataController rdc;
 
@@ -20,6 +20,7 @@ namespace dailyreminder.controllers {
             }
             else {
                 rdc = new OfflineController();
+                reminderList = new List<Reminder>();
             }
             
         }
