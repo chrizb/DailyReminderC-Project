@@ -29,7 +29,7 @@ namespace dailyreminder {
             InitializeComponent();
             // Show login-popup
             mainController = new MainController(false);
-            mainController.initializeDataAndLogin();
+            //mainController.initializeDataAndLogin();
         }
 
         BitmapImage blueButt = new BitmapImage(new Uri("Images/Buttons/blueButt.png", UriKind.Relative));
