@@ -8,27 +8,36 @@ using dailyreminder.models;
 namespace dailyreminder.controllers {
     class MainController {
 
-        List<Reminder> reminderList;
-        bool loggedIn = false;
+        private List<Reminder> reminderList;
+        public bool loggedIn{ get; set; }
         ReminderDataController rdc;
 
 
-        public MainController() {
+        public MainController(bool loggedIn) {
+            this.loggedIn = loggedIn;
             if(loggedIn){ // This is important, both is used the same way but works different
-                rdc = new OfflineController();
-            }
-            else {
                 rdc = new LoggedInController();
             }
+            else {
+                rdc = new OfflineController();
+                reminderList = new List<Reminder>();
+            }
             
-               
+        }
 
+        public void addReminderToList(Reminder newReminder) {
+            reminderList.Add(newReminder);
+            saveCurrentReminderList();
+        }
+        public void deleteReminderFromList(int index) {
+            reminderList.RemoveAt(index);
+            saveCurrentReminderList();
         }
 
         public void initializeDataAndLogin() {
             reminderList = rdc.loadAll(@"c:\tempFile.dr");
         }
-        public void saveDataAndExitProgram() {
+        public void saveCurrentReminderList() {
             rdc.saveAll(reminderList, null);
         }
 
@@ -41,7 +50,7 @@ namespace dailyreminder.controllers {
                     todaysReminders.Add(reminder);
                 }
             }
-            return todaysReminders;
+            return todaysReminders.OrderBy(o => o.endTime).ToList();
         }
     }
 }

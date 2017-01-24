@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using dailyreminder.models;
+using dailyreminder.controllers;
 
 namespace dailyreminder {
     /// <summary>
@@ -19,6 +21,11 @@ namespace dailyreminder {
     /// </summary>
     public partial class MainWindow : Window {
         System.Windows.Forms.NotifyIcon icon = new System.Windows.Forms.NotifyIcon();
+
+        // Controllers to be used:
+
+        public static MainController mainController;
+
         public MainWindow() {
 
             InitializeComponent();
@@ -30,6 +37,9 @@ namespace dailyreminder {
             this.icon.ContextMenu.MenuItems.Add("dailyreminder app");
             this.icon.ContextMenu.MenuItems[0].Click += new EventHandler(icon_DoubleClick);
             this.icon.DoubleClick += new EventHandler(icon_DoubleClick);
+            // Show login-popup
+            mainController = new MainController(false);
+            //mainController.initializeDataAndLogin();
         }
 
         
@@ -47,6 +57,8 @@ namespace dailyreminder {
         BitmapImage createreminderClickedButt = new BitmapImage(new Uri("Images/Buttons/createreminderClickedButt.png", UriKind.Relative));
 
         #region Mouseevents for Menu Buttons
+
+        
 
         //---------------------------------------------------------------------------------------------------
         //----- Bookingsite
@@ -108,12 +120,21 @@ namespace dailyreminder {
             overviewButt.Source = blueClickedButt;
         }
 
+
+
         #endregion
 
         private void createButt_MouseDown(object sender, MouseButtonEventArgs e) {
             createButt.Source = createreminderClickedButt;
             this.icon.ShowBalloonTip(10000, "Added Reminder", "AlarmTime", System.Windows.Forms.ToolTipIcon.Info);
-            //Save reminder to database!!
+            //Save reminder to the list/database!!
+            Reminder newReminder = new Reminder();
+            newReminder.Title = title.Text;
+            newReminder.Description = description.Text;
+            newReminder.startTime = Int32.Parse(startTime.Text);
+            newReminder.endTime = Int32.Parse(stopTime.Text);
+            newReminder.Days = getSelectedDays();
+            MainWindow.mainController.addReminderToList(newReminder);
         }
 
         private void createButt_MouseEnter(object sender, MouseEventArgs e) {
@@ -145,9 +166,53 @@ namespace dailyreminder {
 
         }
 
+
         private void ReminderBox_Loaded(object sender, RoutedEventArgs e)
         {
 
+
+        private String getSelectedDays() {
+            string days = "";
+
+
+            // Be prepared for nice code
+            if (day_Monday.isToggled == true)
+                days += "1";
+            else
+                days += "0";
+
+            if (day_Tuesday.isToggled == true)
+                days += "1";
+            else
+                days += "0";
+
+            if (day_Wednesday.isToggled == true)
+                days += "1";
+            else
+                days += "0";
+
+            if (day_Thursday.isToggled == true)
+                days += "1";
+            else
+                days += "0";
+
+            if (day_Friday.isToggled == true)
+                days += "1";
+            else
+                days += "0";
+
+            if (day_Saturday.isToggled == true)
+                days += "1";
+            else
+                days += "0";
+
+            if (day_Sunday.isToggled == true)
+                days += "1";
+            else
+                days += "0";
+
+
+            return days;
         }
 
     }
