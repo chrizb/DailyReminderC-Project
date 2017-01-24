@@ -8,8 +8,11 @@ namespace dailyreminder.models {
     class Reminder {
 
         long id;
-        int startTime; // Time is measured in minutes from 00:00
-        int endTime;
+        public long Id { get; set; }
+      
+        // Time is measured in minutes from 00:00
+        public int startTime{ get; set; }
+        public int endTime{ get; set; }
         String days;
         public String Days {
             get { return days; }
