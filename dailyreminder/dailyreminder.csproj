@@ -129,12 +129,39 @@
     <Resource Include="Images\Buttons\blueButt.png" />
     <Resource Include="Images\Buttons\blueClickedButt.png" />
     <Resource Include="Images\Buttons\blueHoverButt.png" />
-    <Resource Include="Images\Buttons\createreminderButt.png" />
-    <Resource Include="Images\Buttons\createreminderClickedButt.png" />
-    <Resource Include="Images\Buttons\createreminderHoverButt.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\DailyReminderIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\reminderBoxPic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\reminderBoxPic2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\reminderBoxPic3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\reminderBoxPic4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\doneButt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\doneHoverButt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\createReminderButt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\createReminderButt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\createReminderHoverButt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\createreminderClickedButt.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

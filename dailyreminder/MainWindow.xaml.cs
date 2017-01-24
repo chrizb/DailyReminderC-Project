@@ -113,6 +113,7 @@ namespace dailyreminder {
         private void createButt_MouseDown(object sender, MouseButtonEventArgs e) {
             createButt.Source = createreminderClickedButt;
             this.icon.ShowBalloonTip(10000, "Added Reminder", "AlarmTime", System.Windows.Forms.ToolTipIcon.Info);
+
             //Save reminder to database!!
         }
 
@@ -143,6 +144,11 @@ namespace dailyreminder {
               this.Show();
               this.WindowState = WindowState.Normal;
 
+        }
+
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            
         }
 
     }
