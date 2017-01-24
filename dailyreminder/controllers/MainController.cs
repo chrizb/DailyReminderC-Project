@@ -27,17 +27,17 @@ namespace dailyreminder.controllers {
 
         public void addReminderToList(Reminder newReminder) {
             reminderList.Add(newReminder);
-            saveDataToFile();
+            saveCurrentReminderList();
         }
         public void deleteReminderFromList(int index) {
             reminderList.RemoveAt(index);
-            saveDataToFile();
+            saveCurrentReminderList();
         }
 
         public void initializeDataAndLogin() {
             reminderList = rdc.loadAll(@"c:\tempFile.dr");
         }
-        public void saveDataToFile() {
+        public void saveCurrentReminderList() {
             rdc.saveAll(reminderList, null);
         }
 
