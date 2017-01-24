@@ -33,7 +33,28 @@
             </Grid>
             <!--.....................grid for overView page.....................-->
             <Grid Name="overView" Visibility="Hidden" Margin="0,59,0,0">
-                <Label Grid.Row="2" FontSize="15" Content="You have no reminders" Height="100" Width="164"></Label>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                    <!--width = 20%-->
+                    <ColumnDefinition Width="0.60*"></ColumnDefinition>
+                    <!--width = 80% (Mitt-del)-->
+                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                    <!--width = 20%-->
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"></RowDefinition>
+                    <RowDefinition Height="0.6*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <!--Label med inga påminnelser, Skall "överskrivas" när reminders läggs till-->
+                <Label Grid.Row="0" Grid.Column="1" FontSize="18" Content="No reminders!" HorizontalAlignment="Center"></Label>
+
+                <!--Byt ut mot en pil som pekar åt respektive håll-->
+                <!--förslag: mouseover på pil så "lyser" sidan upp som pilen pekar åt-->
+                <Button Grid.Column="0" Grid.Row="1" Content="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Width="50" Height="30"></Button>
+                <!--Resetta mitt-del, hämta morgondagens reminders-->
+                <Button Grid.Column="2" Grid.Row="1" Content="Right" HorizontalAlignment="Right" VerticalAlignment="Center" Width="50" Height="30"></Button>
+                <!--Restta mitt-del, hämta föregående dags reminders-->
             </Grid>
             <!--.....................grid for booking site....................-->
             <Grid Name="bookingSite" Visibility="Hidden" Margin="0,59,0,0">
