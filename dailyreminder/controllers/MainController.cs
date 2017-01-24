@@ -40,7 +40,7 @@ namespace dailyreminder.controllers {
                     todaysReminders.Add(reminder);
                 }
             }
-            return todaysReminders;
+            return todaysReminders.OrderBy(o => o.endTime).ToList();
         }
     }
 }
