@@ -145,5 +145,10 @@ namespace dailyreminder {
 
         }
 
+        private void ReminderBox_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }
