@@ -8,7 +8,7 @@ using dailyreminder.models;
 namespace dailyreminder.controllers {
     class MainController {
 
-        public List<Reminder> reminderList;
+        private List<Reminder> reminderList;
         public bool loggedIn{ get; set; }
         ReminderDataController rdc;
 
@@ -25,10 +25,19 @@ namespace dailyreminder.controllers {
             
         }
 
+        public void addReminderToList(Reminder newReminder) {
+            reminderList.Add(newReminder);
+            saveDataToFile();
+        }
+        public void deleteReminderFromList(int index) {
+            reminderList.RemoveAt(index);
+            saveDataToFile();
+        }
+
         public void initializeDataAndLogin() {
             reminderList = rdc.loadAll(@"c:\tempFile.dr");
         }
-        public void saveDataAndExitProgram() {
+        public void saveDataToFile() {
             rdc.saveAll(reminderList, null);
         }
 
