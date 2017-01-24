@@ -30,6 +30,9 @@
             <!--.....................grid for front page.....................-->
             <Grid Name="frontPage" Visibility="Visible" Margin="0,59,0,0">
                 <Label Grid.Row="2" FontSize="15" Content="You have no reminders today" Height="100" Width="210"></Label>
+                
+                <local:ReminderBox/>
+                
             </Grid>
             <!--.....................grid for overView page.....................-->
             <Grid Name="overView" Visibility="Hidden" Margin="0,59,0,0">
