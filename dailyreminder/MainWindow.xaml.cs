@@ -165,7 +165,7 @@ namespace dailyreminder {
               this.WindowState = WindowState.Normal;
 
         }
-
+            
         private String getSelectedDays() {
             string days = "";
 

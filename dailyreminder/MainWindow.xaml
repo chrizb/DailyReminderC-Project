@@ -29,10 +29,13 @@
             </UniformGrid>
             <!--.....................grid for front page.....................-->
             <Grid Name="frontPage" Visibility="Visible" Margin="0,59,0,0">
-                <Label Grid.Row="2" FontSize="15" Content="You have no reminders today" Height="100" Width="210"></Label>
+                <Label Grid.Row="2" FontSize="15" Content="You have no reminders today" Height="100" Width="210" Visibility="Hidden"></Label>
                 
-                <local:ReminderBox/>
-                
+                <Image Source="Images/reminderBoxPic4.png" Width="250" Margin="0,0,0,160"></Image>
+
+                <Image Source="Images/buttons/doneButt.png" Width="210" Height="30" Margin="27,83,27,186"></Image>             
+                <Label Width="135" Margin="4,23,10,227" HorizontalAlignment="Center" Content="Feed the cat" FontFamily="Calibri" FontSize="25"></Label>
+                <Label Width="114" Margin="72,50,78,199" HorizontalAlignment="Center" Content=" 2 Hours left" FontFamily="Calibri" FontSize="20"></Label>
             </Grid>
             <!--.....................grid for overView page.....................-->
             <Grid Name="overView" Visibility="Hidden" Margin="0,59,0,0">
@@ -98,11 +101,11 @@
                     <local:DayImages  Grid.Row="1" Grid.Column="3" x:Name="day_Sunday"/>
                 </Grid>
 
-                <WrapPanel Width="210" Margin="27,174,27,49">
+                <WrapPanel Width="210" Margin="27,174,27,25">
                     <Label Content="Description:" Margin="0 0 0 0" Width="75"></Label>
                     <TextBox Name="description" Margin="0 2 0 0" Width="110" Height="42"></TextBox>
 
-                    <Image Name="createButt" Source="Images/Buttons/createreminderButt.png" Width="100" Height="30" Margin="75,0,0,0"  MouseDown="createButt_MouseDown" 
+                    <Image Name="createButt" Source="Images/Buttons/createReminderButt.png" Width="165" Height="39" Margin="44,5,0,0"  MouseDown="createButt_MouseDown" 
                            MouseEnter="createButt_MouseEnter" MouseLeave="createButt_MouseLeave">
                     </Image>
                 </WrapPanel>

@@ -4,11 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="290" d:DesignWidth="300">
-    <Grid Background="White" Margin="0,0,0,160">
-        <Label Name="reminderBoxTitle" Content="Mata katten">
-           
-        </Label>  
-        <Label Name="timeCountdown" Content="5 hours left" Margin="0,40" FontSize="30"></Label>
-    </Grid>
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UniformGrid>
+        <Image Source="Images/reminderBoxPic.png">
+        </Image>
+    </UniformGrid>
+       
+       
+ 
+    
 </UserControl>
