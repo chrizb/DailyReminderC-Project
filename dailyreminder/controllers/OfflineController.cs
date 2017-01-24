@@ -16,6 +16,7 @@ namespace dailyreminder.controllers {
         }
         public override List<Reminder> loadAll(string filepath = @"c:\tempFile.dr") {
             string fileContent = File.ReadAllText(filepath);
+            
             List<Reminder> reminderList = new JavaScriptSerializer().Deserialize<List<Reminder>>(fileContent);
             return reminderList;
         }

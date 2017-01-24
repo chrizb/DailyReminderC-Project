@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using dailyreminder.models;
+using dailyreminder.controllers;
 
 namespace dailyreminder {
     /// <summary>
@@ -19,6 +21,11 @@ namespace dailyreminder {
     /// </summary>
     public partial class MainWindow : Window {
         System.Windows.Forms.NotifyIcon icon = new System.Windows.Forms.NotifyIcon();
+
+        // Controllers to be used:
+
+        MainController mainController;
+
         public MainWindow() {
 
             InitializeComponent();
@@ -30,6 +37,9 @@ namespace dailyreminder {
             this.icon.ContextMenu.MenuItems.Add("dailyreminder app");
             this.icon.ContextMenu.MenuItems[0].Click += new EventHandler(icon_DoubleClick);
             this.icon.DoubleClick += new EventHandler(icon_DoubleClick);
+            // Show login-popup
+            mainController = new MainController(false);
+            //mainController.initializeDataAndLogin();
         }
 
         
@@ -47,6 +57,8 @@ namespace dailyreminder {
         BitmapImage createreminderClickedButt = new BitmapImage(new Uri("Images/Buttons/createreminderClickedButt.png", UriKind.Relative));
 
         #region Mouseevents for Menu Buttons
+
+        
 
         //---------------------------------------------------------------------------------------------------
         //----- Bookingsite
@@ -107,6 +119,8 @@ namespace dailyreminder {
             addButt.Source = greenButt;
             overviewButt.Source = blueClickedButt;
         }
+
+
 
         #endregion
 
