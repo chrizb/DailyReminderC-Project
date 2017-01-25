@@ -98,6 +98,9 @@ namespace dailyreminder {
             frontpageButt.Source = blueClickedButt;
             addButt.Source = greenButt;
             overviewButt.Source = blueButt;
+
+            
+
         }
         //---------------------------------------------------------------------------------------------------
         //----- Overview
@@ -135,6 +138,7 @@ namespace dailyreminder {
             newReminder.endTime = Int32.Parse(stopTime.Text);
             newReminder.Days = getSelectedDays();
             mainController.addReminderToList(newReminder);
+            
         }
 
         private void createButt_MouseEnter(object sender, MouseEventArgs e) {
