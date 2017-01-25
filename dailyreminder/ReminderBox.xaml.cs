@@ -23,6 +23,14 @@ namespace dailyreminder
         public ReminderBox()
         {
             InitializeComponent();
+            ReminderBoxTitle1.Content = "Buy Milk";
+            timeCountdown1.Content = "1 Hours Left";
+        }
+
+        public Label ReminderBoxTitle1
+        {
+            get { return reminderBoxTitle1; }
+            set { reminderBoxTitle1 = value; }
         }
     }
 }
