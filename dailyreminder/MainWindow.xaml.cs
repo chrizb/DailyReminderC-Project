@@ -24,7 +24,7 @@ namespace dailyreminder {
 
         // Controllers to be used:
 
-        public static MainController mainController;
+        public MainController mainController;
 
         public MainWindow() {
 
@@ -134,7 +134,7 @@ namespace dailyreminder {
             newReminder.startTime = Int32.Parse(startTime.Text);
             newReminder.endTime = Int32.Parse(stopTime.Text);
             newReminder.Days = getSelectedDays();
-            MainWindow.mainController.addReminderToList(newReminder);
+            mainController.addReminderToList(newReminder);
         }
 
         private void createButt_MouseEnter(object sender, MouseEventArgs e) {

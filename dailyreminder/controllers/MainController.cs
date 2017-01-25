@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using dailyreminder.models;
 
 namespace dailyreminder.controllers {
-    class MainController {
+    public class MainController {
 
         private List<Reminder> reminderList;
         public bool loggedIn{ get; set; }

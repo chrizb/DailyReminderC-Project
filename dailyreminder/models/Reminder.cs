@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace dailyreminder.models {
-    class Reminder {
+    public class Reminder {
 
         long id;
         public long Id { get; set; }
