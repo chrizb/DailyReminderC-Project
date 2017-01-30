@@ -31,10 +31,12 @@ namespace dailyreminder {
             InitializeComponent();
             this.Closed += new EventHandler(MainWindow_Closed);
             this.Deactivated += new EventHandler(MainWindow_Deactivated);
+            
             this.icon.Visible = true;
             this.icon.Icon = dailyreminder.Resources.Resource1.DailyReminderIcon;
             this.icon.ContextMenu = new System.Windows.Forms.ContextMenu();
             this.icon.ContextMenu.MenuItems.Add("dailyreminder app");
+        
             this.icon.ContextMenu.MenuItems[0].Click += new EventHandler(icon_DoubleClick);
             this.icon.DoubleClick += new EventHandler(icon_DoubleClick);
             // Show login-popup

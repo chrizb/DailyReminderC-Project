@@ -25,6 +25,7 @@ namespace dailyreminder
             InitializeComponent();
             ReminderBoxTitle1.Content = "Buy Milk";
             timeCountdown1.Content = "1 Hours Left";
+           
         }
 
         public Label ReminderBoxTitle1

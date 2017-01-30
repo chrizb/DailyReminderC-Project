@@ -69,7 +69,7 @@
                 <!--Restta mitt-del, hämta föregående dags reminders-->
             </Grid>
             <!--.....................grid for booking site....................-->
-            <Grid Name="bookingSite" Visibility="Visible" Margin="0,59,0,0">
+            <Grid Name="bookingSite" Visibility="Hidden" Margin="0,59,0,0">
 
                 <Label Content="   Reminder" Grid.Row="1" Width="80"></Label>
 
