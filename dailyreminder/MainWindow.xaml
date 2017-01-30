@@ -31,14 +31,18 @@
   
             <!--.....................grid for front page.....................-->
             <Grid Name="frontPage" Visibility="Hidden" Margin="0,59,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40*" />
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="40*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                </Grid.RowDefinitions>
 
-                <Label Grid.Row="2" FontSize="15" Content="You have no reminders today" Height="100" Width="210"></Label>               
-                <local:ReminderBox/>               
-                <Image Source="Images/reminderBoxPic4.png" Width="250" Margin="0,0,0,160"></Image>
 
-                <Image Source="Images/buttons/doneButt.png" Width="210" Height="30" Margin="27,83,27,186"></Image>             
-                <Label Width="135" Margin="4,23,10,227" HorizontalAlignment="Center" Content="Feed the cat" FontFamily="Calibri" FontSize="25"></Label>
-                <Label Width="114" Margin="72,50,78,199" HorizontalAlignment="Center" Content=" 2 Hours left" FontFamily="Calibri" FontSize="20"></Label>
+                <Label Grid.Row="2" FontSize="15" Content="You have no reminders today" Height="100" Width="210" Visibility="Hidden"></Label>
+
             </Grid>
        
             <!--.....................grid for overView page.....................-->

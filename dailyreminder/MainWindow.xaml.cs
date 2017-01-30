@@ -100,6 +100,41 @@ namespace dailyreminder {
             frontpageButt.Source = blueClickedButt;
             addButt.Source = greenButt;
             overviewButt.Source = blueButt;
+
+
+
+            List<Reminder> reminders = new List<Reminder>{
+                new Reminder{Title = "Hej", startTime = 200, endTime = 300 },
+                new Reminder{Title = "på", startTime = 350, endTime = 370 },
+                new Reminder{Title = "dig", startTime = 700, endTime = 800 },
+                new Reminder{Title = "din", startTime = 700, endTime = 800 },
+                new Reminder{Title = "jävel", startTime = 700, endTime = 800 }
+            };
+            for(int i = 0; i < reminders.Count; i++){
+                frontPage.RowDefinitions.Add(new RowDefinition());
+                Label title = new Label{Content = reminders.ElementAt(i).Title};
+                Grid.SetRow(title, i);
+                Grid.SetColumn(title, 0);
+                Label startTime = new Label{Content = reminders.ElementAt(i).startTime};
+                Grid.SetRow(startTime, i);
+                Grid.SetColumn(startTime, 1);
+                Label endTime = new Label{Content = reminders.ElementAt(i).endTime};
+                Grid.SetRow(endTime, i);
+                Grid.SetColumn(endTime, 2);
+                Button doneButt = new Button{Content = "Done!"};
+                 // doneButt.Click need a function to call 
+                Grid.SetRow(doneButt, i);
+                Grid.SetColumn(doneButt, 3);
+                // Add all the new elements
+                frontPage.Children.Add(title);
+                frontPage.Children.Add(startTime);
+                frontPage.Children.Add(endTime);
+                frontPage.Children.Add(doneButt);
+            }
+            
+
+            
+
         }
         //---------------------------------------------------------------------------------------------------
         //----- Overview
@@ -139,6 +174,7 @@ namespace dailyreminder {
             newReminder.endTime = Int32.Parse(stopTime.Text);
             newReminder.Days = getSelectedDays();
             mainController.addReminderToList(newReminder);
+            
         }
 
         private void createButt_MouseEnter(object sender, MouseEventArgs e) {
