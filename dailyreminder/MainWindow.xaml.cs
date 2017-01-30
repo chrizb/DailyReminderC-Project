@@ -56,6 +56,8 @@ namespace dailyreminder {
         BitmapImage createreminderHoverButt = new BitmapImage(new Uri("Images/Buttons/createreminderHoverButt.png", UriKind.Relative));
         BitmapImage createreminderClickedButt = new BitmapImage(new Uri("Images/Buttons/createreminderClickedButt.png", UriKind.Relative));
 
+        String[] daysOfWeek = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+
         #region Mouseevents for Menu Buttons
 
         
@@ -153,6 +155,8 @@ namespace dailyreminder {
             frontpageButt.Source = blueButt;
             addButt.Source = greenButt;
             overviewButt.Source = blueClickedButt;
+
+            dayOfTheWeekLabel.Content = DateTime.Now.DayOfWeek;
         }
 
 
@@ -251,6 +255,31 @@ namespace dailyreminder {
 
 
             return days;
+        }
+
+ 
+        private void rightButt_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < daysOfWeek.Length; i++)
+            {
+                if (daysOfWeek[i] == dayOfTheWeekLabel.Content.ToString())
+                {
+                    dayOfTheWeekLabel.Content = daysOfWeek[(i+1)%7];
+                    break;
+                }
+            }
+        }
+
+        private void leftButt_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < daysOfWeek.Length; i++)
+            {
+                if (daysOfWeek[i] == dayOfTheWeekLabel.Content.ToString())
+                {
+                    dayOfTheWeekLabel.Content = daysOfWeek[(i - 1 + 7) % 7];
+                    break;
+                }
+            }
         }
 
     }
