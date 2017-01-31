@@ -49,12 +49,10 @@ namespace dailyreminder.controllers {
                 Label title = new Label { Content = reminders.ElementAt(i).Title };
                 Grid.SetRow(title, i);
                 Grid.SetColumn(title, 0);
-                string startTimeString = (reminders.ElementAt(i).startTime / 60) + ":" + (reminders.ElementAt(i).startTime % 60);
-                Label startTime = new Label { Content = startTimeString };
+                Label startTime = new Label { Content = reminders.ElementAt(i).getStartTimeString() };
                 Grid.SetRow(startTime, i);
                 Grid.SetColumn(startTime, 1);
-                string endTimeString = (reminders.ElementAt(i).endTime / 60) + ":" + (reminders.ElementAt(i).endTime % 60);
-                Label endTime = new Label { Content = endTimeString };
+                Label endTime = new Label { Content = reminders.ElementAt(i).getEndTimeString() };
                 Grid.SetRow(endTime, i);
                 Grid.SetColumn(endTime, 2);
                 Button doneButt = new Button { Content = "Done!" };
