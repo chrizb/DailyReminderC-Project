@@ -19,14 +19,13 @@ using dailyreminder.controllers;
 
 
 namespace dailyreminder {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window {
         System.Windows.Forms.NotifyIcon icon = new System.Windows.Forms.NotifyIcon();
 
+		
         // Controllers to be used:
         DispatcherTimer timer = new DispatcherTimer();
+
 
         //private void startclock()
         //{
@@ -34,6 +33,7 @@ namespace dailyreminder {
         //    timer.Tick += tickevent;
         //    timer.Start();
         //}
+
         public MainController mainController;
         ListController listController;
 
@@ -50,7 +50,9 @@ namespace dailyreminder {
         
             this.icon.ContextMenu.MenuItems[0].Click += new EventHandler(icon_DoubleClick);
             this.icon.DoubleClick += new EventHandler(icon_DoubleClick);
+
             //startclock();
+
             //testin
            
           
@@ -61,8 +63,10 @@ namespace dailyreminder {
 
         }
 
+
         //private void tickevent(object sender, EventArgs e)
         //{
+
        
         //   string nowdate =datalbl.Text = DateTime.Now.ToString(@"HH:mm", new CultureInfo("sv-SE"));
         //   // var timezone = TimeZoneInfo.FindSystemTimeZoneById("Atlantic Standard Time");
@@ -89,15 +93,12 @@ namespace dailyreminder {
         BitmapImage createreminderButt = new BitmapImage(new Uri("Images/Buttons/createreminderButt.png", UriKind.Relative));
         BitmapImage createreminderHoverButt = new BitmapImage(new Uri("Images/Buttons/createreminderHoverButt.png", UriKind.Relative));
         BitmapImage createreminderClickedButt = new BitmapImage(new Uri("Images/Buttons/createreminderClickedButt.png", UriKind.Relative));
-
+		
         String[] daysOfWeek = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
 
         #region Mouseevents for Menu Buttons
 
-        
-
-        //---------------------------------------------------------------------------------------------------
-        //----- Bookingsite
+        /*--------------------------------Add Reminder--------------------------------*/
         private void addButt_MouseEnter(object sender, MouseEventArgs e) {
             if (bookingSite.Visibility != Visibility.Visible)
                 addButt.Source = greenHoverButt;
@@ -116,8 +117,7 @@ namespace dailyreminder {
             overviewButt.Source = blueButt;
             addButt.Source = greenClickedButt;
         }
-        //---------------------------------------------------------------------------------------------------
-        //----- Frontpage 
+        /*--------------------------------Frontpage--------------------------------*/
         private void frontpageButt_MouseEnter(object sender, MouseEventArgs e) {
             if (frontPage.Visibility != Visibility.Visible)
                 frontpageButt.Source = blueHoverButt;
@@ -149,8 +149,7 @@ namespace dailyreminder {
             
 
         }
-        //---------------------------------------------------------------------------------------------------
-        //----- Overview
+        /*--------------------------------Overview--------------------------------*/
         private void overviewButt_MouseEnter(object sender, MouseEventArgs e) {
             if (overView.Visibility != Visibility.Visible)
                 overviewButt.Source = blueHoverButt;
@@ -173,36 +172,46 @@ namespace dailyreminder {
         }
 
 
+            dayOfTheWeekLabel.Content = DateTime.Now.DayOfWeek;
+        }
 
         #endregion
 
-        private void createButt_MouseDown(object sender, MouseButtonEventArgs e) {
+
+        /************************** 
+         * FUNCTION: Creates a reminder and adds it to a list when createButt is pressed
+         **************************/
+        private void createButt_MouseDown(object sender, MouseButtonEventArgs e)
+        {
             createButt.Source = createreminderClickedButt;
+            
+            // Gives the user a notification on the system tray 
             this.icon.ShowBalloonTip(10000, "Added Reminder", "AlarmTime", System.Windows.Forms.ToolTipIcon.Info);
-            //Save reminder to the list/database!!
+            
             Reminder newReminder = new Reminder();
             newReminder.Title = title.Text;
             newReminder.Description = description.Text;
             newReminder.startTime = (startTime.Value.Value.Hour * 60) + startTime.Value.Value.Minute;
             newReminder.endTime = (stopTime.Value.Value.Hour * 60) + stopTime.Value.Value.Minute;
             newReminder.Days = getSelectedDays();
+            
             mainController.addReminderToList(newReminder);
             
-
         }
 
-        private void createButt_MouseEnter(object sender, MouseEventArgs e) {
+        private void createButt_MouseEnter(object sender, MouseEventArgs e)
+        {
             createButt.Source = createreminderHoverButt;
         }
 
-        private void createButt_MouseLeave(object sender, MouseEventArgs e) {
+        private void createButt_MouseLeave(object sender, MouseEventArgs e)
+        {
             createButt.Source = createreminderButt;
         }
 
         void MainWindow_Closed(object sender, EventArgs e)
         {
             icon.Dispose();
-            
         }
 
         void MainWindow_Deactivated(object sender, EventArgs e)
@@ -226,12 +235,17 @@ namespace dailyreminder {
 
 
 
-
-        private String getSelectedDays() {
+        /**************************
+         * CALL: getSelectedDays() 
+         * FUNCTION: gets the days that have been toggled via a  string
+         * NOTE: 1 = toggled, 0 = untoggled
+         **************************/
+        private String getSelectedDays()
+        {
             string days = "";
 
+            #region if-else statements for checking toggled days
 
-            // Be prepared for nice code
             if (day_Monday.isToggled == true)
                 days += "1";
             else
@@ -267,6 +281,7 @@ namespace dailyreminder {
             else
                 days += "0";
 
+            #endregion
 
             return days;
         }
