@@ -37,10 +37,10 @@ namespace dailyreminder.models {
             done = true;
         }
         public String getStartTimeString() {
-            return (startTime/60) + " " + (startTime % 60);
+            return (startTime/60) + ":" + (startTime % 60);
         }
         public String getEndTimeString() {
-            return (endTime / 60) + " " + (endTime % 60);
+            return (endTime / 60) + ":" + (endTime % 60);
         }
 
 

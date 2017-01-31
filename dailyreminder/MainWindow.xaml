@@ -41,22 +41,24 @@
             </Grid>
        
             <!--.....................grid for overView page.....................-->
-            <Grid Name="overView" Visibility="Hidden" Margin="0,59,0,0">             
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.1*"></RowDefinition>
-                    <RowDefinition Height="0.6*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Label Name="dayOfTheWeekLabel" Grid.Row="0" HorizontalAlignment="Center" FontFamily="Calibri" FontSize="15"></Label>
-                <Image Name="rightArrow" Grid.Column="2"  Source="Images/rightArrow.png" Height="42" Width="28" MouseEnter="rightArrow_MouseEnter" MouseLeave="rightArrow_MouseLeave" 
-                       MouseDown="rightArrow_MouseDown" HorizontalAlignment="Right">                  
-                </Image>
-                <Image Name="leftArrow" Source="Images/rightArrow.png" Margin="22,0" Height="42" Width="28" MouseEnter="leftArrow_MouseEnter"
-                       MouseLeave="leftArrow_MouseLeave" MouseDown="leftArrow_MouseDown" HorizontalAlignment="Left">
-                    <Image.RenderTransform>
-                        <ScaleTransform ScaleX="-1"/>
-                    </Image.RenderTransform>
-                </Image>
-            </Grid>
+            <!--<ScrollViewer Height="299" VerticalAlignment="Bottom">-->
+                <Grid Name="overView" Visibility="Hidden" Margin="0,59,0,0">             
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*"></RowDefinition>
+                        <RowDefinition Height="0.6*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Name="dayOfTheWeekLabel" Grid.Row="0" HorizontalAlignment="Center" FontFamily="Calibri" FontSize="15"></Label>
+                    <Image Name="rightArrow" Grid.Column="2"  Source="Images/rightArrow.png" Height="42" Width="28" MouseEnter="rightArrow_MouseEnter" MouseLeave="rightArrow_MouseLeave" 
+                           MouseDown="rightArrow_MouseDown" HorizontalAlignment="Right">                  
+                    </Image>
+                    <Image Name="leftArrow" Source="Images/rightArrow.png" Margin="22,0" Height="42" Width="28" MouseEnter="leftArrow_MouseEnter"
+                           MouseLeave="leftArrow_MouseLeave" MouseDown="leftArrow_MouseDown" HorizontalAlignment="Left">
+                        <Image.RenderTransform>
+                            <ScaleTransform ScaleX="-1"/>
+                        </Image.RenderTransform>
+                    </Image>
+                </Grid>
+            <!--</ScrollViewer>-->
             <!--.....................grid for booking site....................-->
             <Grid Name="bookingSite" Visibility="Hidden" Margin="0,59,0,0" >
                 
