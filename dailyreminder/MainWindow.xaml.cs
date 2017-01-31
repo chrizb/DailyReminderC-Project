@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using dailyreminder.models;
 using dailyreminder.controllers;
+
 
 namespace dailyreminder {
     /// <summary>
@@ -23,7 +26,14 @@ namespace dailyreminder {
         System.Windows.Forms.NotifyIcon icon = new System.Windows.Forms.NotifyIcon();
 
         // Controllers to be used:
+        DispatcherTimer timer = new DispatcherTimer();
 
+        private void startclock()
+        {
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += tickevent;
+            timer.Start();
+        }
         public MainController mainController;
 
         public MainWindow() {
@@ -39,11 +49,31 @@ namespace dailyreminder {
         
             this.icon.ContextMenu.MenuItems[0].Click += new EventHandler(icon_DoubleClick);
             this.icon.DoubleClick += new EventHandler(icon_DoubleClick);
+            startclock();
+            //testin
+           
+          
             // Show login-popup
             mainController = new MainController(false);
             //mainController.initializeDataAndLogin();
+          
         }
 
+        private void tickevent(object sender, EventArgs e)
+        {
+       
+           string nowdate =datalbl.Text = DateTime.Now.ToString(@"HH:mm", new CultureInfo("sv-SE"));
+           // var timezone = TimeZoneInfo.FindSystemTimeZoneById("Atlantic Standard Time");
+            //string nowdate = datalbl.Text = TimeZoneInfo.ConvertTime(DateTime.Now, timezone).ToString("hh:mm:ss");
+            string alarm = stopTime.FormatString = "17:10";
+            title.Text = alarm;
+            if (alarm == nowdate)
+            {
+                this.icon.ShowBalloonTip(0, "Alarmtime", "AlarmTime", System.Windows.Forms.ToolTipIcon.Info);
+                title.Text = "Alarm";
+                timer.Stop();
+            }
+        }
         
 
         BitmapImage blueButt = new BitmapImage(new Uri("Images/Buttons/blueButt.png", UriKind.Relative));
@@ -57,6 +87,8 @@ namespace dailyreminder {
         BitmapImage createreminderButt = new BitmapImage(new Uri("Images/Buttons/createreminderButt.png", UriKind.Relative));
         BitmapImage createreminderHoverButt = new BitmapImage(new Uri("Images/Buttons/createreminderHoverButt.png", UriKind.Relative));
         BitmapImage createreminderClickedButt = new BitmapImage(new Uri("Images/Buttons/createreminderClickedButt.png", UriKind.Relative));
+
+        String[] daysOfWeek = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
 
         #region Mouseevents for Menu Buttons
 
@@ -100,6 +132,41 @@ namespace dailyreminder {
             frontpageButt.Source = blueClickedButt;
             addButt.Source = greenButt;
             overviewButt.Source = blueButt;
+
+
+
+            List<Reminder> reminders = new List<Reminder>{
+                new Reminder{Title = "Hej", startTime = 200, endTime = 300 },
+                new Reminder{Title = "på", startTime = 350, endTime = 370 },
+                new Reminder{Title = "dig", startTime = 700, endTime = 800 },
+                new Reminder{Title = "din", startTime = 700, endTime = 800 },
+                new Reminder{Title = "jävel", startTime = 700, endTime = 800 }
+            };
+            for(int i = 0; i < reminders.Count; i++){
+                frontPage.RowDefinitions.Add(new RowDefinition());
+                Label title = new Label{Content = reminders.ElementAt(i).Title};
+                Grid.SetRow(title, i);
+                Grid.SetColumn(title, 0);
+                Label startTime = new Label{Content = reminders.ElementAt(i).startTime};
+                Grid.SetRow(startTime, i);
+                Grid.SetColumn(startTime, 1);
+                Label endTime = new Label{Content = reminders.ElementAt(i).endTime};
+                Grid.SetRow(endTime, i);
+                Grid.SetColumn(endTime, 2);
+                Button doneButt = new Button{Content = "Done!"};
+                 // doneButt.Click need a function to call 
+                Grid.SetRow(doneButt, i);
+                Grid.SetColumn(doneButt, 3);
+                // Add all the new elements
+                frontPage.Children.Add(title);
+                frontPage.Children.Add(startTime);
+                frontPage.Children.Add(endTime);
+                frontPage.Children.Add(doneButt);
+            }
+            
+
+            
+
         }
         //---------------------------------------------------------------------------------------------------
         //----- Overview
@@ -120,6 +187,8 @@ namespace dailyreminder {
             frontpageButt.Source = blueButt;
             addButt.Source = greenButt;
             overviewButt.Source = blueClickedButt;
+
+            dayOfTheWeekLabel.Content = DateTime.Now.DayOfWeek;
         }
 
 
@@ -137,6 +206,8 @@ namespace dailyreminder {
             newReminder.endTime = Int32.Parse(stopTime.Text);
             newReminder.Days = getSelectedDays();
             mainController.addReminderToList(newReminder);
+            
+
         }
 
         private void createButt_MouseEnter(object sender, MouseEventArgs e) {
@@ -219,5 +290,29 @@ namespace dailyreminder {
             return days;
         }
 
+ 
+        private void rightButt_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < daysOfWeek.Length; i++)
+            {
+                if (daysOfWeek[i] == dayOfTheWeekLabel.Content.ToString())
+                {
+                    dayOfTheWeekLabel.Content = daysOfWeek[(i+1)%7];
+                    break;
+                }
+            }
+        }
+
+        private void leftButt_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < daysOfWeek.Length; i++)
+            {
+                if (daysOfWeek[i] == dayOfTheWeekLabel.Content.ToString())
+                {
+                    dayOfTheWeekLabel.Content = daysOfWeek[(i - 1 + 7) % 7];
+                    break;
+                }
+            }
+        }
     }
 }
