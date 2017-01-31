@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using dailyreminder.models;
 using dailyreminder.controllers;
+
 
 namespace dailyreminder {
     /// <summary>
@@ -23,7 +26,14 @@ namespace dailyreminder {
         System.Windows.Forms.NotifyIcon icon = new System.Windows.Forms.NotifyIcon();
 
         // Controllers to be used:
+        DispatcherTimer timer = new DispatcherTimer();
 
+        private void startclock()
+        {
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += tickevent;
+            timer.Start();
+        }
         public MainController mainController;
 
         public MainWindow() {
@@ -31,17 +41,40 @@ namespace dailyreminder {
             InitializeComponent();
             this.Closed += new EventHandler(MainWindow_Closed);
             this.Deactivated += new EventHandler(MainWindow_Deactivated);
+            
             this.icon.Visible = true;
             this.icon.Icon = dailyreminder.Resources.Resource1.DailyReminderIcon;
             this.icon.ContextMenu = new System.Windows.Forms.ContextMenu();
             this.icon.ContextMenu.MenuItems.Add("dailyreminder app");
+        
             this.icon.ContextMenu.MenuItems[0].Click += new EventHandler(icon_DoubleClick);
             this.icon.DoubleClick += new EventHandler(icon_DoubleClick);
+            startclock();
+            //testin
+           
+          
             // Show login-popup
             mainController = new MainController(false);
+
             mainController.initializeDataAndLogin();
+
         }
 
+        private void tickevent(object sender, EventArgs e)
+        {
+       
+           string nowdate =datalbl.Text = DateTime.Now.ToString(@"HH:mm", new CultureInfo("sv-SE"));
+           // var timezone = TimeZoneInfo.FindSystemTimeZoneById("Atlantic Standard Time");
+            //string nowdate = datalbl.Text = TimeZoneInfo.ConvertTime(DateTime.Now, timezone).ToString("hh:mm:ss");
+            string alarm = stopTime.FormatString = "17:10";
+            title.Text = alarm;
+            if (alarm == nowdate)
+            {
+                this.icon.ShowBalloonTip(0, "Alarmtime", "AlarmTime", System.Windows.Forms.ToolTipIcon.Info);
+                title.Text = "Alarm";
+                timer.Stop();
+            }
+        }
         
 
         BitmapImage blueButt = new BitmapImage(new Uri("Images/Buttons/blueButt.png", UriKind.Relative));
@@ -169,6 +202,7 @@ namespace dailyreminder {
             newReminder.Days = getSelectedDays();
             mainController.addReminderToList(newReminder);
             
+
         }
 
         private void createButt_MouseEnter(object sender, MouseEventArgs e) {

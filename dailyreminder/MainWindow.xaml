@@ -17,16 +17,13 @@
 
                 <Image Name="addButt" MouseDown="addButt_MouseDown" MouseEnter="addButt_MouseEnter" MouseLeave="addButt_MouseLeave" 
                        Source="Images/Buttons/addnewButt.png">
-                </Image>
-                
+                </Image>               
                 <Image Name="frontpageButt" MouseDown="frontpageButt_MouseDown" MouseEnter="frontpageButt_MouseEnter" MouseLeave="frontpageButt_MouseLeave"
                        Source="Images/Buttons/blueClickedButt.png">
                 </Image>
-
                 <Image Name="overviewButt" MouseDown="overviewButt_MouseDown" MouseEnter="overviewButt_MouseEnter" MouseLeave="overviewButt_MouseLeave"
                        Source="Images/Buttons/blueButt.png">
                 </Image>
-
             </UniformGrid>
   
             <!--.....................grid for front page.....................-->
@@ -63,17 +60,27 @@
                 <!--Label med inga påminnelser, Skall "överskrivas" när reminders läggs till-->
                 <Label Name="dayOfTheWeekLabel" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontFamily="Calibri" FontSize="15"></Label>
 
-                <!--Byt ut mot en pil som pekar åt respektive håll-->
-                <!--förslag: mouseover på pil så "lyser" sidan upp som pilen pekar åt-->
                 <Button Name="leftButt" Grid.Column="0" Grid.Row="1" Content="Left" VerticalAlignment="Center" HorizontalAlignment="Left" 
                         Width="50" Height="30" Click="leftButt_Click"></Button>
                 <!--Resetta mitt-del, hämta morgondagens reminders-->
-                <Button Name="rightButt" Grid.Column="2" Grid.Row="1" Content="Right" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                        Width="50" Height="30" Click="rightButt_Click"></Button>
+
+                <Image Name="rightButt" Source="Images/rightArrow.png" Grid.Column="2"  Height="43">
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Source" Value="Images/rightArrowHover.png"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
                 <!--Restta mitt-del, hämta föregående dags reminders-->
             </Grid>
             <!--.....................grid for booking site....................-->
-            <Grid Name="bookingSite" Visibility="Hidden" Margin="0,59,0,0" >
+
+            <Grid Name="bookingSite" Visibility="Hidden" Margin="0,59,0,0">
+
 
                 <Label Content="   Reminder" Grid.Row="1" Width="80" FontFamily="Calibri" FontSize="14"></Label>
 
@@ -82,7 +89,9 @@
                     <TextBox Name="title" Margin="0 4 0 0" Width="140" Height="22" FontFamily="Calibri" FontSize="13"></TextBox>
                 </WrapPanel>
 
+                <TextBlock Name="datalbl" HorizontalAlignment="Left" Margin="36,102,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="19" Width="227"/>
                 <WrapPanel Width="210" Height="30" Margin="0 -120 0 0">
+
                     <Label Content="Start:" Margin="0 0 0 0" Width="45" FontFamily="Calibri" FontSize="13"></Label>
                     <xctk:DateTimeUpDown Name="startTime" Value="{Binding LastUpdated}" Format="ShortTime"  FontSize="10" Width="50"/>
                     <Label Content="Finnish:" Margin="0 0 0 0" Width="50" FontFamily="Calibri" FontSize="13"></Label>
