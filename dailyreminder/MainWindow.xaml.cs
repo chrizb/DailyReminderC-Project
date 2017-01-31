@@ -246,5 +246,15 @@ namespace dailyreminder {
             }
         }
 
+        private void Image_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void rightButt_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
     }
 }
