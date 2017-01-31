@@ -19,59 +19,67 @@ using dailyreminder.controllers;
 
 
 namespace dailyreminder {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window {
         System.Windows.Forms.NotifyIcon icon = new System.Windows.Forms.NotifyIcon();
 
+		
         // Controllers to be used:
         DispatcherTimer timer = new DispatcherTimer();
 
-        private void startclock()
-        {
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += tickevent;
-            timer.Start();
-        }
+
+        //private void startclock()
+        //{
+        //    timer.Interval = TimeSpan.FromSeconds(1);
+        //    timer.Tick += tickevent;
+        //    timer.Start();
+        //}
+
         public MainController mainController;
+        ListController listController;
 
         public MainWindow() {
 
             InitializeComponent();
             this.Closed += new EventHandler(MainWindow_Closed);
             this.Deactivated += new EventHandler(MainWindow_Deactivated);
+            
             this.icon.Visible = true;
             this.icon.Icon = dailyreminder.Resources.Resource1.DailyReminderIcon;
             this.icon.ContextMenu = new System.Windows.Forms.ContextMenu();
             this.icon.ContextMenu.MenuItems.Add("dailyreminder app");
+        
             this.icon.ContextMenu.MenuItems[0].Click += new EventHandler(icon_DoubleClick);
             this.icon.DoubleClick += new EventHandler(icon_DoubleClick);
-            startclock();
+
+            //startclock();
+
             //testin
            
           
             // Show login-popup
             mainController = new MainController(false);
-            //mainController.initializeDataAndLogin();
-          
+
+            mainController.initializeDataAndLogin();
+
         }
 
-        private void tickevent(object sender, EventArgs e)
-        {
+
+        //private void tickevent(object sender, EventArgs e)
+        //{
+
        
-           string nowdate =datalbl.Text = DateTime.Now.ToString(@"HH:mm", new CultureInfo("sv-SE"));
-           // var timezone = TimeZoneInfo.FindSystemTimeZoneById("Atlantic Standard Time");
-            //string nowdate = datalbl.Text = TimeZoneInfo.ConvertTime(DateTime.Now, timezone).ToString("hh:mm:ss");
-            string alarm = stopTime.FormatString = "17:10";
-            title.Text = alarm;
-            if (alarm == nowdate)
-            {
-                this.icon.ShowBalloonTip(0, "Alarmtime", "AlarmTime", System.Windows.Forms.ToolTipIcon.Info);
-                title.Text = "Alarm";
-                timer.Stop();
-            }
-        }
+        //   string nowdate =datalbl.Text = DateTime.Now.ToString(@"HH:mm", new CultureInfo("sv-SE"));
+        //   // var timezone = TimeZoneInfo.FindSystemTimeZoneById("Atlantic Standard Time");
+        //    //string nowdate = datalbl.Text = TimeZoneInfo.ConvertTime(DateTime.Now, timezone).ToString("hh:mm:ss");
+        //    string alarm = stopTime.FormatString = "17:10";
+        //    title.Text = alarm;
+        //    if (alarm == nowdate)
+        //    {
+        //        this.icon.ShowBalloonTip(0, "Alarmtime", "AlarmTime", System.Windows.Forms.ToolTipIcon.Info);
+        //        title.Text = "Alarm";
+        //        timer.Stop();
+        //    }
+        //}
         
 
         BitmapImage blueButt = new BitmapImage(new Uri("Images/Buttons/blueButt.png", UriKind.Relative));
@@ -94,10 +102,7 @@ namespace dailyreminder {
 
         #region Mouseevents for Menu Buttons
 
-        
-
-        //---------------------------------------------------------------------------------------------------
-        //----- Bookingsite
+        /*--------------------------------Add Reminder--------------------------------*/
         private void addButt_MouseEnter(object sender, MouseEventArgs e) {
             if (bookingSite.Visibility != Visibility.Visible)
                 addButt.Source = greenHoverButt;
@@ -116,8 +121,7 @@ namespace dailyreminder {
             overviewButt.Source = blueButt;
             addButt.Source = greenClickedButt;
         }
-        //---------------------------------------------------------------------------------------------------
-        //----- Frontpage 
+        /*--------------------------------Frontpage--------------------------------*/
         private void frontpageButt_MouseEnter(object sender, MouseEventArgs e) {
             if (frontPage.Visibility != Visibility.Visible)
                 frontpageButt.Source = blueHoverButt;
@@ -136,42 +140,20 @@ namespace dailyreminder {
             overviewButt.Source = blueButt;
 
 
-
-            List<Reminder> reminders = new List<Reminder>{
-                new Reminder{Title = "Hej", startTime = 200, endTime = 300 },
-                new Reminder{Title = "på", startTime = 350, endTime = 370 },
-                new Reminder{Title = "dig", startTime = 700, endTime = 800 },
-                new Reminder{Title = "din", startTime = 700, endTime = 800 },
-                new Reminder{Title = "jävel", startTime = 700, endTime = 800 }
-            };
-            for(int i = 0; i < reminders.Count; i++){
-                frontPage.RowDefinitions.Add(new RowDefinition());
-                Label title = new Label{Content = reminders.ElementAt(i).Title};
-                Grid.SetRow(title, i);
-                Grid.SetColumn(title, 0);
-                Label startTime = new Label{Content = reminders.ElementAt(i).startTime};
-                Grid.SetRow(startTime, i);
-                Grid.SetColumn(startTime, 1);
-                Label endTime = new Label{Content = reminders.ElementAt(i).endTime};
-                Grid.SetRow(endTime, i);
-                Grid.SetColumn(endTime, 2);
-                Button doneButt = new Button{Content = "Done!"};
-                 // doneButt.Click need a function to call 
-                Grid.SetRow(doneButt, i);
-                Grid.SetColumn(doneButt, 3);
-                // Add all the new elements
-                frontPage.Children.Add(title);
-                frontPage.Children.Add(startTime);
-                frontPage.Children.Add(endTime);
-                frontPage.Children.Add(doneButt);
-            }
+            // List the reminders
+            try {
+                listController.ResetGrid();
+            } catch { }
+            
+            List<Reminder> reminders = mainController.getTodaysReminders();
+            listController = new ListController(frontPage, reminders);
+            listController.ListAll();
             
 
             
 
         }
-        //---------------------------------------------------------------------------------------------------
-        //----- Overview
+        /*--------------------------------Overview--------------------------------*/
         private void overviewButt_MouseEnter(object sender, MouseEventArgs e) {
             if (overView.Visibility != Visibility.Visible)
                 overviewButt.Source = blueHoverButt;
@@ -194,36 +176,46 @@ namespace dailyreminder {
         }
 
 
+            dayOfTheWeekLabel.Content = DateTime.Now.DayOfWeek;
+        }
 
         #endregion
 
-        private void createButt_MouseDown(object sender, MouseButtonEventArgs e) {
+
+        /************************** 
+         * FUNCTION: Creates a reminder and adds it to a list when createButt is pressed
+         **************************/
+        private void createButt_MouseDown(object sender, MouseButtonEventArgs e)
+        {
             createButt.Source = createreminderClickedButt;
+            
+            // Gives the user a notification on the system tray 
             this.icon.ShowBalloonTip(10000, "Added Reminder", "AlarmTime", System.Windows.Forms.ToolTipIcon.Info);
-            //Save reminder to the list/database!!
+            
             Reminder newReminder = new Reminder();
             newReminder.Title = title.Text;
             newReminder.Description = description.Text;
-            newReminder.startTime = Int32.Parse(startTime.Text);
-            newReminder.endTime = Int32.Parse(stopTime.Text);
+            newReminder.startTime = (startTime.Value.Value.Hour * 60) + startTime.Value.Value.Minute;
+            newReminder.endTime = (stopTime.Value.Value.Hour * 60) + stopTime.Value.Value.Minute;
             newReminder.Days = getSelectedDays();
+            
             mainController.addReminderToList(newReminder);
             
-
         }
 
-        private void createButt_MouseEnter(object sender, MouseEventArgs e) {
+        private void createButt_MouseEnter(object sender, MouseEventArgs e)
+        {
             createButt.Source = createreminderHoverButt;
         }
 
-        private void createButt_MouseLeave(object sender, MouseEventArgs e) {
+        private void createButt_MouseLeave(object sender, MouseEventArgs e)
+        {
             createButt.Source = createreminderButt;
         }
 
         void MainWindow_Closed(object sender, EventArgs e)
         {
             icon.Dispose();
-            
         }
 
         void MainWindow_Deactivated(object sender, EventArgs e)
@@ -247,12 +239,17 @@ namespace dailyreminder {
 
 
 
-
-        private String getSelectedDays() {
+        /**************************
+         * CALL: getSelectedDays() 
+         * FUNCTION: gets the days that have been toggled via a  string
+         * NOTE: 1 = toggled, 0 = untoggled
+         **************************/
+        private String getSelectedDays()
+        {
             string days = "";
 
+            #region if-else statements for checking toggled days
 
-            // Be prepared for nice code
             if (day_Monday.isToggled == true)
                 days += "1";
             else
@@ -288,6 +285,7 @@ namespace dailyreminder {
             else
                 days += "0";
 
+            #endregion
 
             return days;
         }

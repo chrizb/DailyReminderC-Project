@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,10 +30,12 @@ namespace dailyreminder
         public ReminderBox()
         {
             InitializeComponent();
+
             mainWindow = (MainWindow)Application.Current.MainWindow;
             
             
             
+
         }
 
         public Label ReminderBoxTitle1

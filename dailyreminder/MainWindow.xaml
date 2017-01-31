@@ -29,10 +29,10 @@
             <!--.....................grid for front page.....................-->
             <Grid Name="frontPage" Visibility="Hidden" Margin="0,59,0,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40*" />
-                    <ColumnDefinition Width="10*" />
-                    <ColumnDefinition Width="10*" />
-                    <ColumnDefinition Width="40*" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="50" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                 </Grid.RowDefinitions>
@@ -60,6 +60,7 @@
             <!--.....................grid for booking site....................-->
             <Grid Name="bookingSite" Visibility="Hidden" Margin="0,59,0,0" >
                 
+
                 <Label Content="   Reminder" Grid.Row="1" Width="80" FontFamily="Calibri" FontSize="14"></Label>
                 
                 <WrapPanel Width="210" Height="30" Margin="0 -200 0 0">
