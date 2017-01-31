@@ -154,18 +154,6 @@
     <None Include="Resources\DailyReminderIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\reminderBoxPic.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\reminderBoxPic2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\reminderBoxPic3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\reminderBoxPic4.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Buttons\doneButt.png" />
   </ItemGroup>
   <ItemGroup>
@@ -188,6 +176,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\rightArrowHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\rightArrowPressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\deleteButt.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

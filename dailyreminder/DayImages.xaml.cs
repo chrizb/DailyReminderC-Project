@@ -33,44 +33,6 @@ namespace dailyreminder
 
         private void dayButt_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
-            //if (isToggled)
-            //    isToggled = false;
-            //else
-            //    isToggled = true;
-
-            //if (dayButt.Source != blueClickedButt)
-            //    dayButt.Source = blueClickedButt;
-
-            //else dayButt.Source = new BitmapImage(new Uri("Images/frontpageButtPic.png", UriKind.Relative));
-        }
-
-        private void dayButt_MouseEnter(object sender, MouseEventArgs e)
-        {
-            //if (dayButt.Source != blueClickedButt)
-            //    dayButt.Source = blueHoverButt;
-        }
-
-        private void dayButt_MouseLeave(object sender, MouseEventArgs e)
-        {
-            //if (dayButt.Source != blueClickedButt)
-            //    dayButt.Source = blueButt;
-        }
-
-        private void dayLabel_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (dayButt.Source != blueClickedButt)
-                dayButt.Source = blueHoverButt;
-        }
-
-        private void dayLabel_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (dayButt.Source != blueClickedButt)
-                dayButt.Source = blueButt;
-        }
-
-        private void dayLabel_MouseDown(object sender, MouseButtonEventArgs e)
-        {
             if (isToggled)
                 isToggled = false;
             else
@@ -81,5 +43,19 @@ namespace dailyreminder
 
             else dayButt.Source = new BitmapImage(new Uri("Images/frontpageButtPic.png", UriKind.Relative));
         }
+
+        private void dayButt_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (dayButt.Source != blueClickedButt)
+                dayButt.Source = blueHoverButt;
+        }
+
+        private void dayButt_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (dayButt.Source != blueClickedButt)
+                dayButt.Source = blueButt;
+        }
+
+
     }
 }
