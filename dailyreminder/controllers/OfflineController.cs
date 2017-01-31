@@ -10,11 +10,12 @@ using System.Web.Script.Serialization;
 namespace dailyreminder.controllers {
     class OfflineController : ReminderDataController{
         public override void saveAll(List<Reminder> reminderList, string token) {
-            string path = @"c:\tempFile.dr";
+            string path = @"c:\data\tempFile.dr";
             string json = new JavaScriptSerializer().Serialize(reminderList);
             File.WriteAllText(path, json);
+
         }
-        public override List<Reminder> loadAll(string filepath = @"c:\tempFile.dr") {
+        public override List<Reminder> loadAll(string filepath = @"c:\data\tempFile.dr") {
             string fileContent = File.ReadAllText(filepath);
             
             List<Reminder> reminderList = new JavaScriptSerializer().Deserialize<List<Reminder>>(fileContent);
