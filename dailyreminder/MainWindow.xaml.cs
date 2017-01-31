@@ -52,7 +52,7 @@ namespace dailyreminder {
             mainController = new MainController(false);
 
             mainController.initializeDataAndLogin();
-            alarmController = new AlarmController(mainController.getTodaysReminders());
+            alarmController = new AlarmController(mainController.getTodaysReminders(), mainController);
 
         }
 
@@ -124,7 +124,7 @@ namespace dailyreminder {
             } catch { }
             
             List<Reminder> reminders = mainController.getTodaysReminders();
-            listController = new ListController(frontPage, reminders);
+            listController = new ListController(frontPage, reminders, mainController);
             listController.ListAll();
             
 
