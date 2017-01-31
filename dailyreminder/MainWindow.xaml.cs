@@ -86,6 +86,10 @@ namespace dailyreminder {
         BitmapImage createreminderHoverButt = new BitmapImage(new Uri("Images/Buttons/createreminderHoverButt.png", UriKind.Relative));
         BitmapImage createreminderClickedButt = new BitmapImage(new Uri("Images/Buttons/createreminderClickedButt.png", UriKind.Relative));
 
+        BitmapImage rightArrowButt = new BitmapImage(new Uri("Images/rightArrow.png", UriKind.Relative));
+        BitmapImage rightArrowHoverButt = new BitmapImage(new Uri("Images/rightArrowHover.png", UriKind.Relative));
+        BitmapImage rightArrowClickedButt = new BitmapImage(new Uri("Images/rightArrowPressed.png", UriKind.Relative));
+
         String[] daysOfWeek = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
 
         #region Mouseevents for Menu Buttons
@@ -288,20 +292,43 @@ namespace dailyreminder {
             return days;
         }
 
- 
-        private void rightButt_Click(object sender, RoutedEventArgs e)
-        {
+        #region arrowButtons
+
+        private void rightArrow_MouseDown(object sender, MouseButtonEventArgs e)
+        {            
             for (int i = 0; i < daysOfWeek.Length; i++)
             {
                 if (daysOfWeek[i] == dayOfTheWeekLabel.Content.ToString())
                 {
-                    dayOfTheWeekLabel.Content = daysOfWeek[(i+1)%7];
+                    dayOfTheWeekLabel.Content = daysOfWeek[(i + 1) % 7];
                     break;
                 }
             }
+            rightArrow.Source = rightArrowClickedButt;     
+        }
+        private void rightArrow_MouseEnter(object sender, MouseEventArgs e)
+        {
+            rightArrow.Source = rightArrowHoverButt;
         }
 
-        private void leftButt_Click(object sender, RoutedEventArgs e)
+        private void rightArrow_MouseLeave(object sender, MouseEventArgs e)
+        {
+            rightArrow.Source = rightArrowButt;
+        }
+
+        #endregion
+
+        private void leftArrow_MouseEnter(object sender, MouseEventArgs e)
+        {
+            leftArrow.Source = rightArrowHoverButt;
+        }
+
+        private void leftArrow_MouseLeave(object sender, MouseEventArgs e)
+        {
+            leftArrow.Source = rightArrowButt;
+        }
+
+        private void leftArrow_MouseDown(object sender, MouseButtonEventArgs e)
         {
             for (int i = 0; i < daysOfWeek.Length; i++)
             {
@@ -311,7 +338,11 @@ namespace dailyreminder {
                     break;
                 }
             }
+
+            leftArrow.Source = rightArrowClickedButt;
         }
+
+     
 
     }
 }
