@@ -82,7 +82,9 @@
                     <TextBox Name="title" Margin="0 4 0 0" Width="140" Height="22" FontFamily="Calibri" FontSize="13"></TextBox>
                 </WrapPanel>
 
+                <TextBlock Name="datalbl" HorizontalAlignment="Left" Margin="36,102,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="19" Width="227"/>
                 <WrapPanel Width="210" Height="30" Margin="0 -120 0 0">
+
                     <Label Content="Start:" Margin="0 0 0 0" Width="45" FontFamily="Calibri" FontSize="13"></Label>
                     <xctk:DateTimeUpDown Name="startTime" Value="{Binding LastUpdated}" Format="ShortTime"  FontSize="10" Width="50"/>
                     <Label Content="Finnish:" Margin="0 0 0 0" Width="50" FontFamily="Calibri" FontSize="13"></Label>
