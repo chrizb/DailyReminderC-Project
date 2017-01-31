@@ -36,17 +36,17 @@ namespace dailyreminder.controllers {
 
         public void initializeDataAndLogin() {
             reminderList = rdc.loadAll(@"c:\data\tempFile.dr");
+            
         }
         public void saveCurrentReminderList() {
             rdc.saveAll(reminderList, null);
         }
 
         public List<Reminder> getTodaysReminders() {
-            DateTime dt = new DateTime();
-            int today = (int)dt.DayOfWeek;
+            int today = (int)DateTime.Now.DayOfWeek;
             List<Reminder> todaysReminders = new List<Reminder>();
             foreach (Reminder reminder in reminderList) {
-                if (reminder.Days.ElementAt(today) == 1) { // Checks if the event is happening today
+                if (reminder.Days.ElementAt(today) == '1') { // Checks if the event is happening today
                     todaysReminders.Add(reminder);
                 }
             }

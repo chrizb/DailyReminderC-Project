@@ -28,13 +28,14 @@ namespace dailyreminder {
         // Controllers to be used:
         DispatcherTimer timer = new DispatcherTimer();
 
-        private void startclock()
-        {
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += tickevent;
-            timer.Start();
-        }
+        //private void startclock()
+        //{
+        //    timer.Interval = TimeSpan.FromSeconds(1);
+        //    timer.Tick += tickevent;
+        //    timer.Start();
+        //}
         public MainController mainController;
+        ListController listController;
 
         public MainWindow() {
 
@@ -49,7 +50,7 @@ namespace dailyreminder {
         
             this.icon.ContextMenu.MenuItems[0].Click += new EventHandler(icon_DoubleClick);
             this.icon.DoubleClick += new EventHandler(icon_DoubleClick);
-            startclock();
+            //startclock();
             //testin
            
           
@@ -60,21 +61,21 @@ namespace dailyreminder {
 
         }
 
-        private void tickevent(object sender, EventArgs e)
-        {
+        //private void tickevent(object sender, EventArgs e)
+        //{
        
-           string nowdate =datalbl.Text = DateTime.Now.ToString(@"HH:mm", new CultureInfo("sv-SE"));
-           // var timezone = TimeZoneInfo.FindSystemTimeZoneById("Atlantic Standard Time");
-            //string nowdate = datalbl.Text = TimeZoneInfo.ConvertTime(DateTime.Now, timezone).ToString("hh:mm:ss");
-            string alarm = stopTime.FormatString = "17:10";
-            title.Text = alarm;
-            if (alarm == nowdate)
-            {
-                this.icon.ShowBalloonTip(0, "Alarmtime", "AlarmTime", System.Windows.Forms.ToolTipIcon.Info);
-                title.Text = "Alarm";
-                timer.Stop();
-            }
-        }
+        //   string nowdate =datalbl.Text = DateTime.Now.ToString(@"HH:mm", new CultureInfo("sv-SE"));
+        //   // var timezone = TimeZoneInfo.FindSystemTimeZoneById("Atlantic Standard Time");
+        //    //string nowdate = datalbl.Text = TimeZoneInfo.ConvertTime(DateTime.Now, timezone).ToString("hh:mm:ss");
+        //    string alarm = stopTime.FormatString = "17:10";
+        //    title.Text = alarm;
+        //    if (alarm == nowdate)
+        //    {
+        //        this.icon.ShowBalloonTip(0, "Alarmtime", "AlarmTime", System.Windows.Forms.ToolTipIcon.Info);
+        //        title.Text = "Alarm";
+        //        timer.Stop();
+        //    }
+        //}
         
 
         BitmapImage blueButt = new BitmapImage(new Uri("Images/Buttons/blueButt.png", UriKind.Relative));
@@ -135,29 +136,14 @@ namespace dailyreminder {
             overviewButt.Source = blueButt;
 
 
-
+            // List the reminders
+            try {
+                listController.ResetGrid();
+            } catch { }
+            
             List<Reminder> reminders = mainController.getTodaysReminders();
-            for(int i = 0; i < reminders.Count; i++){
-                frontPage.RowDefinitions.Add(new RowDefinition());
-                Label title = new Label{Content = reminders.ElementAt(i).Title};
-                Grid.SetRow(title, i);
-                Grid.SetColumn(title, 0);
-                Label startTime = new Label{Content = reminders.ElementAt(i).startTime};
-                Grid.SetRow(startTime, i);
-                Grid.SetColumn(startTime, 1);
-                Label endTime = new Label{Content = reminders.ElementAt(i).endTime};
-                Grid.SetRow(endTime, i);
-                Grid.SetColumn(endTime, 2);
-                Button doneButt = new Button{Content = "Done!"};
-                 // doneButt.Click need a function to call 
-                Grid.SetRow(doneButt, i);
-                Grid.SetColumn(doneButt, 3);
-                // Add all the new elements
-                frontPage.Children.Add(title);
-                frontPage.Children.Add(startTime);
-                frontPage.Children.Add(endTime);
-                frontPage.Children.Add(doneButt);
-            }
+            listController = new ListController(frontPage, reminders);
+            listController.ListAll();
             
 
             
