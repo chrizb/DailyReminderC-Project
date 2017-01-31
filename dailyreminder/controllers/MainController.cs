@@ -35,7 +35,7 @@ namespace dailyreminder.controllers {
         }
 
         public void initializeDataAndLogin() {
-            reminderList = rdc.loadAll(@"c:\tempFile.dr");
+            reminderList = rdc.loadAll(@"c:\data\tempFile.dr");
         }
         public void saveCurrentReminderList() {
             rdc.saveAll(reminderList, null);

@@ -40,10 +40,12 @@ namespace dailyreminder {
             InitializeComponent();
             this.Closed += new EventHandler(MainWindow_Closed);
             this.Deactivated += new EventHandler(MainWindow_Deactivated);
+            
             this.icon.Visible = true;
             this.icon.Icon = dailyreminder.Resources.Resource1.DailyReminderIcon;
             this.icon.ContextMenu = new System.Windows.Forms.ContextMenu();
             this.icon.ContextMenu.MenuItems.Add("dailyreminder app");
+        
             this.icon.ContextMenu.MenuItems[0].Click += new EventHandler(icon_DoubleClick);
             this.icon.DoubleClick += new EventHandler(icon_DoubleClick);
 
@@ -53,8 +55,9 @@ namespace dailyreminder {
           
             // Show login-popup
             mainController = new MainController(false);
-            //mainController.initializeDataAndLogin();
-          
+
+            mainController.initializeDataAndLogin();
+
         }
         private void tickevent(object sender, EventArgs e)
         {
@@ -128,13 +131,7 @@ namespace dailyreminder {
 
 
 
-            List<Reminder> reminders = new List<Reminder>{
-                new Reminder{Title = "Hej", startTime = 200, endTime = 300 },
-                new Reminder{Title = "på", startTime = 350, endTime = 370 },
-                new Reminder{Title = "dig", startTime = 700, endTime = 800 },
-                new Reminder{Title = "din", startTime = 700, endTime = 800 },
-                new Reminder{Title = "jävel", startTime = 700, endTime = 800 }
-            };
+            List<Reminder> reminders = mainController.getTodaysReminders();
             for(int i = 0; i < reminders.Count; i++){
                 frontPage.RowDefinitions.Add(new RowDefinition());
                 Label title = new Label{Content = reminders.ElementAt(i).Title};
@@ -203,8 +200,8 @@ namespace dailyreminder {
             Reminder newReminder = new Reminder();
             newReminder.Title = title.Text;
             newReminder.Description = description.Text;
-            newReminder.startTime = Int32.Parse(startTime.Text);
-            newReminder.endTime = Int32.Parse(stopTime.Text);
+            newReminder.startTime = (startTime.Value.Value.Hour * 60) + startTime.Value.Value.Minute;
+            newReminder.endTime = (stopTime.Value.Value.Hour * 60) + stopTime.Value.Value.Minute;
             newReminder.Days = getSelectedDays();
             
             mainController.addReminderToList(newReminder);
@@ -322,5 +319,6 @@ namespace dailyreminder {
                 }
             }
         }
+
     }
 }
