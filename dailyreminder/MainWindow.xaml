@@ -18,7 +18,7 @@
                 <Image Name="addButt" MouseDown="addButt_MouseDown" MouseEnter="addButt_MouseEnter" MouseLeave="addButt_MouseLeave" 
                        Source="Images/Buttons/addnewButt.png">
                 </Image>
-
+                
                 <Image Name="frontpageButt" MouseDown="frontpageButt_MouseDown" MouseEnter="frontpageButt_MouseEnter" MouseLeave="frontpageButt_MouseLeave"
                        Source="Images/Buttons/blueClickedButt.png">
                 </Image>
@@ -28,24 +28,25 @@
                 </Image>
 
             </UniformGrid>
-            
+  
             <!--.....................grid for front page.....................-->
             <Grid Name="frontPage" Visibility="Hidden" Margin="0,59,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40*" />
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="40*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                </Grid.RowDefinitions>
 
-                <Label Grid.Row="2" FontSize="15" Content="You have no reminders today" Height="100" Width="210"></Label>
-                
-                <local:ReminderBox/>
 
-                
-                <Image Source="Images/reminderBoxPic4.png" Width="250" Margin="0,0,0,160"></Image>
+                <Label Grid.Row="2" FontSize="15" Content="You have no reminders today" Height="100" Width="210" Visibility="Hidden"></Label>
 
-                <Image Source="Images/buttons/doneButt.png" Width="210" Height="30" Margin="27,83,27,186"></Image>             
-                <Label Width="135" Margin="4,23,10,227" HorizontalAlignment="Center" Content="Feed the cat" FontFamily="Calibri" FontSize="25"></Label>
-                <Label Width="114" Margin="72,50,78,199" HorizontalAlignment="Center" Content=" 2 Hours left" FontFamily="Calibri" FontSize="20"></Label>
             </Grid>
        
             <!--.....................grid for overView page.....................-->
-            <Grid Name="overView" Visibility="Hidden" Margin="0,59,0,0">
+            <Grid Name="overView" Visibility="Visible" Margin="0,59,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.2*"></ColumnDefinition>
                     <!--width = 20%-->
@@ -60,33 +61,39 @@
                 </Grid.RowDefinitions>
 
                 <!--Label med inga påminnelser, Skall "överskrivas" när reminders läggs till-->
-                <Label Grid.Row="0" Grid.Column="1" FontSize="18" Content="No reminders!" HorizontalAlignment="Center"></Label>
+                <Label Name="dayOfTheWeekLabel" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontFamily="Calibri" FontSize="15"></Label>
 
                 <!--Byt ut mot en pil som pekar åt respektive håll-->
                 <!--förslag: mouseover på pil så "lyser" sidan upp som pilen pekar åt-->
-                <Button Grid.Column="0" Grid.Row="1" Content="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Width="50" Height="30"></Button>
+                <Button Name="leftButt" Grid.Column="0" Grid.Row="1" Content="Left" VerticalAlignment="Center" HorizontalAlignment="Left" 
+                        Width="50" Height="30" Click="leftButt_Click"></Button>
                 <!--Resetta mitt-del, hämta morgondagens reminders-->
-                <Button Grid.Column="2" Grid.Row="1" Content="Right" HorizontalAlignment="Right" VerticalAlignment="Center" Width="50" Height="30"></Button>
+                <Button Name="rightButt" Grid.Column="2" Grid.Row="1" Content="Right" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                        Width="50" Height="30" Click="rightButt_Click"></Button>
                 <!--Restta mitt-del, hämta föregående dags reminders-->
             </Grid>
             <!--.....................grid for booking site....................-->
-            <Grid Name="bookingSite" Visibility="Visible" Margin="0,59,0,0">
+            <Grid Name="bookingSite" Visibility="Hidden" Margin="0,59,0,0" >
 
-                <Label Content="   Reminder" Grid.Row="1" Width="80"></Label>
+                <Label Content="   Reminder" Grid.Row="1" Width="80" FontFamily="Calibri" FontSize="14"></Label>
 
                 <WrapPanel Width="210" Height="30" Margin="0 -200 0 0">
-                    <Label Content="Title:" Margin="0 0 0 0" Width="45"></Label>
-                    <TextBox Name="title" Margin="0 4 0 0" Width="140" Height="22"></TextBox>
+                    <Label Content="Title:" Margin="0 0 0 0" Width="45" FontFamily="Calibri" FontSize="13"></Label>
+                    <TextBox Name="title" Margin="0 4 0 0" Width="140" Height="22" FontFamily="Calibri" FontSize="13"></TextBox>
                 </WrapPanel>
 
+                <TextBlock Name="datalbl" HorizontalAlignment="Left" Margin="36,102,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="19" Width="227"/>
                 <WrapPanel Width="210" Height="30" Margin="0 -120 0 0">
-                    <Label Content="Start:" Margin="0 0 0 0" Width="45"></Label>
-                    <xctk:DateTimeUpDown Name="startTime" Value="{Binding LastUpdated}" Format="FullDateTime" />
-                    <Label Content="Finnish:" Margin="0 0 0 0" Width="50"></Label>
-                    <xctk:DateTimeUpDown Name="stopTime" Value="{Binding LastUpdated}" Format="FullDateTime" />
+
+                    <Label Content="Start:" Margin="0 0 0 0" Width="45" FontFamily="Calibri" FontSize="13"></Label>
+                    <xctk:DateTimeUpDown Name="startTime" Value="{Binding LastUpdated}" Format="ShortTime"  FontSize="10" Width="50"/>
+                    <Label Content="Finnish:" Margin="0 0 0 0" Width="50" FontFamily="Calibri" FontSize="13"></Label>
+                    <xctk:DateTimeUpDown Name="stopTime" Value="{Binding LastUpdated}" Format="ShortTime" FontSize="10" Width="50"/>
                 </WrapPanel>
 
                 <Grid Width="210" Height="60" Margin="0 0 0 0">
+                    
+                    
                     <Grid.RowDefinitions>
                         <RowDefinition Height="25"></RowDefinition>
                         <RowDefinition Height="25"></RowDefinition>
@@ -98,9 +105,9 @@
                         <ColumnDefinition Width="40"></ColumnDefinition>
                         <ColumnDefinition Width="40"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Days:"></Label>
-                    <local:DayImages  Grid.Row="0" Grid.Column="1" x:Name="day_Monday"/>
-                    <local:DayImages  Grid.Row="0" Grid.Column="4" x:Name="day_Thursday"/>
+                    <Label Content="Days:" FontFamily="Calibri" FontSize="13"></Label>
+                    <local:DayImages  Grid.Row="0" Grid.Column="1" x:Name="day_Monday"/>                        
+                    <local:DayImages  Grid.Row="0" Grid.Column="4" x:Name="day_Thursday"/>                       
                     <local:DayImages  Grid.Row="0" Grid.Column="2" x:Name="day_Tuesday" />
                     <local:DayImages  Grid.Row="0" Grid.Column="3" x:Name="day_Wednesday"/>
                     <local:DayImages  Grid.Row="1" Grid.Column="1" x:Name="day_Friday"/>
