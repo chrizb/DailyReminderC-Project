@@ -27,6 +27,7 @@ namespace dailyreminder {
 
         public MainController mainController;
         ListController listController;
+        ListController overviewListController;
         AlarmController alarmController;
 
         public MainWindow() {
@@ -94,6 +95,7 @@ namespace dailyreminder {
             bookingSite.Visibility = Visibility.Visible;
             frontPage.Visibility = Visibility.Hidden;
             overView.Visibility = Visibility.Hidden;
+            overViewNavbar.Visibility = Visibility.Hidden;
 
             frontpageButt.Source = blueButt;
             overviewButt.Source = blueButt;
@@ -112,6 +114,7 @@ namespace dailyreminder {
             frontPage.Visibility = Visibility.Visible;
             overView.Visibility = Visibility.Hidden;
             bookingSite.Visibility = Visibility.Hidden;
+            overViewNavbar.Visibility = Visibility.Hidden;
 
             frontpageButt.Source = blueClickedButt;
             addButt.Source = greenButt;
@@ -125,7 +128,7 @@ namespace dailyreminder {
             
             List<Reminder> reminders = mainController.getTodaysReminders();
             listController = new ListController(frontPage, reminders, mainController);
-            listController.ListAll();
+            listController.ListAllFrontPage();
             
 
             
@@ -143,6 +146,7 @@ namespace dailyreminder {
         }
         private void overviewButt_MouseDown(object sender, MouseButtonEventArgs e) {
             overView.Visibility = Visibility.Visible;
+            overViewNavbar.Visibility = Visibility.Visible;
             frontPage.Visibility = Visibility.Hidden;
             bookingSite.Visibility = Visibility.Hidden;
 
@@ -150,7 +154,30 @@ namespace dailyreminder {
             addButt.Source = greenButt;
             overviewButt.Source = blueClickedButt;
 
+
             dayOfTheWeekLabel.Content = DateTime.Now.DayOfWeek;
+            overviewListController = new ListController(overView, mainController.getADaysReminders(nameOfDayToNumber(dayOfTheWeekLabel.Content.ToString())), mainController);
+            overviewListController.ListAllOverview();
+        }
+
+        private int nameOfDayToNumber(string str) {
+            switch (str) {
+                case "Monday":
+                    return 1;
+                case "Tuesday":
+                    return 2;
+                case "Wednesday":
+                    return 3;
+                case "Thursday":
+                    return 4;
+                case "Friday":
+                    return 5;
+                case "Saturday":
+                    return 6;
+                case "Sunday":
+                    return 0;
+            }
+            return -1;
         }
 
         
@@ -176,7 +203,9 @@ namespace dailyreminder {
             newReminder.Days = getSelectedDays();
             
             mainController.addReminderToList(newReminder);
-            alarmController.addAlarm(newReminder);
+            if (newReminder.Days.ElementAt((int)DateTime.Now.DayOfWeek) == '1') { // Om larmet är idag
+                alarmController.addAlarm(newReminder);
+            }
             
         }
 
@@ -279,7 +308,10 @@ namespace dailyreminder {
                     break;
                 }
             }
-            rightArrow.Source = rightArrowClickedButt;     
+            rightArrow.Source = rightArrowClickedButt;
+            overviewListController.ResetGrid();
+            overviewListController.setNewReminderList(mainController.getADaysReminders(nameOfDayToNumber(dayOfTheWeekLabel.Content.ToString())));
+            overviewListController.ListAllOverview();
         }
         private void rightArrow_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -291,7 +323,7 @@ namespace dailyreminder {
             rightArrow.Source = rightArrowButt;
         }
 
-        #endregion
+        
 
         private void leftArrow_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -315,9 +347,12 @@ namespace dailyreminder {
             }
 
             leftArrow.Source = rightArrowClickedButt;
+            overviewListController.ResetGrid();
+            overviewListController.setNewReminderList(mainController.getADaysReminders(nameOfDayToNumber(dayOfTheWeekLabel.Content.ToString())));
+            overviewListController.ListAllOverview();
         }
 
-     
+        #endregion
 
     }
 }
