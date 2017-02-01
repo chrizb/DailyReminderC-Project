@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using dailyreminder.models;
+using System.Windows.Controls;
 
 namespace dailyreminder.controllers {
     public class MainController {
@@ -11,6 +12,7 @@ namespace dailyreminder.controllers {
         private List<Reminder> reminderList;
         public bool loggedIn{ get; set; }
         ReminderDataController rdc;
+        long highestId;
 
 
         public MainController(bool loggedIn) {
@@ -22,10 +24,18 @@ namespace dailyreminder.controllers {
                 rdc = new OfflineController();
                 reminderList = new List<Reminder>();
             }
+
+            highestId = 0;
+            foreach (Reminder reminder in reminderList) { // set the highest ID on reminders
+                if (reminder.Id > highestId)
+                    highestId = reminder.Id;
+            }
             
         }
 
         public void addReminderToList(Reminder newReminder) {
+            highestId += 1;
+            newReminder.Id = highestId;
             reminderList.Add(newReminder);
             saveCurrentReminderList();
         }
@@ -51,6 +61,16 @@ namespace dailyreminder.controllers {
                 }
             }
             return todaysReminders.OrderBy(o => o.endTime).ToList();
+        }
+
+        public void setReminderToDone(long id) {
+            foreach (Reminder reminder in reminderList) {
+                if (reminder.Id == id) {
+                    reminder.setToDone();
+                    reminder.dateSetToDone = DateTime.Now;
+                }
+            }
+            saveCurrentReminderList();
         }
     }
 }

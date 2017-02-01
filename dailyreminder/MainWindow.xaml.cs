@@ -22,20 +22,12 @@ namespace dailyreminder {
     public partial class MainWindow : Window {
         System.Windows.Forms.NotifyIcon icon = new System.Windows.Forms.NotifyIcon();
 
-		
+        
         // Controllers to be used:
-        DispatcherTimer timer = new DispatcherTimer();
-
-
-        //private void startclock()
-        //{
-        //    timer.Interval = TimeSpan.FromSeconds(1);
-        //    timer.Tick += tickevent;
-        //    timer.Start();
-        //}
 
         public MainController mainController;
         ListController listController;
+        AlarmController alarmController;
 
         public MainWindow() {
 
@@ -51,7 +43,7 @@ namespace dailyreminder {
             this.icon.ContextMenu.MenuItems[0].Click += new EventHandler(icon_DoubleClick);
             this.icon.DoubleClick += new EventHandler(icon_DoubleClick);
 
-            //startclock();
+            
 
             //testin
            
@@ -60,26 +52,12 @@ namespace dailyreminder {
             mainController = new MainController(false);
 
             mainController.initializeDataAndLogin();
+            alarmController = new AlarmController(mainController.getTodaysReminders(), mainController);
 
         }
 
 
-        //private void tickevent(object sender, EventArgs e)
-        //{
-
-       
-        //   string nowdate =datalbl.Text = DateTime.Now.ToString(@"HH:mm", new CultureInfo("sv-SE"));
-        //   // var timezone = TimeZoneInfo.FindSystemTimeZoneById("Atlantic Standard Time");
-        //    //string nowdate = datalbl.Text = TimeZoneInfo.ConvertTime(DateTime.Now, timezone).ToString("hh:mm:ss");
-        //    string alarm = stopTime.FormatString = "17:10";
-        //    title.Text = alarm;
-        //    if (alarm == nowdate)
-        //    {
-        //        this.icon.ShowBalloonTip(0, "Alarmtime", "AlarmTime", System.Windows.Forms.ToolTipIcon.Info);
-        //        title.Text = "Alarm";
-        //        timer.Stop();
-        //    }
-        //}
+        
         
 
         BitmapImage blueButt = new BitmapImage(new Uri("Images/Buttons/blueButt.png", UriKind.Relative));
@@ -146,7 +124,7 @@ namespace dailyreminder {
             } catch { }
             
             List<Reminder> reminders = mainController.getTodaysReminders();
-            listController = new ListController(frontPage, reminders);
+            listController = new ListController(frontPage, reminders, mainController);
             listController.ListAll();
             
 
@@ -175,9 +153,7 @@ namespace dailyreminder {
             dayOfTheWeekLabel.Content = DateTime.Now.DayOfWeek;
         }
 
-
-            dayOfTheWeekLabel.Content = DateTime.Now.DayOfWeek;
-        }
+        
 
         #endregion
 
@@ -200,6 +176,7 @@ namespace dailyreminder {
             newReminder.Days = getSelectedDays();
             
             mainController.addReminderToList(newReminder);
+            alarmController.addAlarm(newReminder);
             
         }
 

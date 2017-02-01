@@ -12,14 +12,16 @@ namespace dailyreminder.controllers {
 
         List<Reminder> reminders;
         Grid grid;
+        MainController mainController;
 
         private List<RowDefinition> rows;
         private List<Label> labels;
         private List<Button> buttons;
 
-        public ListController(Grid grid, List<Reminder> reminders) {
+        public ListController(Grid grid, List<Reminder> reminders, MainController mc) {
             this.reminders = reminders;
             this.grid = grid;
+            mainController = mc;
 
             rows = new List<RowDefinition>();
             labels = new List<Label>();
@@ -49,14 +51,14 @@ namespace dailyreminder.controllers {
                 Label title = new Label { Content = reminders.ElementAt(i).Title };
                 Grid.SetRow(title, i);
                 Grid.SetColumn(title, 0);
-                Label startTime = new Label { Content = reminders.ElementAt(i).startTime };
+                Label startTime = new Label { Content = reminders.ElementAt(i).getStartTimeString() };
                 Grid.SetRow(startTime, i);
                 Grid.SetColumn(startTime, 1);
-                Label endTime = new Label { Content = reminders.ElementAt(i).endTime };
+                Label endTime = new Label { Content = reminders.ElementAt(i).getEndTimeString() };
                 Grid.SetRow(endTime, i);
                 Grid.SetColumn(endTime, 2);
-                Button doneButt = new Button { Content = "Done!" };
-                // doneButt.Click need a function to call 
+                Button doneButt = new Button { Content = "Done!", Tag = reminders.ElementAt(i).Id }; // Sets the name of the button
+                doneButt.Click += doneButton_Clicked;
                 Grid.SetRow(doneButt, i);
                 Grid.SetColumn(doneButt, 3);
                 // Add all the new elements
@@ -71,5 +73,10 @@ namespace dailyreminder.controllers {
             }
         }
 
+        private void doneButton_Clicked(object sender, EventArgs e) {
+            Button butt = (Button)sender;
+            long id = (long)butt.Tag;
+            mainController.setReminderToDone(id);
+        }
     }
 }
