@@ -58,9 +58,7 @@ namespace dailyreminder {
           
             // Show login-popup
             mainController = new MainController(false);
-
             mainController.initializeDataAndLogin();
-
         }
 
 
@@ -140,18 +138,24 @@ namespace dailyreminder {
             overviewButt.Source = blueButt;
 
 
-            // List the reminders
-            try {
-                listController.ResetGrid();
-            } catch { }
+
+
+            updateOverview();
             
+
+        }
+        private void updateOverview()
+        {
+            // List the reminders
+            try
+            {
+                listController.ResetGrid();
+            }
+            catch { }
+
             List<Reminder> reminders = mainController.getTodaysReminders();
             listController = new ListController(frontPage, reminders);
             listController.ListAll();
-            
-
-            
-
         }
         /*--------------------------------Overview--------------------------------*/
         private void overviewButt_MouseEnter(object sender, MouseEventArgs e) {
@@ -163,7 +167,8 @@ namespace dailyreminder {
             if (overView.Visibility != Visibility.Visible)
                 overviewButt.Source = blueButt;
         }
-        private void overviewButt_MouseDown(object sender, MouseButtonEventArgs e) {
+        private void overviewButt_MouseDown(object sender, MouseButtonEventArgs e)
+        {
             overView.Visibility = Visibility.Visible;
             frontPage.Visibility = Visibility.Hidden;
             bookingSite.Visibility = Visibility.Hidden;
@@ -171,10 +176,6 @@ namespace dailyreminder {
             frontpageButt.Source = blueButt;
             addButt.Source = greenButt;
             overviewButt.Source = blueClickedButt;
-
-            dayOfTheWeekLabel.Content = DateTime.Now.DayOfWeek;
-        }
-
 
             dayOfTheWeekLabel.Content = DateTime.Now.DayOfWeek;
         }

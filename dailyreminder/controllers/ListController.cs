@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 using dailyreminder.models;
 using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace dailyreminder.controllers {
     class ListController {
@@ -55,7 +61,9 @@ namespace dailyreminder.controllers {
                 Label endTime = new Label { Content = reminders.ElementAt(i).endTime };
                 Grid.SetRow(endTime, i);
                 Grid.SetColumn(endTime, 2);
-                Button doneButt = new Button { Content = "Done!" };
+                Button doneButt = new Button() { Content = "Done!" };
+                
+                
                 // doneButt.Click need a function to call 
                 Grid.SetRow(doneButt, i);
                 Grid.SetColumn(doneButt, 3);
