@@ -39,9 +39,13 @@ namespace dailyreminder.controllers {
             reminderList.Add(newReminder);
             saveCurrentReminderList();
         }
-        public void deleteReminderFromList(int index) {
-            reminderList.RemoveAt(index);
-            saveCurrentReminderList();
+        public void deleteReminderFromList(int id) {
+            for (int i = 0; i < reminderList.Count; i++) {
+                if (reminderList.ElementAt(i).Id == id) {
+                    reminderList.RemoveAt(i);
+                }
+            }
+                saveCurrentReminderList();
         }
 
         public void initializeDataAndLogin() {
@@ -57,6 +61,16 @@ namespace dailyreminder.controllers {
             List<Reminder> todaysReminders = new List<Reminder>();
             foreach (Reminder reminder in reminderList) {
                 if (reminder.Days.ElementAt(today) == '1') { // Checks if the event is happening today
+                    todaysReminders.Add(reminder);
+                }
+            }
+            return todaysReminders.OrderBy(o => o.endTime).ToList();
+        }
+
+        public List<Reminder> getADaysReminders(int dt) {
+            List<Reminder> todaysReminders = new List<Reminder>();
+            foreach (Reminder reminder in reminderList) {
+                if (reminder.Days.ElementAt(dt) == '1') { // Checks if the event is happening today
                     todaysReminders.Add(reminder);
                 }
             }
