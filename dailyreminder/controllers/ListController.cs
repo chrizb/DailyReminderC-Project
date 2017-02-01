@@ -110,8 +110,13 @@ namespace dailyreminder.controllers {
 
         private void deleteButton_Clicked(object sender, RoutedEventArgs e) {
             Button butt = (Button)sender;
-            mainController.deleteReminderFromList((int)butt.Tag);
+            mainController.deleteReminderFromList(Int32.Parse(butt.Tag.ToString()));
             ResetGrid();
+            for(int i = 0; i < reminders.Count; i++){
+                if (reminders.ElementAt(i).Id == Int32.Parse(butt.Tag.ToString())) {
+                    reminders.RemoveAt(i);
+                }
+            }
             ListAllOverview();
         }
 
