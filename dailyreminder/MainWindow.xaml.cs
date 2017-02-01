@@ -51,9 +51,10 @@ namespace dailyreminder {
           
             // Show login-popup
             mainController = new MainController(false);
-
             mainController.initializeDataAndLogin();
+
             alarmController = new AlarmController(mainController.getTodaysReminders(), mainController);
+
 
         }
 
@@ -121,16 +122,25 @@ namespace dailyreminder {
             overviewButt.Source = blueButt;
 
 
-            // List the reminders
-            try {
-                listController.ResetGrid();
-            } catch { }
-            
-            List<Reminder> reminders = mainController.getTodaysReminders();
-            listController = new ListController(frontPage, reminders, mainController);
-            listController.ListAllFrontPage();
+
+
+            updateOverview();
             
 
+        }
+        private void updateOverview()
+        {
+            // List the reminders
+            try
+            {
+                listController.ResetGrid();
+            }
+            catch { }
+
+            List<Reminder> reminders = mainController.getTodaysReminders();
+
+            listController = new ListController(frontPage, reminders, mainController);
+            listController.ListAllFrontPage();
             
 
         }
@@ -144,7 +154,8 @@ namespace dailyreminder {
             if (overView.Visibility != Visibility.Visible)
                 overviewButt.Source = blueButt;
         }
-        private void overviewButt_MouseDown(object sender, MouseButtonEventArgs e) {
+        private void overviewButt_MouseDown(object sender, MouseButtonEventArgs e)
+        {
             overView.Visibility = Visibility.Visible;
             overViewNavbar.Visibility = Visibility.Visible;
             frontPage.Visibility = Visibility.Hidden;
@@ -159,6 +170,7 @@ namespace dailyreminder {
             overviewListController = new ListController(overView, mainController.getADaysReminders(nameOfDayToNumber(dayOfTheWeekLabel.Content.ToString())), mainController);
             overviewListController.ListAllOverview();
         }
+
 
         private int nameOfDayToNumber(string str) {
             switch (str) {
