@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 namespace dailyreminder.models {
     public class Reminder {
 
-        long id;
         public long Id { get; set; }
+
+        public DateTime dateSetToDone { get; set; }
       
         // Time is measured in minutes from 00:00
         public int startTime{ get; set; }
@@ -28,19 +29,16 @@ namespace dailyreminder.models {
             get { return description; }
             set { this.description = value; }
         }
-        bool done;
-        public bool Done {
-            get { return done; }
-        }
+        public bool Done { get; set; }
 
         public void setToDone() {
-            done = true;
+            Done = true;
         }
         public String getStartTimeString() {
-            return (startTime/60) + " " + (startTime % 60);
+            return (startTime/60) + ":" + (startTime % 60);
         }
         public String getEndTimeString() {
-            return (endTime / 60) + " " + (endTime % 60);
+            return (endTime / 60) + ":" + (endTime % 60);
         }
 
 

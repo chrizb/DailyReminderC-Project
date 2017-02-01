@@ -74,6 +74,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="controllers\AlarmController.cs" />
     <Compile Include="controllers\ListController.cs" />
     <Compile Include="ReminderBox.xaml.cs">
       <DependentUpon>ReminderBox.xaml</DependentUpon>

@@ -18,19 +18,25 @@ namespace dailyreminder.controllers {
 
         List<Reminder> reminders;
         Grid grid;
+        MainController mainController;
 
         private List<RowDefinition> rows;
         private List<Label> labels;
         private List<Button> buttons;
 
-        public ListController(Grid grid, List<Reminder> reminders) {
+        public ListController(Grid grid, List<Reminder> reminders, MainController mc) {
             this.reminders = reminders;
             this.grid = grid;
+            mainController = mc;
 
             rows = new List<RowDefinition>();
             labels = new List<Label>();
             buttons = new List<Button>();
 
+        }
+
+        public void setNewReminderList(List<Reminder> reminders) {
+            this.reminders = reminders;
         }
 
         public void ResetGrid() {
@@ -46,7 +52,7 @@ namespace dailyreminder.controllers {
             
         }
 
-        public void ListAll(){
+        public void ListAllFrontPage(){
             for (int i = 0; i < reminders.Count; i++) {
                 RowDefinition rd = new RowDefinition();
                 rd.Height = new GridLength(30);
@@ -55,16 +61,20 @@ namespace dailyreminder.controllers {
                 Label title = new Label { Content = reminders.ElementAt(i).Title };
                 Grid.SetRow(title, i);
                 Grid.SetColumn(title, 0);
-                Label startTime = new Label { Content = reminders.ElementAt(i).startTime };
+                Label startTime = new Label { Content = reminders.ElementAt(i).getStartTimeString() };
                 Grid.SetRow(startTime, i);
                 Grid.SetColumn(startTime, 1);
-                Label endTime = new Label { Content = reminders.ElementAt(i).endTime };
+                Label endTime = new Label { Content = reminders.ElementAt(i).getEndTimeString() };
                 Grid.SetRow(endTime, i);
                 Grid.SetColumn(endTime, 2);
-                Button doneButt = new Button() { Content = "Done!" };
+
                 
                 
                 // doneButt.Click need a function to call 
+
+                Button doneButt = new Button { Content = "Done!", Tag = reminders.ElementAt(i).Id }; // Sets the name of the button
+                doneButt.Click += doneButton_Clicked;
+
                 Grid.SetRow(doneButt, i);
                 Grid.SetColumn(doneButt, 3);
                 // Add all the new elements
@@ -79,5 +89,53 @@ namespace dailyreminder.controllers {
             }
         }
 
+        public void ListAllOverview() {
+            for (int i = 0; i < reminders.Count; i++) {
+                RowDefinition rd = new RowDefinition();
+                rd.Height = new GridLength(30);
+                rows.Add(rd);
+                grid.RowDefinitions.Add(rows.ElementAt((rows.Count - 1))); // Gets and adds the latest new rowdefinition
+                Label title = new Label { Content = reminders.ElementAt(i).Title };
+                Grid.SetRow(title, i);
+                Grid.SetColumn(title, 0);
+                Label startTime = new Label { Content = reminders.ElementAt(i).getStartTimeString() };
+                Grid.SetRow(startTime, i);
+                Grid.SetColumn(startTime, 1);
+                Label endTime = new Label { Content = reminders.ElementAt(i).getEndTimeString() };
+                Grid.SetRow(endTime, i);
+                Grid.SetColumn(endTime, 2);
+                Button doneButt = new Button { Content = "Delete", Tag = reminders.ElementAt(i).Id }; // Sets the .Tag of the button
+                doneButt.Click += deleteButton_Clicked;
+                Grid.SetRow(doneButt, i);
+                Grid.SetColumn(doneButt, 3);
+                // Add all the new elements
+                grid.Children.Add(title);
+                labels.Add(title);
+                grid.Children.Add(startTime);
+                labels.Add(startTime);
+                grid.Children.Add(endTime);
+                labels.Add(endTime);
+                grid.Children.Add(doneButt);
+                buttons.Add(doneButt);
+            }
+        }
+
+        private void deleteButton_Clicked(object sender, RoutedEventArgs e) {
+            Button butt = (Button)sender;
+            mainController.deleteReminderFromList(Int32.Parse(butt.Tag.ToString()));
+            ResetGrid();
+            for(int i = 0; i < reminders.Count; i++){
+                if (reminders.ElementAt(i).Id == Int32.Parse(butt.Tag.ToString())) {
+                    reminders.RemoveAt(i);
+                }
+            }
+            ListAllOverview();
+        }
+
+        private void doneButton_Clicked(object sender, EventArgs e) {
+            Button butt = (Button)sender;
+            long id = (long)butt.Tag;
+            mainController.setReminderToDone(id);
+        }
     }
 }
