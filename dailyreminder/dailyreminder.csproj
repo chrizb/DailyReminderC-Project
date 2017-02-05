@@ -144,33 +144,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Buttons\addnewButt.png" />
-    <Resource Include="Images\Buttons\addnewClickedButt.png" />
-    <Resource Include="Images\Buttons\addnewHoverButt.png" />
-    <Resource Include="Images\Buttons\blueButt.png" />
-    <Resource Include="Images\Buttons\blueClickedButt.png" />
-    <Resource Include="Images\Buttons\blueHoverButt.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\DailyReminderIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Buttons\doneButt.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Buttons\doneHoverButt.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Properties\createReminderButt.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Buttons\createReminderButt.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Buttons\createReminderHoverButt.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Buttons\createreminderClickedButt.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\rightArrow.png" />
@@ -182,7 +159,32 @@
     <Resource Include="Images\rightArrowPressed.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Buttons\deleteButt.png" />
+    <Resource Include="Images\popUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\createreminderButt.png" />
+    <Resource Include="Images\Buttons\createreminderHoverButt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\deleteReminderButt.png" />
+    <Resource Include="Images\Buttons\deleteReminderHoverButt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\addnewButt.png" />
+    <Resource Include="Images\Buttons\addnewHoverButt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\blueHoverTodayButt.png" />
+    <Resource Include="Images\Buttons\blueOverviewButt.png" />
+    <Resource Include="Images\Buttons\blueTodayButt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\blueHoverOverviewButt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\blueButt.png" />
+    <Resource Include="Images\Buttons\blueClickedButt.png" />
+    <Resource Include="Images\Buttons\blueHoverButt.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
