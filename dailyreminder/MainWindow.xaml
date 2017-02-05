@@ -3,57 +3,56 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:dailyreminder"
-        Title="MainWindow" Height="458" Width="327">
+        Title="MainWindow" Height="600" Width="427.017">
 
     <Window.Resources>
     </Window.Resources>
-        <Viewbox>
-            <Grid Name="theGrid" Background="LightBlue" Height="358">
-                <Grid Margin="0,0,0,299" Background="CadetBlue"></Grid>
+    <Viewbox>
+        <Grid Name="theGrid" Background="LightBlue" Height="358">
+            <Grid Margin="0,0,0,299" Background="CadetBlue"></Grid>
 
-                <!--.....................Menu Buttons.....................-->
-                <UniformGrid VerticalAlignment="Top" Height="50" Columns="3" >
+            <!--.....................Menu Buttons.....................-->
+            <UniformGrid VerticalAlignment="Top" Height="50" Columns="3" >
 
-                    <Image Name="addButt" MouseDown="addButt_MouseDown" MouseEnter="addButt_MouseEnter" MouseLeave="addButt_MouseLeave" 
+                <Image Name="addButt" MouseDown="addButt_MouseDown" MouseEnter="addButt_MouseEnter" MouseLeave="addButt_MouseLeave" 
                        Source="Images/Buttons/addnewButt.png">
-                    </Image>
-                    <Image Name="frontpageButt" MouseDown="frontpageButt_MouseDown" MouseEnter="frontpageButt_MouseEnter" MouseLeave="frontpageButt_MouseLeave"
-                       Source="Images/Buttons/blueClickedButt.png">
-                    </Image>
-                    <Image Name="overviewButt" MouseDown="overviewButt_MouseDown" MouseEnter="overviewButt_MouseEnter" MouseLeave="overviewButt_MouseLeave"
-                       Source="Images/Buttons/blueButt.png">
-                    </Image>
-                </UniformGrid>
+                </Image>
+                <Image Name="frontpageButt" MouseDown="frontpageButt_MouseDown" MouseEnter="frontpageButt_MouseEnter" MouseLeave="frontpageButt_MouseLeave"
+                       Source="Images/Buttons/blueHoverTodayButt.png">
+                </Image>
+                <Image Name="overviewButt" MouseDown="overviewButt_MouseDown" MouseEnter="overviewButt_MouseEnter" MouseLeave="overviewButt_MouseLeave"
+                       Source="Images/Buttons/blueOverviewButt.png">
+                </Image>
+            </UniformGrid>
 
-                <!--.....................grid for front page.....................-->
-                <Grid Name="frontPage" Visibility="Hidden" Margin="0,59,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition Width="50" />
-                        <ColumnDefinition Width="50" />
-                        <ColumnDefinition Width="50" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="2" FontSize="15" Content="You have no reminders today" Height="100" Width="210" Visibility="Hidden"></Label>
+            <!--.....................grid for front page.....................-->
+            <Grid Name="frontPage" Visibility="Visible" Margin="0,64,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="50" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="2" FontSize="15" Content="You have no reminders today" Height="100" Width="210" Visibility="Hidden"></Label>
 
-                </Grid>
+            </Grid>
 
-                <!--.....................grid for overView page.....................-->
-                <!--<ScrollViewer Height="299" VerticalAlignment="Bottom">-->
-                <Grid Name="overViewNavbar" Visibility="Hidden" Margin="0,59,0,248">
+            <!--.....................grid for overView page.....................-->
+            <!--<ScrollViewer Height="299" VerticalAlignment="Bottom">-->
+            <Grid Name="overViewNavbar" Visibility="Hidden" Margin="0,59,0,248">
 
-                    <Label Name="dayOfTheWeekLabel" Grid.Row="0" HorizontalAlignment="Center" FontFamily="Calibri" FontSize="15"></Label>
-                    <Image Name="rightArrow" Grid.Column="2"  Source="Images/rightArrow.png" Height="42" Width="28" MouseEnter="rightArrow_MouseEnter" MouseLeave="rightArrow_MouseLeave" 
-                           MouseDown="rightArrow_MouseDown" HorizontalAlignment="Right">
-                    </Image>
-                    <Image Name="leftArrow" Source="Images/rightArrow.png" Margin="22,0" Height="42" Width="28" MouseEnter="leftArrow_MouseEnter"
+                <Label Name="dayOfTheWeekLabel" Grid.Row="0" HorizontalAlignment="Center" FontFamily="Calibri" FontSize="15"></Label>
+                <Image Name="rightArrow"  Source="Images/rightArrow.png" Height="42" Width="28" MouseEnter="rightArrow_MouseEnter" MouseLeave="rightArrow_MouseLeave" 
+                           MouseDown="rightArrow_MouseDown" HorizontalAlignment="Right" Margin="3,4,4,5"/>
+                <Image Name="leftArrow" Source="Images/rightArrow.png" Margin="24,4,0,5" Height="42" Width="28" MouseEnter="leftArrow_MouseEnter"
                            MouseLeave="leftArrow_MouseLeave" MouseDown="leftArrow_MouseDown" HorizontalAlignment="Left">
-                        <Image.RenderTransform>
-                            <ScaleTransform ScaleX="-1"/>
-                        </Image.RenderTransform>
-                    </Image>
-                </Grid>
+                    <Image.RenderTransform>
+                        <ScaleTransform ScaleX="-1"/>
+                    </Image.RenderTransform>
+                </Image>
+            </Grid>
             <Grid Name="overView" Visibility="Visible" Margin="0,110,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100" />
@@ -62,57 +61,62 @@
                     <ColumnDefinition Width="50" />
                 </Grid.ColumnDefinitions>
             </Grid>
-                <!--</ScrollViewer>-->
-                <!--.....................grid for booking site....................-->
-                <Grid Name="bookingSite" Visibility="Hidden" Margin="0,59,0,0" >
+            <!--</ScrollViewer>-->
+            <!--.....................grid for booking site....................-->
+            <Grid Name="bookingSite" Visibility="Hidden" Margin="0,59,0,0" >
 
+                <Label Content="   Reminder" Grid.Row="1" Width="80" FontFamily="Calibri" FontSize="14"></Label>
 
-                    <Label Content="   Reminder" Grid.Row="1" Width="80" FontFamily="Calibri" FontSize="14"></Label>
+                <WrapPanel Width="210" Height="30" Margin="0 -200 0 0">
+                    <Label Content="Title:" Margin="0 0 0 0" Width="45" FontFamily="Calibri" FontSize="13"></Label>
+                    <TextBox Name="title" Margin="0 4 0 0" Width="140" Height="22" FontFamily="Calibri" FontSize="13"></TextBox>
+                </WrapPanel>
 
-                    <WrapPanel Width="210" Height="30" Margin="0 -200 0 0">
-                        <Label Content="Title:" Margin="0 0 0 0" Width="45" FontFamily="Calibri" FontSize="13"></Label>
-                        <TextBox Name="title" Margin="0 4 0 0" Width="140" Height="22" FontFamily="Calibri" FontSize="13"></TextBox>
-                    </WrapPanel>
+                <WrapPanel Width="210" Height="30" Margin="0 -120 0 0">
+                    <Label Content="Start:" Margin="0 0 0 0" Width="45" FontFamily="Calibri" FontSize="13"></Label>
+                    <xctk:DateTimeUpDown Name="startTime" Value="{Binding LastUpdated}" Format="ShortTime"  FontSize="10" Width="50" KeyDown="startTime_KeyDown" MouseMove="startTime_MouseMove"/>
+                    <Label Content="Finish:" Margin="0 0 0 0" Width="46" FontFamily="Calibri" FontSize="13"></Label>
+                    <xctk:DateTimeUpDown Name="stopTime" Value="{Binding LastUpdated}" Format="ShortTime" FontSize="10" Width="50"  KeyDown="stopTime_KeyDown" MouseMove="stopTime_MouseMove"/>
+                </WrapPanel>
 
-                    <WrapPanel Width="210" Height="30" Margin="0 -120 0 0">
-                        <Label Content="Start:" Margin="0 0 0 0" Width="45" FontFamily="Calibri" FontSize="13"></Label>
-                        <xctk:DateTimeUpDown Name="startTime" Value="{Binding LastUpdated}" Format="ShortTime"  FontSize="10" Width="50"/>
-                        <Label Content="Finnish:" Margin="0 0 0 0" Width="50" FontFamily="Calibri" FontSize="13"></Label>
-                        <xctk:DateTimeUpDown Name="stopTime" Value="{Binding LastUpdated}" Format="ShortTime" FontSize="10" Width="50"/>
-                    </WrapPanel>
-
-                    <Grid Width="210" Height="60" Margin="0 0 0 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="25"></RowDefinition>
-                            <RowDefinition Height="25"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="44"></ColumnDefinition>
-                            <ColumnDefinition Width="40"></ColumnDefinition>
-                            <ColumnDefinition Width="40"></ColumnDefinition>
-                            <ColumnDefinition Width="40"></ColumnDefinition>
-                            <ColumnDefinition Width="40"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Label Content="Days:" FontFamily="Calibri" FontSize="13"></Label>
-                        <local:DayImages  Grid.Row="0" Grid.Column="1" x:Name="day_Monday"/>
-                        <local:DayImages  Grid.Row="0" Grid.Column="4" x:Name="day_Thursday"/>
-                        <local:DayImages  Grid.Row="0" Grid.Column="2" x:Name="day_Tuesday" />
-                        <local:DayImages  Grid.Row="0" Grid.Column="3" x:Name="day_Wednesday"/>
-                        <local:DayImages  Grid.Row="1" Grid.Column="1" x:Name="day_Friday"/>
-                        <local:DayImages  Grid.Row="1" Grid.Column="2" x:Name="day_Saturday"/>
-                        <local:DayImages  Grid.Row="1" Grid.Column="3" x:Name="day_Sunday"/>
-                    </Grid>
-
-                    <WrapPanel Width="210" Margin="27,174,27,25">
-                        <Label Content="Description:" Margin="0 0 0 0" Width="75"></Label>
-                        <TextBox Name="description" Margin="0 2 0 0" Width="110" Height="42"></TextBox>
-
-                        <Image Name="createButt" Source="Images/Buttons/createReminderButt.png" Width="165" Height="39" Margin="44,5,0,0"  MouseDown="createButt_MouseDown" 
-                           MouseEnter="createButt_MouseEnter" MouseLeave="createButt_MouseLeave">
-                        </Image>
-                    </WrapPanel>
+                <Grid Width="210" Height="60" Margin="0 0 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"></RowDefinition>
+                        <RowDefinition Height="25"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="44"></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Days:" FontFamily="Calibri" FontSize="13"></Label>
+                    <local:DayImages  Grid.Row="0" Grid.Column="1" x:Name="day_Monday"/>
+                    <local:DayImages  Grid.Row="0" Grid.Column="4" x:Name="day_Thursday"/>
+                    <local:DayImages  Grid.Row="0" Grid.Column="2" x:Name="day_Tuesday" />
+                    <local:DayImages  Grid.Row="0" Grid.Column="3" x:Name="day_Wednesday"/>
+                    <local:DayImages  Grid.Row="1" Grid.Column="1" x:Name="day_Friday"/>
+                    <local:DayImages  Grid.Row="1" Grid.Column="2" x:Name="day_Saturday"/>
+                    <local:DayImages  Grid.Row="1" Grid.Column="3" x:Name="day_Sunday"/>
                 </Grid>
 
+                <!--<WrapPanel Width="210" Margin="27,174,27,36">
+                    <Label Content="Description:" Margin="0 0 0 0" Width="75"></Label>-->
+                <TextBox Visibility="Hidden" Name="description" Margin="0 2 0 0" Width="110" Height="42"></TextBox>
+                <!--</WrapPanel>-->
+                <Image Name="createButt" Source="Images/Buttons/createReminderButt.png" Width="165" Height="39"   MouseDown="createButt_MouseDown" 
+                           MouseEnter="createButt_MouseEnter" MouseLeave="createButt_MouseLeave" Margin="72,180,27,82">
+                </Image>
+
+                <Image Visibility="Hidden" Name="deleteButt" Source="Images/buttons/deleteReminderButt.png" Width="165" Height="39" Margin="72,224,27,38" MouseDown="deleteButt_MouseDown"
+                       MouseEnter="deleteButt_MouseEnter" MouseLeave="deleteButt_MouseLeave"></Image>
+
+                <Canvas Name="popUp" Visibility="Hidden" Width="264" Background="White" Canvas.Left="-37" Canvas.Top="5" Margin="0,36,0,196">
+                    <Label Name="popUpLabel" Height="27" FontSize="13" FontFamily="Calibri" Canvas.Top="5" Width="264">Hallååååå</Label>
+                    <Button Name="popUpButt" Height="24" Width="75" Content="Okay!" Canvas.Left="96" Canvas.Top="38" Click="popUpButt_Click"></Button>
+                </Canvas>
             </Grid>
-        </Viewbox>
+        </Grid>
+    </Viewbox>
 </Window>
