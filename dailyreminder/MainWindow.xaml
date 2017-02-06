@@ -53,7 +53,7 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <ScrollViewer Name="overviewScroller" Panel.ZIndex="-1" Margin="0,110,0,0">
+            <ScrollViewer Name="overviewScroller" VerticalScrollBarVisibility="Auto"  Panel.ZIndex="-1" Margin="0,110,0,0">
                 <Grid Name="overView" Visibility="Visible">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100" />
