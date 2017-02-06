@@ -67,10 +67,7 @@ namespace dailyreminder.controllers {
                 Label endTime = new Label { Content = reminders.ElementAt(i).getEndTimeString() };
                 Grid.SetRow(endTime, i);
                 Grid.SetColumn(endTime, 2);
-                
-
-                
-                
+                    
                 // doneButt.Click need a function to call 
 
                 Button doneButt = new Button { Content = "Done!", Tag = reminders.ElementAt(i).Id }; // Sets the name of the button

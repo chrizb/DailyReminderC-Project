@@ -18,11 +18,12 @@ using dailyreminder.models;
 using dailyreminder.controllers;
 
 
-namespace dailyreminder {
-    public partial class MainWindow : Window {
+namespace dailyreminder
+{
+    public partial class MainWindow : Window
+    {
         System.Windows.Forms.NotifyIcon icon = new System.Windows.Forms.NotifyIcon();
 
-        
         // Controllers to be used:
 
         public MainController mainController;
@@ -30,21 +31,22 @@ namespace dailyreminder {
         ListController overviewListController;
         AlarmController alarmController;
 
-        public MainWindow() {
+        public MainWindow()
+        {
 
             InitializeComponent();
             this.Closed += new EventHandler(MainWindow_Closed);
             this.Deactivated += new EventHandler(MainWindow_Deactivated);
-            
+
             this.icon.Visible = true;
             this.icon.Icon = dailyreminder.Resources.Resource1.DailyReminderIcon;
             this.icon.ContextMenu = new System.Windows.Forms.ContextMenu();
             this.icon.ContextMenu.MenuItems.Add("dailyreminder app");
-        
+
             this.icon.ContextMenu.MenuItems[0].Click += new EventHandler(icon_DoubleClick);
             this.icon.DoubleClick += new EventHandler(icon_DoubleClick);
             //testin
-                     
+
             // Show login-popup
             mainController = new MainController(false);
             mainController.initializeDataAndLogin();
@@ -72,24 +74,27 @@ namespace dailyreminder {
         BitmapImage rightArrowHoverButt = new BitmapImage(new Uri("Images/rightArrowHover.png", UriKind.Relative));
         BitmapImage rightArrowClickedButt = new BitmapImage(new Uri("Images/rightArrowPressed.png", UriKind.Relative));
 
-        String[] daysOfWeek = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+        BitmapImage dayButt = new BitmapImage(new Uri("Images/Buttons/blueButt.png", UriKind.Relative));
+        BitmapImage dayHoverButt = new BitmapImage(new Uri("Images/Buttons/blueHoverButt.png", UriKind.Relative));
+        BitmapImage dayClickedButt = new BitmapImage(new Uri("Images/Buttons/blueHoverButt.png", UriKind.Relative));
 
-        
-        
-        
+        String[] daysOfWeek = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
 
         #region Mouseevents for Menu Buttons
 
         /*--------------------------------Add Reminder--------------------------------*/
-        private void addButt_MouseEnter(object sender, MouseEventArgs e) {
-                addButt.Source = greenHoverButt;
+        private void addButt_MouseEnter(object sender, MouseEventArgs e)
+        {
+            addButt.Source = greenHoverButt;
         }
 
-        private void addButt_MouseLeave(object sender, MouseEventArgs e) {
+        private void addButt_MouseLeave(object sender, MouseEventArgs e)
+        {
             if (bookingSite.Visibility != Visibility.Visible)
                 addButt.Source = greenButt;
         }
-        private void addButt_MouseDown(object sender, MouseButtonEventArgs e) {
+        private void addButt_MouseDown(object sender, MouseButtonEventArgs e)
+        {
             bookingSite.Visibility = Visibility.Visible;
             frontPage.Visibility = Visibility.Hidden;
             
@@ -103,14 +108,17 @@ namespace dailyreminder {
             overviewButt.Source = blueOverviewButt;
         }
         /*--------------------------------Frontpage--------------------------------*/
-        private void frontpageButt_MouseEnter(object sender, MouseEventArgs e) {
-                frontpageButt.Source = blueHoverButt;
+        private void frontpageButt_MouseEnter(object sender, MouseEventArgs e)
+        {
+            frontpageButt.Source = blueHoverButt;
         }
-        private void frontpageButt_MouseLeave(object sender, MouseEventArgs e) {
+        private void frontpageButt_MouseLeave(object sender, MouseEventArgs e)
+        {
             if (frontPage.Visibility != Visibility.Visible)
                 frontpageButt.Source = blueButt;
         }
-        private void frontpageButt_MouseDown(object sender, MouseButtonEventArgs e) {
+        private void frontpageButt_MouseDown(object sender, MouseButtonEventArgs e)
+        {
             frontPage.Visibility = Visibility.Visible;
             overView.Visibility = Visibility.Hidden;
             bookingSite.Visibility = Visibility.Hidden;
@@ -125,7 +133,7 @@ namespace dailyreminder {
             updateOverview();
 
         }
-      
+
         /*--------------------------------Overview--------------------------------*/
         private void updateOverview()
         {
@@ -142,11 +150,13 @@ namespace dailyreminder {
             listController.ListAllFrontPage();
         }
 
-        private void overviewButt_MouseEnter(object sender, MouseEventArgs e) {
+        private void overviewButt_MouseEnter(object sender, MouseEventArgs e)
+        {
             overviewButt.Source = blueHoverOverviewButt;
         }
 
-        private void overviewButt_MouseLeave(object sender, MouseEventArgs e) {
+        private void overviewButt_MouseLeave(object sender, MouseEventArgs e)
+        {
             if (overViewNavbar.Visibility != Visibility.Visible)
                 overviewButt.Source = blueOverviewButt;
         }
@@ -168,8 +178,10 @@ namespace dailyreminder {
             overviewListController.ListAllOverview();
         }
 
-        private int nameOfDayToNumber(string str) {
-            switch (str) {
+        private int nameOfDayToNumber(string str)
+        {
+            switch (str)
+            {
                 case "Monday":
                     return 1;
                 case "Tuesday":
@@ -204,7 +216,6 @@ namespace dailyreminder {
 
                 Reminder newReminder = new Reminder();
                 newReminder.Title = title.Text;
-                newReminder.Description = description.Text;
                 newReminder.startTime = (startTime.Value.Value.Hour * 60) + startTime.Value.Value.Minute;
                 newReminder.endTime = (stopTime.Value.Value.Hour * 60) + stopTime.Value.Value.Minute;
                 newReminder.Days = getSelectedDays();
@@ -216,17 +227,29 @@ namespace dailyreminder {
                 }
 
                 //reset all windows in bookingsite
-                ReminderClear();
+
+                title.Text = "";
+                stopTime.Text = "";
+                startTime.Text = "";
+
+                //reset days
+                Mon.Source = dayButt;
+                Tue.Source = dayButt;
+                Wed.Source = dayButt;
+                Thu.Source = dayButt;
+                Fri.Source = dayButt;
+                Sat.Source = dayButt;
+                Sun.Source = dayButt;
             }
             else
             {
-                if(startTime.Text == "" || stopTime.Text == "")
-                popUpLabel.Content = "Choose Start and Alarm time";
-                else if(title.Text == "")
-                    popUpLabel.Content = "Choose a title";
-                else popUpLabel.Content = "You must select atleast one day";
-                popUp.Visibility = Visibility.Visible;
+                if (startTime.Text == "" || stopTime.Text == "")
+                    popUpLabel.Content = "Choose start and finish time";
+                else if (title.Text == "")
+
+                ReminderClear();
             }
+
           
         }
 
@@ -270,12 +293,12 @@ namespace dailyreminder {
 
         void icon_DoubleClick(object sender, EventArgs e)
         {
-              this.Show();
-              this.WindowState = WindowState.Normal;
+            this.Show();
+            this.WindowState = WindowState.Normal;
         }
 
         private void ReminderBox_Loaded(object sender, RoutedEventArgs e)
-        {}
+        { }
 
         /**************************
          * CALL: getSelectedDays() 
@@ -288,37 +311,37 @@ namespace dailyreminder {
 
             #region if-else statements for checking toggled days
 
-            if (day_Monday.isToggled == true)
+            if (Mon.Source == dayClickedButt)
                 days += "1";
             else
                 days += "0";
 
-            if (day_Tuesday.isToggled == true)
+            if (Tue.Source == dayClickedButt)
                 days += "1";
             else
                 days += "0";
 
-            if (day_Wednesday.isToggled == true)
+            if (Wed.Source == dayClickedButt)
                 days += "1";
             else
                 days += "0";
 
-            if (day_Thursday.isToggled == true)
+            if (Thu.Source == dayClickedButt)
                 days += "1";
             else
                 days += "0";
 
-            if (day_Friday.isToggled == true)
+            if (Fri.Source == dayClickedButt)
                 days += "1";
             else
                 days += "0";
 
-            if (day_Saturday.isToggled == true)
+            if (Sat.Source == dayClickedButt)
                 days += "1";
             else
                 days += "0";
 
-            if (day_Sunday.isToggled == true)
+            if (Sun.Source == dayClickedButt)
                 days += "1";
             else
                 days += "0";
@@ -331,7 +354,7 @@ namespace dailyreminder {
         #region MouseEvents for arrowButtons
 
         private void rightArrow_MouseDown(object sender, MouseButtonEventArgs e)
-        {            
+        {
             for (int i = 0; i < daysOfWeek.Length; i++)
             {
                 if (daysOfWeek[i] == dayOfTheWeekLabel.Content.ToString())
@@ -413,11 +436,133 @@ namespace dailyreminder {
             startTime.IsReadOnly = false;
         }
 
-#endregion
+        #endregion
 
         private void popUpButt_Click(object sender, RoutedEventArgs e)
         {
             popUp.Visibility = Visibility.Hidden;
+        }
+
+
+        #region worlds ugliest code
+
+        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            string buttContent = (sender as Label).Content.ToString();
+
+            switch (buttContent)
+            {
+                case "Mon":
+                    if (Mon.Source == dayClickedButt)
+                        Mon.Source = dayButt;
+                    else Mon.Source = dayClickedButt;
+                    break;
+                case "Tue":
+                    if (Tue.Source == dayClickedButt)
+                        Tue.Source = dayButt;
+                    else Tue.Source = dayClickedButt;
+                    break;
+                case "Wed":
+                    if (Wed.Source == dayClickedButt)
+                        Wed.Source = dayButt;
+                    else Wed.Source = dayClickedButt;
+                    break;
+                case "Thu":
+                    if (Thu.Source == dayClickedButt)
+                        Thu.Source = dayButt;
+                    else Thu.Source = dayClickedButt;
+                    break;
+                case "Fri":
+                    if (Fri.Source == dayClickedButt)
+                        Fri.Source = dayButt;
+                    else Fri.Source = dayClickedButt;
+                    break;
+                case "Sat":
+                    if (Sat.Source == dayClickedButt)
+                        Sat.Source = dayButt;
+                    else Sat.Source = dayClickedButt;
+                    break;
+                case "Sun":
+                    if (Sun.Source == dayClickedButt)
+                        Sun.Source = dayButt;
+                    else Sun.Source = dayClickedButt;
+                    break;
+            }
+        }
+
+        private void Label_MouseEnter(object sender, MouseEventArgs e)
+        {
+            string buttContent = (sender as Label).Content.ToString();
+
+            switch (buttContent)
+            {
+                case "Mon":
+                    if (Mon.Source != dayClickedButt)
+                        Mon.Source = dayHoverButt;
+                    break;
+                case "Tue":
+                    if (Tue.Source != dayClickedButt)
+                        Tue.Source = dayHoverButt;
+                    break;
+                case "Wed":
+                    if (Wed.Source != dayClickedButt)
+                        Wed.Source = dayHoverButt;
+                    break;
+                case "Thu":
+                    if (Thu.Source != dayClickedButt)
+                        Thu.Source = dayHoverButt;
+                    break;
+                case "Fri":
+                    if (Fri.Source != dayClickedButt)
+                        Fri.Source = dayHoverButt;
+                    break;
+                case "Sat":
+                    if (Sat.Source != dayClickedButt)
+                        Sat.Source = dayHoverButt;
+                    break;
+                case "Sun":
+                    if (Sun.Source != dayClickedButt)
+                        Sun.Source = dayHoverButt;
+                    break;
+            }
+        }
+
+        private void Label_MouseLeave(object sender, MouseEventArgs e)
+        {
+            string buttContent = (sender as Label).Content.ToString();
+
+            switch (buttContent)
+            {
+                case "Mon":
+                    if (Mon.Source != dayClickedButt)
+                        Mon.Source = dayButt;
+                    break;
+                case "Tue":
+                    if (Tue.Source != dayClickedButt)
+                        Tue.Source = dayButt;
+                    break;
+                case "Wed":
+                    if (Wed.Source != dayClickedButt)
+                        Wed.Source = dayButt;
+                    break;
+                case "Thu":
+                    if (Thu.Source != dayClickedButt)
+                        Thu.Source = dayButt;
+                    break;
+                case "Fri":
+                    if (Fri.Source != dayClickedButt)
+                        Fri.Source = dayButt;
+                    break;
+                case "Sat":
+                    if (Sat.Source != dayClickedButt)
+                        Sat.Source = dayButt;
+                    break;
+                case "Sun":
+                    if (Sun.Source != dayClickedButt)
+                        Sun.Source = dayButt;
+                    break;
+            }
+        #endregion
         }
 
         public void ReminderClear()
@@ -426,6 +571,7 @@ namespace dailyreminder {
             startTime.Text = "";
             stopTime.Text = "";
         }
+
 
     }
 }
