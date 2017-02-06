@@ -410,9 +410,7 @@ namespace dailyreminder
             }
 
             leftArrow.Source = rightArrowClickedButt;
-            overviewListController.ResetGrid();
-            overviewListController.setNewReminderList(mainController.getADaysReminders(nameOfDayToNumber(dayOfTheWeekLabel.Content.ToString())));
-            overviewListController.ListAllOverview();
+            updateGrid(null);
 
             // Ensures that the correct scrollviewer is displayed
             overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
