@@ -48,7 +48,7 @@ namespace dailyreminder
             //testin
 
             // Show login-popup
-            mainController = new MainController(false);
+            mainController = new MainController(false, this);
             mainController.initializeDataAndLogin();
 
             alarmController = new AlarmController(mainController.getTodaysReminders(), mainController);
@@ -103,6 +103,8 @@ namespace dailyreminder
 
             overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
             frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+
+            deleteButt.Visibility = Visibility.Hidden;
 
             frontpageButt.Source = blueButt;
             overviewButt.Source = blueOverviewButt;
@@ -216,6 +218,47 @@ namespace dailyreminder
 
         #endregion
 
+        public void setupEditPage(long id)
+        {
+            Reminder reminder = mainController.getReminderById(id);
+            mainController.deleteReminderFromList(reminder.Id);
+            #region show editpage
+            bookingSite.Visibility = Visibility.Visible;
+            frontPage.Visibility = Visibility.Hidden;
+            overView.Visibility = Visibility.Hidden;
+            overViewNavbar.Visibility = Visibility.Hidden;
+            deleteButt.Visibility = Visibility.Visible;
+
+            overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+
+            frontpageButt.Source = blueButt;
+            overviewButt.Source = blueOverviewButt;
+
+            #endregion
+
+            // Enter the data in to the form
+            title.Text = reminder.Title;
+            startTime.Text = reminder.getStartTimeString();
+            stopTime.Text = reminder.getEndTimeString();
+
+             // toggle the right days
+            if (reminder.Days.ElementAt(0).ToString() == "Images/Buttons/blueClickedButt.png")
+                Mon.Source = dayClickedButt;
+            if (reminder.Days.ElementAt(1).ToString() == "Images/Buttons/blueClickedButt.png")
+                Tue.Source = dayClickedButt;
+            if (reminder.Days.ElementAt(2).ToString() == "Images/Buttons/blueClickedButt.png")
+                Wed.Source = dayClickedButt;
+            if (reminder.Days.ElementAt(3).ToString() == "Images/Buttons/blueClickedButt.png")
+                Thu.Source = dayClickedButt;
+            if (reminder.Days.ElementAt(4).ToString() == "Images/Buttons/blueClickedButt.png")
+                Fri.Source = dayClickedButt;
+            if (reminder.Days.ElementAt(5).ToString() == "Images/Buttons/blueClickedButt.png")
+                Sat.Source = dayClickedButt;
+            if (reminder.Days.ElementAt(6).ToString() == "Images/Buttons/blueClickedButt.png")
+                Sun.Source = dayClickedButt;
+        }
+
         /************************** 
          * FUNCTION: Creates a reminder and adds it to a list when createButt is pressed
          **************************/
@@ -278,7 +321,20 @@ namespace dailyreminder
 
         private void deleteButt_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //Delete the reminder
+            ReminderClear();
+
+            frontPage.Visibility = Visibility.Visible;
+            overView.Visibility = Visibility.Hidden;
+            bookingSite.Visibility = Visibility.Hidden;
+            overViewNavbar.Visibility = Visibility.Hidden;
+
+            overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+
+            addButt.Source = greenButt;
+            overviewButt.Source = blueOverviewButt;
+
+            updateGrid(frontPage);
         }
 
         private void deleteButt_MouseEnter(object sender, MouseEventArgs e)

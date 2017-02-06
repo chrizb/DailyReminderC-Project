@@ -12,10 +12,11 @@ namespace dailyreminder.controllers {
         private List<Reminder> reminderList;
         public bool loggedIn{ get; set; }
         ReminderDataController rdc;
+        MainWindow mainWindow;
         long highestId;
 
 
-        public MainController(bool loggedIn) {
+        public MainController(bool loggedIn, MainWindow mw) {
             this.loggedIn = loggedIn;
             if(loggedIn){ // This is important, both is used the same way but works different
                 rdc = new LoggedInController();
@@ -30,7 +31,7 @@ namespace dailyreminder.controllers {
                 if (reminder.Id > highestId)
                     highestId = reminder.Id;
             }
-            
+            mainWindow = mw;
         }
 
         public void addReminderToList(Reminder newReminder) {
@@ -39,7 +40,7 @@ namespace dailyreminder.controllers {
             reminderList.Add(newReminder);
             saveCurrentReminderList();
         }
-        public void deleteReminderFromList(int id) {
+        public void deleteReminderFromList(long id) {
             for (int i = 0; i < reminderList.Count; i++) {
                 if (reminderList.ElementAt(i).Id == id) {
                     reminderList.RemoveAt(i);
@@ -48,6 +49,20 @@ namespace dailyreminder.controllers {
                 saveCurrentReminderList();
         }
 
+        public Reminder getReminderById(long id)
+        {
+            foreach(Reminder reminder in reminderList)
+            {
+                if (reminder.Id == id)
+                    return reminder;
+            }
+            return null;
+        }
+
+        public void editFunction(long id)
+        {
+            mainWindow.setupEditPage(id);
+        }
         public void initializeDataAndLogin() {
             reminderList = rdc.loadAll(@"c:\data\tempFile.dr");
             

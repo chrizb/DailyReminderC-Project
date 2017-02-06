@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using dailyreminder;
 
 namespace dailyreminder.controllers {
     class ListController {
@@ -19,6 +20,7 @@ namespace dailyreminder.controllers {
         List<Reminder> reminders;
         Grid grid;
         MainController mainController;
+        MainWindow mainWindow;
 
         private List<RowDefinition> rows;
         private List<Label> labels;
@@ -102,8 +104,9 @@ namespace dailyreminder.controllers {
                 Label endTime = new Label { Content = reminders.ElementAt(i).getEndTimeString() };
                 Grid.SetRow(endTime, i);
                 Grid.SetColumn(endTime, 2);
-                Button doneButt = new Button { Content = "Delete", Tag = reminders.ElementAt(i).Id }; // Sets the .Tag of the button
-                doneButt.Click += deleteButton_Clicked;
+                Button doneButt = new Button { Content = "Edit", Tag = reminders.ElementAt(i).Id }; // Sets the .Tag of the button
+                doneButt.Click += editButton_Clicked;
+
                 Grid.SetRow(doneButt, i);
                 Grid.SetColumn(doneButt, 3);
                 // Add all the new elements
@@ -118,17 +121,13 @@ namespace dailyreminder.controllers {
             }
         }
 
-        private void deleteButton_Clicked(object sender, RoutedEventArgs e) {
-            Button butt = (Button)sender;
-            mainController.deleteReminderFromList(Int32.Parse(butt.Tag.ToString()));
-            ResetGrid();
-            for(int i = 0; i < reminders.Count; i++){
-                if (reminders.ElementAt(i).Id == Int32.Parse(butt.Tag.ToString())) {
-                    reminders.RemoveAt(i);
-                }
-            }
+        private void editButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            Button edit = (Button) sender;
+            mainController.editFunction(long.Parse(edit.Tag.ToString()));
             ListAllOverview();
         }
+
 
         private void doneButton_Clicked(object sender, EventArgs e) {
             Button butt = (Button)sender;

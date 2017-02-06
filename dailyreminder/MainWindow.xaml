@@ -64,7 +64,7 @@
                 </Grid>
             </ScrollViewer>
             <!--.....................grid for booking site....................-->
-            <Grid Name="bookingSite" Visibility="Visible" Margin="0,59,0,0" >
+            <Grid Name="bookingSite" Visibility="Hidden" Margin="0,59,0,0" >
 
                 <Label Content="   Reminder" Grid.Row="1" Width="80" FontFamily="Calibri" FontSize="14"></Label>
 
@@ -115,25 +115,25 @@
                         <ColumnDefinition Width="40"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     
-                    <Label Grid.Column="1" FontFamily="Calibri"  MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
+                    <Label Name="sunLbl" Grid.Column="1" FontFamily="Calibri"  MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
                            MouseLeave="Label_MouseLeave">Sun</Label>
 
-                    <Label Grid.Column="2" FontFamily="Calibri" MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
+                    <Label Name="monLbl" Grid.Column="2" FontFamily="Calibri" MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
                            MouseLeave="Label_MouseLeave">Mon</Label>
 
-                    <Label Grid.Column="3" FontFamily="Calibri" MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
+                    <Label Name="tueLbl" Grid.Column="3" FontFamily="Calibri" MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
                            MouseLeave="Label_MouseLeave">Tue</Label>
 
-                    <Label Grid.Column="4" FontFamily="Calibri" MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
+                    <Label Name="wedLbl" Grid.Column="4" FontFamily="Calibri" MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
                            MouseLeave="Label_MouseLeave">Wed</Label>
 
-                    <Label Grid.Column="1" Grid.Row="1" FontFamily="Calibri" MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
+                    <Label Name="thuLbl" Grid.Column="1" Grid.Row="1" FontFamily="Calibri" MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
                            MouseLeave="Label_MouseLeave">Thu</Label>
 
-                    <Label Grid.Column="2" Grid.Row="1" FontFamily="Calibri" MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
+                    <Label Name="friLbl" Grid.Column="2" Grid.Row="1" FontFamily="Calibri" MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
                            MouseLeave="Label_MouseLeave">Fri</Label>
 
-                    <Label Grid.Column="3" Grid.Row="1" FontFamily="Calibri" MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
+                    <Label Name="satLbl" Grid.Column="3" Grid.Row="1" FontFamily="Calibri" MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
                            MouseLeave="Label_MouseLeave">Sat</Label>
                 </Grid>
                 <Image Name="createButt" Source="Images/Buttons/createReminderButt.png" Width="165" Height="39"   MouseDown="createButt_MouseDown" 
