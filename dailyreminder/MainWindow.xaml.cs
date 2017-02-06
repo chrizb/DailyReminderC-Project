@@ -130,14 +130,15 @@ namespace dailyreminder
             addButt.Source = greenButt;
             overviewButt.Source = blueOverviewButt;
 
-            updateOverview();
+            updateGrid(frontPage);
 
         }
 
-        /*--------------------------------Overview--------------------------------*/
-        private void updateOverview()
+        /************************** 
+        * FUNCTION: Updates the grid which contains the reminders for the different pages
+        **************************/
+        private void updateGrid(Grid grid)
         {
-            // List the reminders
             try
             {
                 listController.ResetGrid();
@@ -145,11 +146,25 @@ namespace dailyreminder
             catch { }
 
             List<Reminder> reminders = mainController.getTodaysReminders();
+            if (grid == overView)
+            {
+                listController = new ListController(overView, reminders, mainController);
+                listController.ListAllOverview();
+            }
+            else if (grid == frontPage)
+            {
+                listController = new ListController(frontPage, reminders, mainController);
+                listController.ListAllFrontPage();
+            }
+            else
+            {
+                listController.setNewReminderList(mainController.getADaysReminders(nameOfDayToNumber(dayOfTheWeekLabel.Content.ToString())));
+                listController.ListAllOverview();
+            }
 
-            listController = new ListController(frontPage, reminders, mainController);
-            listController.ListAllFrontPage();
         }
 
+        /*--------------------------------Overview--------------------------------*/
         private void overviewButt_MouseEnter(object sender, MouseEventArgs e)
         {
             overviewButt.Source = blueHoverOverviewButt;
@@ -174,8 +189,7 @@ namespace dailyreminder
             addButt.Source = greenButt;
 
             dayOfTheWeekLabel.Content = DateTime.Now.DayOfWeek;
-            overviewListController = new ListController(overView, mainController.getADaysReminders(nameOfDayToNumber(dayOfTheWeekLabel.Content.ToString())), mainController);
-            overviewListController.ListAllOverview();
+            updateGrid(overView);
         }
 
         private int nameOfDayToNumber(string str)
@@ -227,10 +241,7 @@ namespace dailyreminder
                 }
 
                 //reset all windows in bookingsite
-
-                title.Text = "";
-                stopTime.Text = "";
-                startTime.Text = "";
+                ReminderClear();
 
                 //reset days
                 Mon.Source = dayButt;
@@ -244,10 +255,12 @@ namespace dailyreminder
             else
             {
                 if (startTime.Text == "" || stopTime.Text == "")
-                    popUpLabel.Content = "Choose start and finish time";
+                    popUpLabel.Content = "Choose start and alarm";
                 else if (title.Text == "")
-
-                ReminderClear();
+                    popUpLabel.Content = "Choose a title";
+                else if(DaysClear() == 0)
+                    popUpLabel.Content = "Choose atleast one day";
+                popUp.Visibility = Visibility.Visible;
             }
 
           
@@ -296,9 +309,6 @@ namespace dailyreminder
             this.Show();
             this.WindowState = WindowState.Normal;
         }
-
-        private void ReminderBox_Loaded(object sender, RoutedEventArgs e)
-        { }
 
         /**************************
          * CALL: getSelectedDays() 
@@ -364,9 +374,7 @@ namespace dailyreminder
                 }
             }
             rightArrow.Source = rightArrowClickedButt;
-            overviewListController.ResetGrid();
-            overviewListController.setNewReminderList(mainController.getADaysReminders(nameOfDayToNumber(dayOfTheWeekLabel.Content.ToString())));
-            overviewListController.ListAllOverview();
+            updateGrid(null);
 
             // Ensures that the correct scrollviewer is displayed
             overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
@@ -404,9 +412,7 @@ namespace dailyreminder
             }
 
             leftArrow.Source = rightArrowClickedButt;
-            overviewListController.ResetGrid();
-            overviewListController.setNewReminderList(mainController.getADaysReminders(nameOfDayToNumber(dayOfTheWeekLabel.Content.ToString())));
-            overviewListController.ListAllOverview();
+            updateGrid(null);
 
             // Ensures that the correct scrollviewer is displayed
             overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
@@ -572,6 +578,12 @@ namespace dailyreminder
             stopTime.Text = "";
         }
 
-
+        public int DaysClear()
+        {
+            if (Mon.Source == dayClickedButt || Tue.Source == dayClickedButt || Wed.Source == dayClickedButt || Thu.Source == dayClickedButt ||
+                Fri.Source == dayClickedButt || Sat.Source == dayClickedButt || Sun.Source == dayClickedButt)
+                return 1;
+            return 0;
+        }
     }
 }
