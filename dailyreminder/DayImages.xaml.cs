@@ -26,6 +26,11 @@ namespace dailyreminder
         }
 
         public bool isToggled { get; set; }
+        public void setToToggled()
+        {
+            isToggled = true;
+            dayButt.Source = new BitmapImage(new Uri("Images/frontPageButtPic.png", UriKind.Relative));
+        }
 
         BitmapImage blueButt = new BitmapImage(new Uri("Images/Buttons/blueButt.png", UriKind.Relative));
         BitmapImage blueHoverButt = new BitmapImage(new Uri("Images/Buttons/blueHoverButt.png", UriKind.Relative));
