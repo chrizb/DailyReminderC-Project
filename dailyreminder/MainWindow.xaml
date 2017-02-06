@@ -75,7 +75,7 @@
                 <WrapPanel Width="210" Height="30" Margin="0 -120 0 0">
                     <Label Content="Start:" Margin="0 0 0 0" Width="45" FontFamily="Calibri" FontSize="13"></Label>
                     <xctk:DateTimeUpDown Name="startTime" Value="{Binding LastUpdated}" Format="ShortTime"  FontSize="10" Width="50" KeyDown="startTime_KeyDown" MouseMove="startTime_MouseMove"/>
-                    <Label Content="Finish:" Margin="0 0 0 0" Width="46" FontFamily="Calibri" FontSize="13"></Label>
+                    <Label Content="Alarm:" Margin="0 0 0 0" Width="46" FontFamily="Calibri" FontSize="13"></Label>
                     <xctk:DateTimeUpDown Name="stopTime" Value="{Binding LastUpdated}" Format="ShortTime" FontSize="10" Width="50"  KeyDown="stopTime_KeyDown" MouseMove="stopTime_MouseMove"/>
                 </WrapPanel>
 

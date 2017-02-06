@@ -50,6 +50,10 @@ namespace dailyreminder {
             mainController.initializeDataAndLogin();
 
             alarmController = new AlarmController(mainController.getTodaysReminders(), mainController);
+            if (alarmController != null)
+            {
+                this.icon.ShowBalloonTip(10000, "Added Reminder", "AlarmTime", System.Windows.Forms.ToolTipIcon.Info);
+            }
         }
 
         BitmapImage blueButt = new BitmapImage(new Uri("Images/Buttons/blueTodayButt.png", UriKind.Relative));
@@ -205,19 +209,18 @@ namespace dailyreminder {
                 }
 
                 //reset all windows in bookingsite
-                title.Text = "";
-                stopTime.Text = "";
-                startTime.Text = "";
+                ReminderClear();
             }
             else
             {
                 if(startTime.Text == "" || stopTime.Text == "")
-                popUpLabel.Content = "Choose start and finish time";
+                popUpLabel.Content = "Choose Start and Alarm time";
                 else if(title.Text == "")
                     popUpLabel.Content = "Choose a title";
-                else popUpLabel.Content = "you must select atleast one day";
+                else popUpLabel.Content = "You must select atleast one day";
                 popUp.Visibility = Visibility.Visible;
             }
+          
         }
 
         private void createButt_MouseEnter(object sender, MouseEventArgs e)
@@ -402,6 +405,12 @@ namespace dailyreminder {
             popUp.Visibility = Visibility.Hidden;
         }
 
-    
+        public void ReminderClear()
+        {
+            title.Text = "";
+            startTime.Text = "";
+            stopTime.Text = "";
+        }
+
     }
 }
