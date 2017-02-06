@@ -63,7 +63,7 @@
             </Grid>
             <!--</ScrollViewer>-->
             <!--.....................grid for booking site....................-->
-            <Grid Name="bookingSite" Visibility="Hidden" Margin="0,59,0,0" >
+            <Grid Name="bookingSite" Visibility="Visible" Margin="0,59,0,0" >
 
                 <Label Content="   Reminder" Grid.Row="1" Width="80" FontFamily="Calibri" FontSize="14"></Label>
 
@@ -92,23 +92,52 @@
                         <ColumnDefinition Width="40"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Label Content="Days:" FontFamily="Calibri" FontSize="13"></Label>
-                    <local:DayImages  Grid.Row="0" Grid.Column="1" x:Name="day_Monday"/>
-                    <local:DayImages  Grid.Row="0" Grid.Column="4" x:Name="day_Thursday"/>
-                    <local:DayImages  Grid.Row="0" Grid.Column="2" x:Name="day_Tuesday" />
-                    <local:DayImages  Grid.Row="0" Grid.Column="3" x:Name="day_Wednesday"/>
-                    <local:DayImages  Grid.Row="1" Grid.Column="1" x:Name="day_Friday"/>
-                    <local:DayImages  Grid.Row="1" Grid.Column="2" x:Name="day_Saturday"/>
-                    <local:DayImages  Grid.Row="1" Grid.Column="3" x:Name="day_Sunday"/>
+                    <Image Source="Images/Buttons/blueButt.png" Grid.Row="0" Grid.Column="1" x:Name="Sun"/>
+                    <Image Source="Images/Buttons/blueButt.png"  Grid.Row="0" Grid.Column="2" x:Name="Mon"/>
+                    <Image Source="Images/Buttons/blueButt.png"  Grid.Row="0" Grid.Column="3" x:Name="Tue"/>
+                    <Image Source="Images/Buttons/blueButt.png"  Grid.Row="0" Grid.Column="4" x:Name="Wed"/>
+                    <Image Source="Images/Buttons/blueButt.png"  Grid.Row="1" Grid.Column="1" x:Name="Thu"/>
+                    <Image Source="Images/Buttons/blueButt.png"  Grid.Row="1" Grid.Column="2" x:Name="Fri"/>
+                    <Image Source="Images/Buttons/blueButt.png"  Grid.Row="1" Grid.Column="3" x:Name="Sat"/>
                 </Grid>
 
-                <!--<WrapPanel Width="210" Margin="27,174,27,36">
-                    <Label Content="Description:" Margin="0 0 0 0" Width="75"></Label>-->
-                <TextBox Visibility="Hidden" Name="description" Margin="0 2 0 0" Width="110" Height="42"></TextBox>
-                <!--</WrapPanel>-->
+                <Grid Width="210" Height="60" Margin="0 0 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"></RowDefinition>
+                        <RowDefinition Height="25"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="44"></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Label Grid.Column="1" FontFamily="Calibri"  MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
+                           MouseLeave="Label_MouseLeave">Sun</Label>
+
+                    <Label Grid.Column="2" FontFamily="Calibri" MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
+                           MouseLeave="Label_MouseLeave">Mon</Label>
+
+                    <Label Grid.Column="3" FontFamily="Calibri" MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
+                           MouseLeave="Label_MouseLeave">Tue</Label>
+
+                    <Label Grid.Column="4" FontFamily="Calibri" MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
+                           MouseLeave="Label_MouseLeave">Wed</Label>
+
+                    <Label Grid.Column="1" Grid.Row="1" FontFamily="Calibri" MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
+                           MouseLeave="Label_MouseLeave">Thu</Label>
+
+                    <Label Grid.Column="2" Grid.Row="1" FontFamily="Calibri" MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
+                           MouseLeave="Label_MouseLeave">Fri</Label>
+
+                    <Label Grid.Column="3" Grid.Row="1" FontFamily="Calibri" MouseDown="Label_MouseDown" MouseEnter="Label_MouseEnter"
+                           MouseLeave="Label_MouseLeave">Sat</Label>
+                </Grid>
                 <Image Name="createButt" Source="Images/Buttons/createReminderButt.png" Width="165" Height="39"   MouseDown="createButt_MouseDown" 
                            MouseEnter="createButt_MouseEnter" MouseLeave="createButt_MouseLeave" Margin="72,180,27,82">
                 </Image>
-
                 <Image Visibility="Hidden" Name="deleteButt" Source="Images/buttons/deleteReminderButt.png" Width="165" Height="39" Margin="72,224,27,38" MouseDown="deleteButt_MouseDown"
                        MouseEnter="deleteButt_MouseEnter" MouseLeave="deleteButt_MouseLeave"></Image>
 

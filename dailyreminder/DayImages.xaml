@@ -8,7 +8,7 @@
     <UniformGrid>
         <Image Name="dayButt" MouseDown="dayButt_MouseDown" MouseEnter="dayButt_MouseEnter" MouseLeave="dayButt_MouseLeave"
                Source="Images/Buttons/blueButt.png">          
-        </Image>
+        </Image>  
     </UniformGrid>
 
 </UserControl>

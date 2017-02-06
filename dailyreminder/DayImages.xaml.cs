@@ -29,7 +29,7 @@ namespace dailyreminder
 
         BitmapImage blueButt = new BitmapImage(new Uri("Images/Buttons/blueButt.png", UriKind.Relative));
         BitmapImage blueHoverButt = new BitmapImage(new Uri("Images/Buttons/blueHoverButt.png", UriKind.Relative));
-        BitmapImage blueClickedButt = new BitmapImage(new Uri("Images/Buttons/blueClickedButt.png", UriKind.Relative));
+        BitmapImage blueClickedButt = new BitmapImage(new Uri("Images/Buttons/blueHoverButt.png", UriKind.Relative));
 
         private void dayButt_MouseDown(object sender, MouseButtonEventArgs e)
         {
