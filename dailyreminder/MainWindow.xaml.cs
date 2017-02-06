@@ -52,6 +52,7 @@ namespace dailyreminder
             mainController.initializeDataAndLogin();
 
             alarmController = new AlarmController(mainController.getTodaysReminders(), mainController);
+
         }
 
         BitmapImage blueButt = new BitmapImage(new Uri("Images/Buttons/blueTodayButt.png", UriKind.Relative));
@@ -96,8 +97,12 @@ namespace dailyreminder
         {
             bookingSite.Visibility = Visibility.Visible;
             frontPage.Visibility = Visibility.Hidden;
+            
             overView.Visibility = Visibility.Hidden;
             overViewNavbar.Visibility = Visibility.Hidden;
+
+            overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
 
             frontpageButt.Source = blueButt;
             overviewButt.Source = blueOverviewButt;
@@ -118,6 +123,9 @@ namespace dailyreminder
             overView.Visibility = Visibility.Hidden;
             bookingSite.Visibility = Visibility.Hidden;
             overViewNavbar.Visibility = Visibility.Hidden;
+
+            overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
 
             addButt.Source = greenButt;
             overviewButt.Source = blueOverviewButt;
@@ -158,6 +166,9 @@ namespace dailyreminder
             overViewNavbar.Visibility = Visibility.Visible;
             frontPage.Visibility = Visibility.Hidden;
             bookingSite.Visibility = Visibility.Hidden;
+
+            overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+            frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
 
             frontpageButt.Source = blueButt;
             addButt.Source = greenButt;
@@ -216,6 +227,7 @@ namespace dailyreminder
                 }
 
                 //reset all windows in bookingsite
+
                 title.Text = "";
                 stopTime.Text = "";
                 startTime.Text = "";
@@ -234,10 +246,11 @@ namespace dailyreminder
                 if (startTime.Text == "" || stopTime.Text == "")
                     popUpLabel.Content = "Choose start and finish time";
                 else if (title.Text == "")
-                    popUpLabel.Content = "Choose a title";
-                else popUpLabel.Content = "you must select atleast one day";
-                popUp.Visibility = Visibility.Visible;
+
+                ReminderClear();
             }
+
+          
         }
 
         private void createButt_MouseEnter(object sender, MouseEventArgs e)
@@ -354,6 +367,10 @@ namespace dailyreminder
             overviewListController.ResetGrid();
             overviewListController.setNewReminderList(mainController.getADaysReminders(nameOfDayToNumber(dayOfTheWeekLabel.Content.ToString())));
             overviewListController.ListAllOverview();
+
+            // Ensures that the correct scrollviewer is displayed
+            overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+            frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
         }
         private void rightArrow_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -390,6 +407,10 @@ namespace dailyreminder
             overviewListController.ResetGrid();
             overviewListController.setNewReminderList(mainController.getADaysReminders(nameOfDayToNumber(dayOfTheWeekLabel.Content.ToString())));
             overviewListController.ListAllOverview();
+
+            // Ensures that the correct scrollviewer is displayed
+            overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+            frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
         }
         #endregion
 
@@ -421,6 +442,7 @@ namespace dailyreminder
         {
             popUp.Visibility = Visibility.Hidden;
         }
+
 
         #region worlds ugliest code
 
@@ -542,5 +564,14 @@ namespace dailyreminder
             }
         #endregion
         }
+
+        public void ReminderClear()
+        {
+            title.Text = "";
+            startTime.Text = "";
+            stopTime.Text = "";
+        }
+
+
     }
 }

@@ -26,7 +26,8 @@
             </UniformGrid>
 
             <!--.....................grid for front page.....................-->
-            <Grid Name="frontPage" Visibility="Visible" Margin="0,64,0,0">
+            <ScrollViewer Name="frontScroller" VerticalScrollBarVisibility="Auto" Panel.ZIndex="-1" Margin="0,59,0.4,0">
+            <Grid Name="frontPage" Visibility="Visible">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100" />
                     <ColumnDefinition Width="50" />
@@ -35,12 +36,11 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="2" FontSize="15" Content="You have no reminders today" Height="100" Width="210" Visibility="Hidden"></Label>
-
-            </Grid>
+                    <Label Grid.Row="2" FontSize="15" Content="You have no reminders today" Height="100" Width="210" Visibility="Hidden"></Label>
+                </Grid>
+            </ScrollViewer>
 
             <!--.....................grid for overView page.....................-->
-            <!--<ScrollViewer Height="299" VerticalAlignment="Bottom">-->
             <Grid Name="overViewNavbar" Visibility="Hidden" Margin="0,59,0,248">
 
                 <Label Name="dayOfTheWeekLabel" Grid.Row="0" HorizontalAlignment="Center" FontFamily="Calibri" FontSize="15"></Label>
@@ -53,15 +53,16 @@
                     </Image.RenderTransform>
                 </Image>
             </Grid>
-            <Grid Name="overView" Visibility="Visible" Margin="0,110,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="50" />
-                    <ColumnDefinition Width="50" />
-                    <ColumnDefinition Width="50" />
-                </Grid.ColumnDefinitions>
-            </Grid>
-            <!--</ScrollViewer>-->
+            <ScrollViewer Name="overviewScroller" Panel.ZIndex="-1" Margin="0,110,0,0">
+                <Grid Name="overView" Visibility="Visible">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="50" />
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </ScrollViewer>
             <!--.....................grid for booking site....................-->
             <Grid Name="bookingSite" Visibility="Visible" Margin="0,59,0,0" >
 
@@ -75,7 +76,7 @@
                 <WrapPanel Width="210" Height="30" Margin="0 -120 0 0">
                     <Label Content="Start:" Margin="0 0 0 0" Width="45" FontFamily="Calibri" FontSize="13"></Label>
                     <xctk:DateTimeUpDown Name="startTime" Value="{Binding LastUpdated}" Format="ShortTime"  FontSize="10" Width="50" KeyDown="startTime_KeyDown" MouseMove="startTime_MouseMove"/>
-                    <Label Content="Finish:" Margin="0 0 0 0" Width="46" FontFamily="Calibri" FontSize="13"></Label>
+                    <Label Content="Alarm:" Margin="0 0 0 0" Width="46" FontFamily="Calibri" FontSize="13"></Label>
                     <xctk:DateTimeUpDown Name="stopTime" Value="{Binding LastUpdated}" Format="ShortTime" FontSize="10" Width="50"  KeyDown="stopTime_KeyDown" MouseMove="stopTime_MouseMove"/>
                 </WrapPanel>
 
