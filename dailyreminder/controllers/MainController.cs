@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using dailyreminder.models;
+using System.Windows.Controls;
 
 namespace dailyreminder.controllers {
     public class MainController {
@@ -11,6 +12,7 @@ namespace dailyreminder.controllers {
         private List<Reminder> reminderList;
         public bool loggedIn{ get; set; }
         ReminderDataController rdc;
+        long highestId;
 
 
         public MainController(bool loggedIn) {
@@ -22,35 +24,67 @@ namespace dailyreminder.controllers {
                 rdc = new OfflineController();
                 reminderList = new List<Reminder>();
             }
+
+            highestId = 0;
+            foreach (Reminder reminder in reminderList) { // set the highest ID on reminders
+                if (reminder.Id > highestId)
+                    highestId = reminder.Id;
+            }
             
         }
 
         public void addReminderToList(Reminder newReminder) {
+            highestId += 1;
+            newReminder.Id = highestId;
             reminderList.Add(newReminder);
             saveCurrentReminderList();
         }
-        public void deleteReminderFromList(int index) {
-            reminderList.RemoveAt(index);
-            saveCurrentReminderList();
+        public void deleteReminderFromList(int id) {
+            for (int i = 0; i < reminderList.Count; i++) {
+                if (reminderList.ElementAt(i).Id == id) {
+                    reminderList.RemoveAt(i);
+                }
+            }
+                saveCurrentReminderList();
         }
 
         public void initializeDataAndLogin() {
             reminderList = rdc.loadAll(@"c:\data\tempFile.dr");
+            
         }
         public void saveCurrentReminderList() {
             rdc.saveAll(reminderList, null);
         }
 
         public List<Reminder> getTodaysReminders() {
-            DateTime dt = new DateTime();
-            int today = (int)dt.DayOfWeek;
+            int today = (int)DateTime.Now.DayOfWeek;
             List<Reminder> todaysReminders = new List<Reminder>();
             foreach (Reminder reminder in reminderList) {
-                if (reminder.Days.ElementAt(today) == 1) { // Checks if the event is happening today
+                if (reminder.Days.ElementAt(today) == '1') { // Checks if the event is happening today
                     todaysReminders.Add(reminder);
                 }
             }
             return todaysReminders.OrderBy(o => o.endTime).ToList();
+        }
+
+        public List<Reminder> getADaysReminders(int dt) {
+            List<Reminder> todaysReminders = new List<Reminder>();
+            foreach (Reminder reminder in reminderList) {
+                if (reminder.Days.ElementAt(dt) == '1') { // Checks if the event is happening today
+                    todaysReminders.Add(reminder);
+                }
+            }
+            return todaysReminders.OrderBy(o => o.endTime).ToList();
+        }
+
+        public void setReminderToDone(long id) {
+            foreach (Reminder reminder in reminderList) {
+                if (reminder.Id == id) {
+                    reminder.setToDone();
+                    reminder.dateSetToDone = DateTime.Now;
+                }
+            }
+            saveCurrentReminderList();
         }
     }
 }
