@@ -44,6 +44,11 @@ namespace dailyreminder
             else dayButt.Source = new BitmapImage(new Uri("Images/frontpageButtPic.png", UriKind.Relative));
         }
 
+        public void setToToggled() {
+            isToggled = true;
+            dayButt.Source = new BitmapImage(new Uri("Images/frontpageButtPic.png", UriKind.Relative));
+        }
+
         private void dayButt_MouseEnter(object sender, MouseEventArgs e)
         {
             if (dayButt.Source != blueClickedButt)

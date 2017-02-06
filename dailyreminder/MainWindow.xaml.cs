@@ -30,6 +30,7 @@ namespace dailyreminder {
         ListController overviewListController;
         AlarmController alarmController;
 
+
         public MainWindow() {
 
             InitializeComponent();
@@ -50,7 +51,8 @@ namespace dailyreminder {
            
           
             // Show login-popup
-            mainController = new MainController(false);
+            mainController = new MainController(false, this);
+            mainController.initializeDataAndLogin();
 
             mainController.initializeDataAndLogin();
             alarmController = new AlarmController(mainController.getTodaysReminders(), mainController);
@@ -120,7 +122,13 @@ namespace dailyreminder {
             addButt.Source = greenButt;
             overviewButt.Source = blueButt;
 
+            updateFrontpage();
 
+        }
+      
+        /*--------------------------------Overview--------------------------------*/
+        private void updateFrontpage()
+        {
             // List the reminders
             try {
                 listController.ResetGrid();
@@ -154,6 +162,10 @@ namespace dailyreminder {
             addButt.Source = greenButt;
             overviewButt.Source = blueClickedButt;
 
+
+            try {
+                overviewListController.ResetGrid();
+            } catch { }
 
             dayOfTheWeekLabel.Content = DateTime.Now.DayOfWeek;
             overviewListController = new ListController(overView, mainController.getADaysReminders(nameOfDayToNumber(dayOfTheWeekLabel.Content.ToString())), mainController);
@@ -354,5 +366,40 @@ namespace dailyreminder {
 
         #endregion
 
+        public void setupEditPage(long id) {
+            Reminder reminder = mainController.getReminderById(id);
+            mainController.deleteReminderFromList(reminder.Id);
+
+            #region show editpage
+            bookingSite.Visibility = Visibility.Visible;
+            frontPage.Visibility = Visibility.Hidden;
+            overView.Visibility = Visibility.Hidden;
+            overViewNavbar.Visibility = Visibility.Hidden;
+
+            frontpageButt.Source = blueButt;
+            overviewButt.Source = blueOverviewButt;
+            #endregion
+
+            title.Text = reminder.Title;
+            startTime.Text = reminder.getStartTimeString();
+            stopTime.Text = reminder.getEndTimeString();
+
+            // Toggle the right days
+            if (reminder.Days.ElementAt(0) == '1')
+                day_Monday.setToToggled();
+            if (reminder.Days.ElementAt(1) == '1')
+                day_Tuesday.setToToggled();
+            if (reminder.Days.ElementAt(2) == '1')
+                day_Wednesday.setToToggled();
+            if (reminder.Days.ElementAt(3) == '1')
+                day_Thursday.setToToggled();
+            if (reminder.Days.ElementAt(4) == '1')
+                day_Friday.setToToggled();
+            if (reminder.Days.ElementAt(5) == '1')
+                day_Saturday.setToToggled();
+            if (reminder.Days.ElementAt(6) == '1')
+                day_Sunday.setToToggled();
+
+        }
     }
 }
