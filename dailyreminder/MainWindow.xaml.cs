@@ -43,36 +43,29 @@ namespace dailyreminder {
         
             this.icon.ContextMenu.MenuItems[0].Click += new EventHandler(icon_DoubleClick);
             this.icon.DoubleClick += new EventHandler(icon_DoubleClick);
-
-            
-
             //testin
-           
-          
+                     
             // Show login-popup
             mainController = new MainController(false);
             mainController.initializeDataAndLogin();
 
             alarmController = new AlarmController(mainController.getTodaysReminders(), mainController);
-
-
         }
 
+        BitmapImage blueButt = new BitmapImage(new Uri("Images/Buttons/blueTodayButt.png", UriKind.Relative));
+        BitmapImage blueHoverButt = new BitmapImage(new Uri("Images/Buttons/blueHoverTodayButt.png", UriKind.Relative));
 
-        
-        
-
-        BitmapImage blueButt = new BitmapImage(new Uri("Images/Buttons/blueButt.png", UriKind.Relative));
-        BitmapImage blueHoverButt = new BitmapImage(new Uri("Images/Buttons/blueHoverButt.png", UriKind.Relative));
-        BitmapImage blueClickedButt = new BitmapImage(new Uri("Images/Buttons/blueClickedButt.png", UriKind.Relative));
+        BitmapImage blueOverviewButt = new BitmapImage(new Uri("Images/Buttons/blueOverviewButt.png", UriKind.Relative));
+        BitmapImage blueHoverOverviewButt = new BitmapImage(new Uri("Images/Buttons/blueHoverOverviewButt.png", UriKind.Relative));
 
         BitmapImage greenButt = new BitmapImage(new Uri("Images/Buttons/addnewButt.png", UriKind.Relative));
         BitmapImage greenHoverButt = new BitmapImage(new Uri("Images/Buttons/addnewHoverButt.png", UriKind.Relative));
-        BitmapImage greenClickedButt = new BitmapImage(new Uri("Images/Buttons/addnewClickedButt.png", UriKind.Relative));
 
         BitmapImage createreminderButt = new BitmapImage(new Uri("Images/Buttons/createreminderButt.png", UriKind.Relative));
         BitmapImage createreminderHoverButt = new BitmapImage(new Uri("Images/Buttons/createreminderHoverButt.png", UriKind.Relative));
-        BitmapImage createreminderClickedButt = new BitmapImage(new Uri("Images/Buttons/createreminderClickedButt.png", UriKind.Relative));
+
+        BitmapImage deletereminderButt = new BitmapImage(new Uri("Images/Buttons/deleteReminderButt.png", UriKind.Relative));
+        BitmapImage deletereminderHoverButt = new BitmapImage(new Uri("Images/Buttons/deleteReminderHoverButt.png", UriKind.Relative));
 
         BitmapImage rightArrowButt = new BitmapImage(new Uri("Images/rightArrow.png", UriKind.Relative));
         BitmapImage rightArrowHoverButt = new BitmapImage(new Uri("Images/rightArrowHover.png", UriKind.Relative));
@@ -80,11 +73,14 @@ namespace dailyreminder {
 
         String[] daysOfWeek = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
 
+        
+        
+        
+
         #region Mouseevents for Menu Buttons
 
         /*--------------------------------Add Reminder--------------------------------*/
         private void addButt_MouseEnter(object sender, MouseEventArgs e) {
-            if (bookingSite.Visibility != Visibility.Visible)
                 addButt.Source = greenHoverButt;
         }
 
@@ -99,12 +95,10 @@ namespace dailyreminder {
             overViewNavbar.Visibility = Visibility.Hidden;
 
             frontpageButt.Source = blueButt;
-            overviewButt.Source = blueButt;
-            addButt.Source = greenClickedButt;
+            overviewButt.Source = blueOverviewButt;
         }
         /*--------------------------------Frontpage--------------------------------*/
         private void frontpageButt_MouseEnter(object sender, MouseEventArgs e) {
-            if (frontPage.Visibility != Visibility.Visible)
                 frontpageButt.Source = blueHoverButt;
         }
         private void frontpageButt_MouseLeave(object sender, MouseEventArgs e) {
@@ -117,17 +111,14 @@ namespace dailyreminder {
             bookingSite.Visibility = Visibility.Hidden;
             overViewNavbar.Visibility = Visibility.Hidden;
 
-            frontpageButt.Source = blueClickedButt;
             addButt.Source = greenButt;
-            overviewButt.Source = blueButt;
-
-
-
+            overviewButt.Source = blueOverviewButt;
 
             updateOverview();
-            
 
         }
+      
+        /*--------------------------------Overview--------------------------------*/
         private void updateOverview()
         {
             // List the reminders
@@ -141,18 +132,15 @@ namespace dailyreminder {
 
             listController = new ListController(frontPage, reminders, mainController);
             listController.ListAllFrontPage();
-            
-
         }
-        /*--------------------------------Overview--------------------------------*/
+
         private void overviewButt_MouseEnter(object sender, MouseEventArgs e) {
-            if (overView.Visibility != Visibility.Visible)
-                overviewButt.Source = blueHoverButt;
+            overviewButt.Source = blueHoverOverviewButt;
         }
 
         private void overviewButt_MouseLeave(object sender, MouseEventArgs e) {
-            if (overView.Visibility != Visibility.Visible)
-                overviewButt.Source = blueButt;
+            if (overViewNavbar.Visibility != Visibility.Visible)
+                overviewButt.Source = blueOverviewButt;
         }
         private void overviewButt_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -163,14 +151,11 @@ namespace dailyreminder {
 
             frontpageButt.Source = blueButt;
             addButt.Source = greenButt;
-            overviewButt.Source = blueClickedButt;
-
 
             dayOfTheWeekLabel.Content = DateTime.Now.DayOfWeek;
             overviewListController = new ListController(overView, mainController.getADaysReminders(nameOfDayToNumber(dayOfTheWeekLabel.Content.ToString())), mainController);
             overviewListController.ListAllOverview();
         }
-
 
         private int nameOfDayToNumber(string str) {
             switch (str) {
@@ -192,33 +177,47 @@ namespace dailyreminder {
             return -1;
         }
 
-        
-
         #endregion
-
 
         /************************** 
          * FUNCTION: Creates a reminder and adds it to a list when createButt is pressed
          **************************/
         private void createButt_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            createButt.Source = createreminderClickedButt;
-            
-            // Gives the user a notification on the system tray 
-            this.icon.ShowBalloonTip(10000, "Added Reminder", "AlarmTime", System.Windows.Forms.ToolTipIcon.Info);
-            
-            Reminder newReminder = new Reminder();
-            newReminder.Title = title.Text;
-            newReminder.Description = description.Text;
-            newReminder.startTime = (startTime.Value.Value.Hour * 60) + startTime.Value.Value.Minute;
-            newReminder.endTime = (stopTime.Value.Value.Hour * 60) + stopTime.Value.Value.Minute;
-            newReminder.Days = getSelectedDays();
-            
-            mainController.addReminderToList(newReminder);
-            if (newReminder.Days.ElementAt((int)DateTime.Now.DayOfWeek) == '1') { // Om larmet är idag
-                alarmController.addAlarm(newReminder);
+            //createButt.Source = createreminderClickedButt;
+
+            if (startTime.Text != "" && stopTime.Text != "" && title.Text != "" && getSelectedDays().Contains("1") == true)
+            {
+                // Gives the user a notification on the system tray 
+                this.icon.ShowBalloonTip(10000, "Added Reminder", "AlarmTime", System.Windows.Forms.ToolTipIcon.Info);
+
+                Reminder newReminder = new Reminder();
+                newReminder.Title = title.Text;
+                newReminder.Description = description.Text;
+                newReminder.startTime = (startTime.Value.Value.Hour * 60) + startTime.Value.Value.Minute;
+                newReminder.endTime = (stopTime.Value.Value.Hour * 60) + stopTime.Value.Value.Minute;
+                newReminder.Days = getSelectedDays();
+
+                mainController.addReminderToList(newReminder);
+                if (newReminder.Days.ElementAt((int)DateTime.Now.DayOfWeek) == '1')
+                { // Om larmet är idag
+                    alarmController.addAlarm(newReminder);
+                }
+
+                //reset all windows in bookingsite
+                title.Text = "";
+                stopTime.Text = "";
+                startTime.Text = "";
             }
-            
+            else
+            {
+                if(startTime.Text == "" || stopTime.Text == "")
+                popUpLabel.Content = "Choose start and finish time";
+                else if(title.Text == "")
+                    popUpLabel.Content = "Choose a title";
+                else popUpLabel.Content = "you must select atleast one day";
+                popUp.Visibility = Visibility.Visible;
+            }
         }
 
         private void createButt_MouseEnter(object sender, MouseEventArgs e)
@@ -229,6 +228,21 @@ namespace dailyreminder {
         private void createButt_MouseLeave(object sender, MouseEventArgs e)
         {
             createButt.Source = createreminderButt;
+        }
+
+        private void deleteButt_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //Delete the reminder
+        }
+
+        private void deleteButt_MouseEnter(object sender, MouseEventArgs e)
+        {
+            deleteButt.Source = deletereminderHoverButt;
+        }
+
+        private void deleteButt_MouseLeave(object sender, MouseEventArgs e)
+        {
+            deleteButt.Source = deletereminderButt;
         }
 
         void MainWindow_Closed(object sender, EventArgs e)
@@ -248,14 +262,10 @@ namespace dailyreminder {
         {
               this.Show();
               this.WindowState = WindowState.Normal;
-
         }
-
 
         private void ReminderBox_Loaded(object sender, RoutedEventArgs e)
         {}
-
-
 
         /**************************
          * CALL: getSelectedDays() 
@@ -308,7 +318,7 @@ namespace dailyreminder {
             return days;
         }
 
-        #region arrowButtons
+        #region MouseEvents for arrowButtons
 
         private void rightArrow_MouseDown(object sender, MouseButtonEventArgs e)
         {            
@@ -334,8 +344,6 @@ namespace dailyreminder {
         {
             rightArrow.Source = rightArrowButt;
         }
-
-        
 
         private void leftArrow_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -363,8 +371,37 @@ namespace dailyreminder {
             overviewListController.setNewReminderList(mainController.getADaysReminders(nameOfDayToNumber(dayOfTheWeekLabel.Content.ToString())));
             overviewListController.ListAllOverview();
         }
-
         #endregion
 
+        #region MouseEvents for dateTimeUpDown
+
+        private void stopTime_KeyDown(object sender, KeyEventArgs e)
+        {
+            stopTime.IsReadOnly = true;
+        }
+
+        private void stopTime_MouseMove(object sender, MouseEventArgs e)
+        {
+            stopTime.IsReadOnly = false;
+        }
+
+        private void startTime_KeyDown(object sender, KeyEventArgs e)
+        {
+            startTime.IsReadOnly = true;
+        }
+
+        private void startTime_MouseMove(object sender, MouseEventArgs e)
+        {
+            startTime.IsReadOnly = false;
+        }
+
+#endregion
+
+        private void popUpButt_Click(object sender, RoutedEventArgs e)
+        {
+            popUp.Visibility = Visibility.Hidden;
+        }
+
+    
     }
 }

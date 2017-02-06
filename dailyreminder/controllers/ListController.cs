@@ -58,7 +58,7 @@ namespace dailyreminder.controllers {
                 rd.Height = new GridLength(30);
                 rows.Add(rd);
                 grid.RowDefinitions.Add(rows.ElementAt((rows.Count - 1))); // Gets and adds the latest new rowdefinition
-                Label title = new Label { Content = reminders.ElementAt(i).Title };
+                Label title = new Label { Content = reminders.ElementAt(i).Title};
                 Grid.SetRow(title, i);
                 Grid.SetColumn(title, 0);
                 Label startTime = new Label { Content = reminders.ElementAt(i).getStartTimeString() };
@@ -67,6 +67,7 @@ namespace dailyreminder.controllers {
                 Label endTime = new Label { Content = reminders.ElementAt(i).getEndTimeString() };
                 Grid.SetRow(endTime, i);
                 Grid.SetColumn(endTime, 2);
+                
 
                 
                 
