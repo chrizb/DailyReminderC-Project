@@ -255,10 +255,12 @@ namespace dailyreminder
             else
             {
                 if (startTime.Text == "" || stopTime.Text == "")
-                    popUpLabel.Content = "Choose start and finish time";
+                    popUpLabel.Content = "Choose start and alarm";
                 else if (title.Text == "")
-
-                ReminderClear();
+                    popUpLabel.Content = "Choose a title";
+                else if(DaysClear() == 0)
+                    popUpLabel.Content = "Choose atleast one day";
+                popUp.Visibility = Visibility.Visible;
             }
 
           
@@ -576,6 +578,12 @@ namespace dailyreminder
             stopTime.Text = "";
         }
 
-
+        public int DaysClear()
+        {
+            if (Mon.Source == dayClickedButt || Tue.Source == dayClickedButt || Wed.Source == dayClickedButt || Thu.Source == dayClickedButt ||
+                Fri.Source == dayClickedButt || Sat.Source == dayClickedButt || Sun.Source == dayClickedButt)
+                return 1;
+            return 0;
+        }
     }
 }
