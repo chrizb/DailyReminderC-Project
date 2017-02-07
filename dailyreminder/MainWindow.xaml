@@ -29,9 +29,9 @@
             <ScrollViewer Name="frontScroller" VerticalScrollBarVisibility="Auto" Panel.ZIndex="-1" Margin="0,59,0.4,0">
             <Grid Name="frontPage" Visibility="Visible">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="50" />
-                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="70" />
                     <ColumnDefinition Width="50" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -56,9 +56,9 @@
             <ScrollViewer Name="overviewScroller" VerticalScrollBarVisibility="Auto"  Panel.ZIndex="-1" Margin="0,110,0,0">
                 <Grid Name="overView" Visibility="Visible">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition Width="50" />
-                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="70" />
+                        <ColumnDefinition Width="70" />
+                        <ColumnDefinition Width="70" />
                         <ColumnDefinition Width="50" />
                     </Grid.ColumnDefinitions>
                 </Grid>
