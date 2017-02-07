@@ -199,19 +199,19 @@ namespace dailyreminder
             switch (str)
             {
                 case "Monday":
-                    return 1;
-                case "Tuesday":
-                    return 2;
-                case "Wednesday":
-                    return 3;
-                case "Thursday":
-                    return 4;
-                case "Friday":
-                    return 5;
-                case "Saturday":
-                    return 6;
-                case "Sunday":
                     return 0;
+                case "Tuesday":
+                    return 1;
+                case "Wednesday":
+                    return 2;
+                case "Thursday":
+                    return 3;
+                case "Friday":
+                    return 4;
+                case "Saturday":
+                    return 5;
+                case "Sunday":
+                    return 6;
             }
             return -1;
         }
@@ -243,19 +243,19 @@ namespace dailyreminder
             stopTime.Text = reminder.getEndTimeString();
 
              // toggle the right days
-            if (reminder.Days.ElementAt(0).ToString() == "Images/Buttons/blueClickedButt.png")
+            if (reminder.Days.ElementAt(0) == '1')
                 Mon.Source = dayClickedButt;
-            if (reminder.Days.ElementAt(1).ToString() == "Images/Buttons/blueClickedButt.png")
+            if (reminder.Days.ElementAt(1) == '1')
                 Tue.Source = dayClickedButt;
-            if (reminder.Days.ElementAt(2).ToString() == "Images/Buttons/blueClickedButt.png")
+            if (reminder.Days.ElementAt(2) == '1')
                 Wed.Source = dayClickedButt;
-            if (reminder.Days.ElementAt(3).ToString() == "Images/Buttons/blueClickedButt.png")
+            if (reminder.Days.ElementAt(3) == '1')
                 Thu.Source = dayClickedButt;
-            if (reminder.Days.ElementAt(4).ToString() == "Images/Buttons/blueClickedButt.png")
+            if (reminder.Days.ElementAt(4) == '1')
                 Fri.Source = dayClickedButt;
-            if (reminder.Days.ElementAt(5).ToString() == "Images/Buttons/blueClickedButt.png")
+            if (reminder.Days.ElementAt(5) == '1')
                 Sat.Source = dayClickedButt;
-            if (reminder.Days.ElementAt(6).ToString() == "Images/Buttons/blueClickedButt.png")
+            if (reminder.Days.ElementAt(6) == '1')
                 Sun.Source = dayClickedButt;
         }
 
