@@ -11,11 +11,13 @@ namespace dailyreminder.controllers {
     class AlarmController {
 
         struct Alarm {
-            public string Time;
+            public string endTime;
+            public string startTime;
             public long Id;
 
-            public Alarm(string time, long id) {
-                Time = time;
+            public Alarm(string starttime, string endtime, long id) {
+                endTime = endtime;
+                startTime = starttime;
                 Id = id;
             }
         }
@@ -25,12 +27,13 @@ namespace dailyreminder.controllers {
         MainController mainController;
 
         DispatcherTimer timer = new DispatcherTimer();
+        DispatcherTimer startTimeTimer = new DispatcherTimer();
 
         public AlarmController(List<Reminder> reminders, MainController mc) {
             mainController = mc;
             alarms = new List<Alarm>();
             foreach (Reminder reminder in reminders) {
-                alarms.Add(new Alarm(reminder.getEndTimeString(), reminder.Id));
+                alarms.Add(new Alarm(reminder.getStartTimeString(), reminder.getEndTimeString(), reminder.Id));
             }
             startclock();
         }
@@ -39,6 +42,22 @@ namespace dailyreminder.controllers {
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += tickEvent;
             timer.Start();
+
+            startTimeTimer.Interval = TimeSpan.FromMinutes(1);
+            startTimeTimer.Tick += slowTickEvent;
+            startTimeTimer.Start();
+        }
+
+        private void slowTickEvent(object sender, EventArgs e) {
+            string nowTime = DateTime.Now.Hour + ":" + DateTime.Now.Minute;
+            foreach (Alarm alarm in alarms) {
+                Reminder currentReminder = new Reminder { Id = -1 };
+                mainController.getTodaysReminders().Find(x => x.Id == alarm.Id);
+                if (alarm.startTime == nowTime && !currentReminder.Done) {
+                    // Visa en pop-up
+                }
+
+            }
         }
 
         private void tickEvent(object sender, EventArgs e) {
@@ -51,7 +70,7 @@ namespace dailyreminder.controllers {
                     }
                 }
 
-                if (alarm.Time == nowTime && !currentReminder.Done) {
+                if (alarm.endTime == nowTime && !currentReminder.Done) {
                     SoundPlayer sp = new SoundPlayer(@"c:\data\foghorn.wav");
                     sp.Play();
                 }
@@ -67,7 +86,7 @@ namespace dailyreminder.controllers {
         }
 
         public void addAlarm(Reminder reminder) {
-            alarms.Add(new Alarm(reminder.getEndTimeString(), reminder.Id));
+            alarms.Add(new Alarm(reminder.getStartTimeString(), reminder.getEndTimeString(), reminder.Id));
         }
     }
 }
