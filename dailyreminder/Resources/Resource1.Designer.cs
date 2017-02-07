@@ -69,5 +69,14 @@ namespace dailyreminder.Resources {
                 return ((System.Drawing.Icon)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Wake_up_sounds {
+            get {
+                return ResourceManager.GetStream("Wake_up_sounds", resourceCulture);
+            }
+        }
     }
 }

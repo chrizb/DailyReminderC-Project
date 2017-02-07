@@ -51,7 +51,6 @@ namespace dailyreminder
 
             // Show login-popup
             mainController = new MainController(false, this);
-            mainController.initializeDataAndLogin();
 
             alarmController = new AlarmController(mainController.getTodaysReminders(), mainController);
 
@@ -108,7 +107,7 @@ namespace dailyreminder
                 overViewNavbar.Visibility = Visibility.Hidden;
 
                 overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
-                frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+                //frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
 
                 frontpageButt.Source = blueButt;
                 overviewButt.Source = blueOverviewButt;
@@ -135,7 +134,7 @@ namespace dailyreminder
                 overViewNavbar.Visibility = Visibility.Hidden;
 
                 overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
-                frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+                //frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
 
                 addButt.Source = greenButt;
                 overviewButt.Source = blueOverviewButt;
@@ -195,7 +194,7 @@ namespace dailyreminder
                 bookingSite.Visibility = Visibility.Hidden;
 
                 overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-                frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+                //frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
 
                 frontpageButt.Source = blueButt;
                 addButt.Source = greenButt;
@@ -242,7 +241,7 @@ namespace dailyreminder
             deleteButt.Visibility = Visibility.Visible;
 
             overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            //frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
 
             frontpageButt.Source = blueButt;
             overviewButt.Source = blueOverviewButt;
@@ -289,7 +288,7 @@ namespace dailyreminder
                 newReminder.Days = getSelectedDays();
 
                 mainController.addReminderToList(newReminder);
-                if (newReminder.Days.ElementAt((int)DateTime.Now.DayOfWeek) == '1')
+                if (newReminder.Days.ElementAt(((int)DateTime.Now.DayOfWeek - 1 + 7) % 7) == '1')
                 { // Om larmet är idag
                     alarmController.addAlarm(newReminder);
                 }
@@ -332,7 +331,7 @@ namespace dailyreminder
             overViewNavbar.Visibility = Visibility.Hidden;
 
             overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+            //frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
 
             addButt.Source = greenButt;
             overviewButt.Source = blueOverviewButt;
@@ -442,7 +441,7 @@ namespace dailyreminder
 
             // Ensures that the correct scrollviewer is displayed
             overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-            frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            //frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
         }
         private void rightArrow_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -480,7 +479,7 @@ namespace dailyreminder
 
             // Ensures that the correct scrollviewer is displayed
             overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-            frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            //frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
         }
         #endregion
 

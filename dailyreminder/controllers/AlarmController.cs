@@ -30,6 +30,9 @@ namespace dailyreminder.controllers {
         DispatcherTimer startTimeTimer = new DispatcherTimer();
 
         public AlarmController(List<Reminder> reminders, MainController mc) {
+
+            
+
             mainController = mc;
             alarms = new List<Alarm>();
             foreach (Reminder reminder in reminders) {
@@ -71,7 +74,8 @@ namespace dailyreminder.controllers {
                 }
 
                 if (alarm.endTime == nowTime && !currentReminder.Done) {
-                    SoundPlayer sp = new SoundPlayer(@"c:\data\foghorn.wav");
+                    System.IO.Stream s = Resources.Resource1.Wake_up_sounds;
+                    SoundPlayer sp = new SoundPlayer(s);
                     sp.Play();
                 }
             }
