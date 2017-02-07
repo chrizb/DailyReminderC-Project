@@ -72,7 +72,7 @@ namespace dailyreminder.controllers {
         }
 
         public List<Reminder> getTodaysReminders() {
-            int today = (int)DateTime.Now.DayOfWeek;
+            int today = ((int)DateTime.Now.DayOfWeek - 1 + 7) % 7;
             List<Reminder> todaysReminders = new List<Reminder>();
             foreach (Reminder reminder in reminderList) {
                 if (reminder.Days.ElementAt(today) == '1') { // Checks if the event is happening today
