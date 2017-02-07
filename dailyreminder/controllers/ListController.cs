@@ -72,7 +72,12 @@ namespace dailyreminder.controllers {
                     
                 // doneButt.Click need a function to call 
 
-                Button doneButt = new Button { Content = "Done!", Tag = reminders.ElementAt(i).Id }; // Sets the name of the button
+                Button doneButt = new Button { Content = "Done?", Tag = reminders.ElementAt(i).Id }; // Sets the name of the button
+                if(mainController.isReminderDone(reminders.ElementAt(i).Id))
+                {
+                    doneButt.IsEnabled = false;
+                    doneButt.Content = "Done!";
+                }
                 doneButt.Click += doneButton_Clicked;
 
                 Grid.SetRow(doneButt, i);
@@ -129,10 +134,12 @@ namespace dailyreminder.controllers {
         }
 
 
-        private void doneButton_Clicked(object sender, EventArgs e) {
+        private void doneButton_Clicked(object sender, EventArgs e) {          
             Button butt = (Button)sender;
             long id = (long)butt.Tag;
             mainController.setReminderToDone(id);
+            butt.Content = "Done!";
+            butt.IsEnabled = false;
         }
     }
 }
