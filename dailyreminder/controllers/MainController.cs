@@ -25,6 +25,7 @@ namespace dailyreminder.controllers {
                 rdc = new OfflineController();
                 reminderList = new List<Reminder>();
             }
+            initializeDataAndLogin();
 
             highestId = 0;
             foreach (Reminder reminder in reminderList) { // set the highest ID on reminders

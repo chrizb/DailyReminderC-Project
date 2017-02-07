@@ -20,12 +20,13 @@ namespace dailyreminder.controllers {
             try {
                 string fileContent = File.ReadAllText(filepath);
                 reminderList = new JavaScriptSerializer().Deserialize<List<Reminder>>(fileContent);
-                if (reminderList == null)
-                    reminderList = new List<Reminder>();
             } catch(FileNotFoundException e) {
-                // Do somemthing, if you pallar
+
+            } catch (DirectoryNotFoundException e) {
+                System.IO.Directory.CreateDirectory(@"c:\data\");
             }
-            
+            if (reminderList == null)
+                reminderList = new List<Reminder>();
             // Check which reminders is old and which is not
             foreach (Reminder reminder in reminderList) {
                 if (!reminder.dateSetToDone.Date.Equals(DateTime.Now.Date)) { // Checks is the "Done"-attribute were set a different day

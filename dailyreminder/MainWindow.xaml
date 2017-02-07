@@ -26,8 +26,8 @@
             </UniformGrid>
 
             <!--.....................grid for front page.....................-->
-            <ScrollViewer Name="frontScroller" VerticalScrollBarVisibility="Auto" Panel.ZIndex="-1" Margin="0,59,0.4,0">
-            <Grid Name="frontPage" Visibility="Visible">
+            <!--<ScrollViewer Name="frontScroller" VerticalScrollBarVisibility="Auto" Panel.ZIndex="-5" Margin="0,59,0.4,0">-->
+            <Grid Name="frontPage" Visibility="Visible" Margin="0, 59, 0.4, 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70" />
                     <ColumnDefinition Width="70" />
@@ -38,7 +38,7 @@
                 </Grid.RowDefinitions>
                     <Label Grid.Row="2" FontSize="15" Content="You have no reminders today" Height="100" Width="210" Visibility="Hidden"></Label>
                 </Grid>
-            </ScrollViewer>
+            <!--</ScrollViewer>-->
 
             <!--.....................grid for overView page.....................-->
             <Grid Name="overViewNavbar" Visibility="Hidden" Margin="0,59,0,248">
