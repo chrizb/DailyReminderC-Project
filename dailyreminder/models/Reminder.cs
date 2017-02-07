@@ -41,6 +41,6 @@ namespace dailyreminder.models {
             return (endTime / 60) + ":" + (endTime % 60);
         }
 
-
+         
     }
 }
