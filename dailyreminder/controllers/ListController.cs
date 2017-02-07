@@ -120,9 +120,9 @@ namespace dailyreminder.controllers {
                 buttons.Add(doneButt);
             }
         }
-
         private void editButton_Clicked(object sender, RoutedEventArgs e)
         {
+           
             Button edit = (Button) sender;
             mainController.editFunction(long.Parse(edit.Tag.ToString()));
             ListAllOverview();
