@@ -30,11 +30,13 @@ namespace dailyreminder
         ListController listController;
         ListController overviewListController;
         AlarmController alarmController;
-
+      
         public MainWindow()
         {
 
             InitializeComponent();
+           
+
             this.Closed += new EventHandler(MainWindow_Closed);
             this.Deactivated += new EventHandler(MainWindow_Deactivated);
 
@@ -52,6 +54,8 @@ namespace dailyreminder
             mainController.initializeDataAndLogin();
 
             alarmController = new AlarmController(mainController.getTodaysReminders(), mainController);
+
+            updateGrid(frontPage);
 
         }
 
@@ -245,6 +249,7 @@ namespace dailyreminder
              // toggle the right days
             if (reminder.Days.ElementAt(0) == '1')
                 Mon.Source = dayClickedButt;
+                
             if (reminder.Days.ElementAt(1) == '1')
                 Tue.Source = dayClickedButt;
             if (reminder.Days.ElementAt(2) == '1')
@@ -294,6 +299,18 @@ namespace dailyreminder
                 Fri.Source = dayButt;
                 Sat.Source = dayButt;
                 Sun.Source = dayButt;
+
+                frontPage.Visibility = Visibility.Visible;
+                overView.Visibility = Visibility.Hidden;
+                bookingSite.Visibility = Visibility.Hidden;
+                overViewNavbar.Visibility = Visibility.Hidden;
+
+                overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+                frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+
+                addButt.Source = greenButt;
+                overviewButt.Source = blueOverviewButt;
+                frontpageButt.Source = blueHoverButt;
             }
             else
             {
@@ -333,6 +350,7 @@ namespace dailyreminder
 
             addButt.Source = greenButt;
             overviewButt.Source = blueOverviewButt;
+            frontpageButt.Source = blueHoverButt;
 
             updateGrid(frontPage);
         }
