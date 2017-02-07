@@ -99,19 +99,21 @@ namespace dailyreminder
         }
         private void addButt_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            bookingSite.Visibility = Visibility.Visible;
-            frontPage.Visibility = Visibility.Hidden;
-            
-            overView.Visibility = Visibility.Hidden;
-            overViewNavbar.Visibility = Visibility.Hidden;
+            if (deleteButt.Visibility == Visibility.Hidden)
+            {
+                bookingSite.Visibility = Visibility.Visible;
+                frontPage.Visibility = Visibility.Hidden;
 
-            overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+                overView.Visibility = Visibility.Hidden;
+                overViewNavbar.Visibility = Visibility.Hidden;
 
-            deleteButt.Visibility = Visibility.Hidden;
+                overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+                frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
 
-            frontpageButt.Source = blueButt;
-            overviewButt.Source = blueOverviewButt;
+                frontpageButt.Source = blueButt;
+                overviewButt.Source = blueOverviewButt;
+            }
+           
         }
         /*--------------------------------Frontpage--------------------------------*/
         private void frontpageButt_MouseEnter(object sender, MouseEventArgs e)
@@ -125,19 +127,21 @@ namespace dailyreminder
         }
         private void frontpageButt_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            frontPage.Visibility = Visibility.Visible;
-            overView.Visibility = Visibility.Hidden;
-            bookingSite.Visibility = Visibility.Hidden;
-            overViewNavbar.Visibility = Visibility.Hidden;
+            if (deleteButt.Visibility == Visibility.Hidden)
+            {
+                frontPage.Visibility = Visibility.Visible;
+                overView.Visibility = Visibility.Hidden;
+                bookingSite.Visibility = Visibility.Hidden;
+                overViewNavbar.Visibility = Visibility.Hidden;
 
-            overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+                overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+                frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
 
-            addButt.Source = greenButt;
-            overviewButt.Source = blueOverviewButt;
+                addButt.Source = greenButt;
+                overviewButt.Source = blueOverviewButt;
 
-            updateGrid(frontPage);
-
+                updateGrid(frontPage);
+            }
         }
 
         /************************** 
@@ -183,19 +187,23 @@ namespace dailyreminder
         }
         private void overviewButt_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            overView.Visibility = Visibility.Visible;
-            overViewNavbar.Visibility = Visibility.Visible;
-            frontPage.Visibility = Visibility.Hidden;
-            bookingSite.Visibility = Visibility.Hidden;
+            if (deleteButt.Visibility == Visibility.Hidden)
+            {
+                overView.Visibility = Visibility.Visible;
+                overViewNavbar.Visibility = Visibility.Visible;
+                frontPage.Visibility = Visibility.Hidden;
+                bookingSite.Visibility = Visibility.Hidden;
 
-            overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-            frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+                overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+                frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
 
-            frontpageButt.Source = blueButt;
-            addButt.Source = greenButt;
+                frontpageButt.Source = blueButt;
+                addButt.Source = greenButt;
 
-            dayOfTheWeekLabel.Content = DateTime.Now.DayOfWeek;
-            updateGrid(overView);
+                dayOfTheWeekLabel.Content = DateTime.Now.DayOfWeek;
+                updateGrid(overView);
+            }
+           
         }
 
         private int nameOfDayToNumber(string str)
@@ -269,8 +277,6 @@ namespace dailyreminder
          **************************/
         private void createButt_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //createButt.Source = createreminderClickedButt;
-
             if (startTime.Text != "" && stopTime.Text != "" && title.Text != "" && getSelectedDays().Contains("1") == true)
             {
                 // Gives the user a notification on the system tray 
@@ -291,26 +297,8 @@ namespace dailyreminder
                 //reset all windows in bookingsite
                 ReminderClear();
 
-                //reset days
-                Mon.Source = dayButt;
-                Tue.Source = dayButt;
-                Wed.Source = dayButt;
-                Thu.Source = dayButt;
-                Fri.Source = dayButt;
-                Sat.Source = dayButt;
-                Sun.Source = dayButt;
+                deleteButt.Visibility = Visibility.Hidden;
 
-                frontPage.Visibility = Visibility.Visible;
-                overView.Visibility = Visibility.Hidden;
-                bookingSite.Visibility = Visibility.Hidden;
-                overViewNavbar.Visibility = Visibility.Hidden;
-
-                overviewScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
-                frontScroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-
-                addButt.Source = greenButt;
-                overviewButt.Source = blueOverviewButt;
-                frontpageButt.Source = blueHoverButt;
             }
             else
             {
@@ -321,9 +309,7 @@ namespace dailyreminder
                 else if(DaysClear() == 0)
                     popUpLabel.Content = "Choose atleast one day";
                 popUp.Visibility = Visibility.Visible;
-            }
-
-          
+            }         
         }
 
         private void createButt_MouseEnter(object sender, MouseEventArgs e)
@@ -352,6 +338,10 @@ namespace dailyreminder
             overviewButt.Source = blueOverviewButt;
             frontpageButt.Source = blueHoverButt;
 
+            addButt.IsEnabled = true;
+            frontpageButt.IsEnabled = true;
+
+            deleteButt.Visibility = Visibility.Hidden;
             updateGrid(frontPage);
         }
 
@@ -650,6 +640,14 @@ namespace dailyreminder
             title.Text = "";
             startTime.Text = "";
             stopTime.Text = "";
+
+            Mon.Source = dayButt;
+            Tue.Source = dayButt;
+            Wed.Source = dayButt;
+            Thu.Source = dayButt;
+            Fri.Source = dayButt;
+            Sat.Source = dayButt;
+            Sun.Source = dayButt;
         }
 
         public int DaysClear()
