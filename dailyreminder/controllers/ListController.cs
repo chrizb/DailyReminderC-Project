@@ -63,16 +63,21 @@ namespace dailyreminder.controllers {
                 Label title = new Label { Content = reminders.ElementAt(i).Title};
                 Grid.SetRow(title, i);
                 Grid.SetColumn(title, 0);
-                Label startTime = new Label { Content = reminders.ElementAt(i).getStartTimeString() };
+                Label startTime = new Label { Content = "Start[" + reminders.ElementAt(i).getStartTimeString() + "]" };
                 Grid.SetRow(startTime, i);
                 Grid.SetColumn(startTime, 1);
-                Label endTime = new Label { Content = reminders.ElementAt(i).getEndTimeString() };
+                Label endTime = new Label { Content = "End[" + reminders.ElementAt(i).getEndTimeString() + "]" };
                 Grid.SetRow(endTime, i);
                 Grid.SetColumn(endTime, 2);
                     
                 // doneButt.Click need a function to call 
 
-                Button doneButt = new Button { Content = "Done!", Tag = reminders.ElementAt(i).Id }; // Sets the name of the button
+                Button doneButt = new Button { Content = "Done?", Tag = reminders.ElementAt(i).Id }; // Sets the name of the button
+                if(mainController.isReminderDone(reminders.ElementAt(i).Id))
+                {
+                    doneButt.IsEnabled = false;
+                    doneButt.Content = "Done!";
+                }
                 doneButt.Click += doneButton_Clicked;
 
                 Grid.SetRow(doneButt, i);
@@ -98,10 +103,10 @@ namespace dailyreminder.controllers {
                 Label title = new Label { Content = reminders.ElementAt(i).Title };
                 Grid.SetRow(title, i);
                 Grid.SetColumn(title, 0);
-                Label startTime = new Label { Content = reminders.ElementAt(i).getStartTimeString() };
+                Label startTime = new Label { Content = "Start[" + reminders.ElementAt(i).getStartTimeString() + "]" };
                 Grid.SetRow(startTime, i);
                 Grid.SetColumn(startTime, 1);
-                Label endTime = new Label { Content = reminders.ElementAt(i).getEndTimeString() };
+                Label endTime = new Label { Content = "End[" + reminders.ElementAt(i).getEndTimeString() + "]" };
                 Grid.SetRow(endTime, i);
                 Grid.SetColumn(endTime, 2);
                 Button doneButt = new Button { Content = "Edit", Tag = reminders.ElementAt(i).Id }; // Sets the .Tag of the button
@@ -120,19 +125,21 @@ namespace dailyreminder.controllers {
                 buttons.Add(doneButt);
             }
         }
-
         private void editButton_Clicked(object sender, RoutedEventArgs e)
         {
+           
             Button edit = (Button) sender;
             mainController.editFunction(long.Parse(edit.Tag.ToString()));
             ListAllOverview();
         }
 
 
-        private void doneButton_Clicked(object sender, EventArgs e) {
+        private void doneButton_Clicked(object sender, EventArgs e) {          
             Button butt = (Button)sender;
             long id = (long)butt.Tag;
             mainController.setReminderToDone(id);
+            butt.Content = "Done!";
+            butt.IsEnabled = false;
         }
     }
 }

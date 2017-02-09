@@ -72,7 +72,7 @@ namespace dailyreminder.controllers {
         }
 
         public List<Reminder> getTodaysReminders() {
-            int today = (int)DateTime.Now.DayOfWeek;
+            int today = ((int)DateTime.Now.DayOfWeek - 1 + 7) % 7;
             List<Reminder> todaysReminders = new List<Reminder>();
             foreach (Reminder reminder in reminderList) {
                 if (reminder.Days.ElementAt(today) == '1') { // Checks if the event is happening today
@@ -92,11 +92,20 @@ namespace dailyreminder.controllers {
             return todaysReminders.OrderBy(o => o.endTime).ToList();
         }
 
+        public bool isReminderDone(long id)
+        {
+            foreach (Reminder reminder in reminderList)
+            {
+                if (reminder.Id == id && reminder.Done)
+                    return true;
+            }
+            return false;
+        }
         public void setReminderToDone(long id) {
             foreach (Reminder reminder in reminderList) {
                 if (reminder.Id == id) {
                     reminder.setToDone();
-                    reminder.dateSetToDone = DateTime.Now;
+                    reminder.dateSetToDone = DateTime.Now;                   
                 }
             }
             saveCurrentReminderList();
